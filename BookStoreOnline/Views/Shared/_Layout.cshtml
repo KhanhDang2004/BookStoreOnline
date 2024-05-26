@@ -1,0 +1,186 @@
+﻿@{
+
+    var user = Session["TaiKhoan"] as BookStoreOnline.Models.Customer;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HaiKhangPhong</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="~/Content/style.css" rel="stylesheet" />
+</head>
+<body>
+    <!-- header     -->
+    <div class="header">
+        <div class="container head-content">
+            <div class="row">
+                <div class="col-lg-3 logo">
+                    <a href="@Url.Action("Index","Home")"><img src="https://cdn.haitrieu.com/wp-content/uploads/2021/09/Logo-DH-Ngoai-Ngu-Tin-Hoc-HUFLIT.png" alt=""></a>
+                </div>
+                <div class="col-lg-6 head-middle">
+
+                    @using (Html.BeginForm("Search", "Category", FormMethod.Post))
+                    {
+                        <input type="text" name="inputString" placeholder="Nhập từ khóa tìm kiếm...">
+                        <button type="submit"><i class="bi bi-search"></i></button>
+                    }
+                </div>
+                <div class="col-lg-3 head-right">
+                    @if (user == null)
+                    {
+                        <a href="@Url.Action("Login","User")" class="cart-link"><i class="bi bi-cart-plus-fill"></i></a>
+
+                    }
+                    else
+                    {
+                        { Html.RenderAction("CartPartial", "Cart"); }
+                    }
+
+                    @if (user == null)
+                    {
+                        <a href="@Url.Action("Login","User")" class="custom-btn btn-7">Đăng nhập</a>
+                        <a href="@Url.Action("SignUp","User")" class="custom-btn btn-7" style="margin-left:5px">Đăng ký</a>
+                    }
+                    else
+                    {
+                        <div class="dropdown show">
+                            <a class="user-link-option" href="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="bi bi-person-circle"></i>
+                                <span style="font-size: 25px;"> @user.NameCustomer</span>
+
+                            </a>
+
+
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="@Url.Action("Index/"+user.ID,"Order")">Đơn hàng của bạn</a>
+                                <a class="dropdown-item" href="@Url.Action("LogOut","User")">Đăng xuất</a>
+
+                            </div>
+                        </div>
+
+                    }
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- end-header -->
+    <!-- nav -->
+    <div class="nav">
+        <div class="container nav-list">
+            <div class="row" style="align-items: center;">
+                <div class="col-lg-1">
+
+
+                    @{Html.RenderAction("GetPartialCategoryNav", "CategoryPartial");}
+                </div>
+                <div class="col-lg-1"></div>
+
+                <div class="col-lg-7">
+
+                    <nav class="navbar navbar-expand-lg navbar-light">
+
+                        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                            <div class="navbar-nav">
+                                <a class="nav-item nav-link" href="@Url.Action("Index","Home")">Trang chủ <span class="sr-only">(current)</span></a>
+                                <a class="nav-item nav-link" href="@Url.Action("GetAllBook","Category")">Tất cả sản phẩm</a>
+                                <a class="nav-item nav-link" href="#">Giới thiệu</a>
+                                <a class="nav-item nav-link" href="#">Liên hệ</a>
+
+
+                            </div>
+                        </div>
+                    </nav>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end-nav -->
+    @RenderBody()
+
+
+
+    <div class="helping-selection">
+        <div class="container">
+            <div class="row help-list">
+                <div class="col-lg-3">
+                    <div class="help-item">
+                        <i class="bi bi-truck"></i><br />
+                        <h6>Giao hàng miễn phí</h6>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="help-item">
+                        <i class="bi bi-arrow-counterclockwise"></i><br />
+                        <h6>Miễn phí đổi trả</h6>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="help-item">
+                        <i class="bi bi-shield-shaded"></i><br />
+                        <h6>Bảo mật thông tin</h6>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="help-item">
+                        <i class="bi bi-gift"></i><br />
+                        <h6>Khuyến Mãi</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <div class="row foot-list">
+                <div class="col-lg-4">
+                    <h2>Dịch vụ</h2> <br />
+                    <ul>
+                        <li>Điều khoản sử dụng</li>
+                        <li>Chính sách bảo mật thông tin cá nhân</li>
+                        <li>Chính sách bảo mật thanh toán</li>
+                        <li>Hệ thống trung tâm - nhà sách</li>
+
+                    </ul>
+
+                </div>
+                <div class="col-lg-4">
+                    <h2>Hỗ trợ</h2> <br />
+                    <ul>
+                        <li>Liên hệ</li>
+                        <li>Chính sách đổi - trả - hoàn tiền</li>
+                        <li>Chính sách vận chuyển</li>
+
+
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h2>Liên hệ</h2> <br />
+                    <ul>
+                        <li><i class="bi bi-facebook"></i><a href="https://www.facebook.com/profile.php?id=100025506227864&locale=vi_VN">Lê Trần Đức Hải</a></li>
+                        <li><i class="bi bi-instagram" style="margin-right: 5px;"></i>Duck.Haii</li>
+                        <li><i class="bi bi-github"></i>DucHai</li>
+                        <li><i class="bi bi-envelope-fill"></i>letranduchai2004@gmail.com</li>
+
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
