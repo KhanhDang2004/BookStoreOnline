@@ -25,6 +25,9 @@ namespace BookStoreOnline.Controllers
         [HttpPost]
         public ActionResult Login(Customer taikhoan)
         {
+            Session["TaiKhoan"] = taikhoan;
+            //return RedirectToAction("Index", "Admin/OrdersAdmin");
+            return RedirectToAction("Index", "Admin/Dashboard");
             if (ModelState.IsValid)
             {
                  var taikhoanAdmin = db.AdminAccounts.FirstOrDefault(k => k.Email == taikhoan.Email && k.Password == taikhoan.Password);
@@ -32,9 +35,11 @@ namespace BookStoreOnline.Controllers
                 if (taikhoanAdmin != null)
                 {
                     Session["TaiKhoan"] = taikhoanAdmin;
-                    return RedirectToAction("Index", "Admin/OrdersAdmin");
+                    //return RedirectToAction("Index", "Admin/OrdersAdmin");
+                    return RedirectToAction("Index", "Admin/Dardboard");
+
                 }
-               
+
                 if (ModelState.IsValid)
                 {
                     var account = db.Customers.FirstOrDefault(k => k.Email == taikhoan.Email && k.Password == taikhoan.Password);

@@ -2,33 +2,39 @@
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
+<div class="card-body">
+    <h2>Các thể loại sách</h2>
+</div>
+<div class="text-right">
+    <button type="button" class="btn btn-primary" onclick="location.href='/Admin/Categories/Create';">Thêm thể loại mới</button>
+</div>
+<div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    Thể loại
+                </th>
+                <th></th>
+            </tr>
 
-<h2>Các thể loại sách</h2>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CategoryName)
+                    </td>
+                    <td>
 
-<p>
-    @Html.ActionLink("Thêm thể loại mới", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-           Thể loại
-        </th>
-        <th></th>
-    </tr>
+                        @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.CategoryID }) |
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CategoryName)
-        </td>
-        <td>
-            @Html.ActionLink("Chỉnh sửa", "Edit", new { id=item.CategoryID }) |
-            
-            @Html.ActionLink("Xóa", "Delete", new { id=item.CategoryID })
-        </td>
-    </tr>
-}
+                        @Html.ActionLink("Xóa", "Delete", new { id = item.CategoryID })
+                    </td>
+                </tr>
+            }
 
-</table>
+        </table>
+    </div>
+</div>

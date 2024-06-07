@@ -2,32 +2,27 @@
 
 @{
     ViewBag.Title = "Delete";
-    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-
-<h2>Delete</h2>
-
-<h3>Bạn có chắc chắn muốn xóa danh mục này ?</h3>
-<div>
-    
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Tên danh mục
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CategoryName)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Xóa" class="btn btn-danger" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }
+<div class="card-body">
+    <h2 class="card-title">Chỉnh sửa</h2>
 </div>
+<div class="card mt-4 shadow-sm">
+    <div class="card-body">
+        <h3 class="text-center mb-4">Bạn có chắc chắn muốn xóa danh mục này?</h3>
+        <h4 class="text-center"> 
+             Danh mục: @Html.DisplayFor(model => model.CategoryName) 
+        </h4>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="d-flex justify-content-between">
+                <input type="submit" value="Xóa" class="btn btn-danger" />
+                @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn btn-secondary", style = "color: white !important;" })
+            </div>
+        }
+    </div>
+</div>
+
+
+

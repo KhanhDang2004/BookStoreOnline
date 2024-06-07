@@ -15,9 +15,21 @@ namespace BookStoreOnline.Areas.Admin.Controllers
         private BookStoreEntities db = new BookStoreEntities();
 
         // GET: Admin/Orders
-        public ActionResult Index()
+        public ActionResult Index(int? status)
         {
-            var orders = (from o in db.Orders orderby o.IDOrder descending select o).ToList();
+            List<Order> orders = new List<Order>();
+            switch (status)
+            {
+                case 0:
+                    orders = db.Orders.Where(x=>x.Status == 0).ToList();
+                    break;
+                case 1:
+                    orders = db.Orders.Where(x => x.Status == 1).ToList();
+                    break;
+                default:
+                    orders = db.Orders.ToList();
+                    break;
+            }
             return View(orders.ToList());
         }
 
