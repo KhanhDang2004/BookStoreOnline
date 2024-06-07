@@ -15,7 +15,5 @@ namespace BookStoreOnline.Controllers
             var book = db.Products.ToList().Take(8);
             return View(book);
         }
-
-        
     }
 }
