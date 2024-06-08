@@ -33,7 +33,9 @@
                         {
                             <td style="color:forestgreen">Đã xác nhận</td>
                         }
-                        <td><a href="@Url.Action("Details/"+item.IDOrder,"OrdersAdmin")">Xem chi tiết</a></td>
+                    <td>
+                        <a href="@Url.Action("Details/"+item.IDOrder,"OrdersAdmin")" class="btn btn-info">Xem chi tiết</a> 
+                    </td>
                     </tr>
                 }
 
