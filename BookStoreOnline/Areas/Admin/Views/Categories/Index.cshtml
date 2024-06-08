@@ -26,11 +26,9 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.CategoryName)
                     </td>
-                    <td>
-
-                        @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.CategoryID }) |
-
-                        @Html.ActionLink("Xóa", "Delete", new { id = item.CategoryID })
+                    <td >
+                        <a href="@Url.Action("Edit", new { id = item.CategoryID})" class="btn btn-sm btn-warning">Chỉnh sửa</a> |
+                        <a href="@Url.Action("Delete", new { id = item.CategoryID })" class="btn btn-sm btn-danger">Xóa</a>
                     </td>
                 </tr>
             }
