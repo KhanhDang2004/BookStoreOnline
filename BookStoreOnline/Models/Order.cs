@@ -22,9 +22,11 @@ namespace BookStoreOnline.Models
     
         public int IDOrder { get; set; }
         public string Address { get; set; }
-        public Nullable<int> Status { get; set; }
+        public Nullable<int> StatusOrder { get; set; }
         public Nullable<System.DateTime> DateOrder { get; set; }
-        public Nullable<int> IDCus { get; set; }
+        public Nullable<int> IDCustomer { get; set; }
+        public int StatusPayment { get; set; }
+        public int TypePayment { get; set; }
     
         public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

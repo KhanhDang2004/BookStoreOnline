@@ -21,10 +21,10 @@ namespace BookStoreOnline.Areas.Admin.Controllers
             switch (status)
             {
                 case 0:
-                    orders = db.Orders.Where(x=>x.Status == 0).ToList();
+                    orders = db.Orders.Where(x=>x.StatusOrder == 0).ToList();
                     break;
                 case 1:
-                    orders = db.Orders.Where(x => x.Status == 1).ToList();
+                    orders = db.Orders.Where(x => x.StatusOrder == 1).ToList();
                     break;
                 default:
                     orders = db.Orders.ToList();
@@ -70,7 +70,7 @@ namespace BookStoreOnline.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IDCus = new SelectList(db.Customers, "ID", "NameCustomer", order.IDCus);
+            ViewBag.IDCus = new SelectList(db.Customers, "ID", "NameCustomer", order.IDCustomer);
             return View(order);
         }
 
@@ -86,7 +86,7 @@ namespace BookStoreOnline.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.IDCus = new SelectList(db.Customers, "ID", "NameCustomer", order.IDCus);
+            ViewBag.IDCus = new SelectList(db.Customers, "ID", "NameCustomer", order.IDCustomer);
             return View(order);
         }
 
@@ -103,7 +103,7 @@ namespace BookStoreOnline.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.IDCus = new SelectList(db.Customers, "ID", "NameCustomer", order.IDCus);
+            ViewBag.IDCus = new SelectList(db.Customers, "ID", "NameCustomer", order.IDCustomer);
             return View(order);
         }
 
@@ -144,7 +144,7 @@ namespace BookStoreOnline.Areas.Admin.Controllers
         public ActionResult ConfirmOrder(int id)
         {
             var order = db.Orders.FirstOrDefault(item => item.IDOrder == id);
-            order.Status = 1;
+            order.StatusOrder = 1;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

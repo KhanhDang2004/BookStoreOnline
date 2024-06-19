@@ -13,7 +13,7 @@ namespace BookStoreOnline.Controllers
         // GET: Order
         public ActionResult Index(int id)
         {
-            return View(db.Orders.Where(o => o.IDCus == id).ToList());
+            return View(db.Orders.Where(o => o.IDCustomer == id).ToList());
         }
 
         

@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<BookStoreOnline.Models.Order>
+@using BookStoreOnline.Areas.Admin.Constants;
 
 @{
     ViewBag.Title = "Index";
@@ -8,39 +9,45 @@
 <div class="card-body">
     <h2>Danh sách đơn hàng</h2>
 </div>
- <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-striped text-center">
+<div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-striped text-center">
+            <tr>
+                <th>Khách hàng</th>
+                <th>Ngày đặt</th>
+                <th>Địa chỉ giao hàng</th>
+                <th>Trạng thái đơn hàng</th>
+                <th>Phương Thức Thanh Toán</th>
+                <th>Trạng Thái Thanh Toán</th>
+                <th>Hoạt động</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
                 <tr>
-                    <th>Khách hàng</th>
-                    <th>Ngày đặt</th>
-                    <th>Địa chỉ giao hàng</th>
-                    <th>Trạng thái đơn hàng</th>
-                    <th></th>
-                </tr>
-
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>@item.Customer.NameCustomer</td>
-                        <td>@String.Format("{0:dd/MM/yyyy}", item.DateOrder)</td>
-                        <td>@item.Address</td>
-                        @if (item.Status == 0)
-                        {
-                            <td style="color:red">Chưa xác nhận</td>
-                        }
-                        else
-                        {
-                            <td style="color:forestgreen">Đã xác nhận</td>
-                        }
+                    <td>@item.Customer.Name</td>
+                    <td>@String.Format("{0:dd/MM/yyyy}", item.DateOrder)</td>
+                    <td>@item.Address</td>
+                    @* Chuyển đổi từ int sang enum *@
+                    <td>@EHelper.GetEnumDescription((Constants.StatusOrder)item.StatusOrder)</td>
+                    <td>@EHelper.GetEnumDescription((Constants.StatusPayment)item.StatusPayment)</td>
+                    <td>@EHelper.GetEnumDescription((Constants.TypePayment)item.TypePayment)</td>
                     <td>
-                        <a href="@Url.Action("Details/"+item.IDOrder,"OrdersAdmin")" class="btn btn-info">Xem chi tiết</a> 
+                        <a href="@Url.Action("Details/"+item.IDOrder,"OrdersAdmin")" class="btn btn-info">Xem chi tiết</a>
                     </td>
-                    </tr>
-                }
+                </tr>
+            }
 
 
-            </table>
+        </table>
 
-        </div>
     </div>
+</div>
+@*@if (item.StatusOrder == 0)
+    {
+        <td style="color:red">Chưa xác nhận</td>
+    }
+    else
+    {
+        <td style="color:forestgreen">Đã xác nhận</td>
+    }*@

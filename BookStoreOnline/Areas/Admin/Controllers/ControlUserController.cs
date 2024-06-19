@@ -1,4 +1,5 @@
-﻿using BookStoreOnline.Models;
+﻿using BookStoreOnline.Core;
+using BookStoreOnline.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,5 +43,61 @@ namespace BookStoreOnline.Areas.Admin.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        public ActionResult ResetPassword(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Customer customer = db.Customers.Find(id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            return View(customer);
+        }
+
+        [HttpPost, ActionName("ResetPassword")]
+        [ValidateAntiForgeryToken]
+        public ActionResult ResetPassword(int id)
+        {
+            Customer nguoidung = db.Customers.Find(id);
+
+            nguoidung.Password = Extension.GetMd5Hash("123456789");
+               
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult DisableAccount(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Customer customer = db.Customers.Find(id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            return View(customer);
+        }
+
+        [HttpPost, ActionName("DisableAccount")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DisableAccountConfirmed(int id)
+        {
+            Customer customer = db.Customers.Find(id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+
+            customer.IsActive = false; 
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
     }
 }

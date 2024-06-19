@@ -1,5 +1,5 @@
 ﻿@model BookStoreOnline.Models.Order
-
+@using BookStoreOnline.Areas.Admin.Constants;
 @{
     ViewBag.Title = "Details";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
@@ -58,11 +58,10 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-6">
-                                        Tên khách hàng: <span style="font-weight:bold">@Model.Customer.NameCustomer</span> <br /><br />
-                                        Địa chỉ Email: @Model.Customer.Email <br /> <br />
+                                        Tên khách hàng: <span style="font-weight:bold">@Model.Customer.Name</span> <br /><br /> 
 
                                         Địa chỉ giao hàng: @Model.Address <br /> <br />
-                                        @if (Model.Status == 0)
+                                        @if (Model.StatusOrder == (int)Constants.StatusOrder.NoInform)
                                         {
                                             <a href="@Url.Action("ConfirmOrder/"+ Model.IDOrder,"OrdersAdmin")" class="btn btn-success">Xác nhận đơn hàng</a>
                                         }
@@ -87,14 +86,14 @@
                         </div>
                     </div>
                 </div>
-                </div>
-         
-        </div> 
+            </div>
+
+        </div>
     </div>
 </div>
 <p>
 
-    @Html.ActionLink("Quay trở lại", "Index")
+    @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn btn-secondary", style = "color: white !important;" })
 </p>
 
 

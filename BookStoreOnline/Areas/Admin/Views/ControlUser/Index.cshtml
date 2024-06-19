@@ -1,50 +1,55 @@
 ﻿@model IEnumerable<BookStoreOnline.Models.Customer>
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-
-<h2>Quản lý người dùng</h2>
+<div class="card-body">
+    <h2>Danh sách tài khoản người dùng</h2>
+</div>
 <p>
     @*<button class="btn-default"> @Html.ActionLink("Thêm mới", "Create") </button>*@
 </p>
 <table class="table table-bordered">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.NameCustomer)
+            Tên người dùng
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Email)
+            Email
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Password)
+            Địa chỉ
         </th>
 
-
-        <th> Hành động</th>
+        <th> Số điện thoại</th>
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.NameCustomer)
+                @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
-
             <td>
-                @Html.DisplayFor(modelItem => item.Password)
+                @Html.DisplayFor(modelItem => item.Address)
             </td>
-
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+           
 
             <td>
                 @*<button class="btn btn-success">
-                        @Html.ActionLink("Sửa", "Edit", new { id = item.MaNguoiDung }, new { @style = "color:white;" })
-                    </button>*@
+            @Html.ActionLink("Sửa", "Edit", new { id = item.MaNguoiDung }, new { @style = "color:white;" })
+        </button>*@
                 <button class="btn btn-primary">
-                    @Html.ActionLink("Chi tiết", "Details", new { id = item.ID }, new { @style = "color:white;" })
+                    @Html.ActionLink("Reset mật khẩu ", "ResetPassword", new { id = item.ID }, new { @style = "color:white;" })
+                </button>
+                <button class="btn btn-warning">
+                    @Html.ActionLink("Vô hiệu hóa", "DisableAccount", new { id = item.ID }, new { @style = "color:white;" })
                 </button>
                 <button class="btn btn-danger">
                     @Html.ActionLink("Xóa", "Delete", new { id = item.ID }, new { @style = "color:white;" })

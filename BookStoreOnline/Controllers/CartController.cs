@@ -137,10 +137,10 @@ namespace BookStoreOnline.Controllers
         {
             Order order = new Order();
             var user = (Customer)Session["TaiKhoan"];
-            order.IDCus = user.ID;
+            order.IDCustomer = user.ID;
             order.DateOrder = DateTime.Now.Date;
             order.Address = address;
-            order.Status = 0;
+            order.StatusOrder = 0;
             db.Orders.Add(order);
             db.SaveChanges();
 

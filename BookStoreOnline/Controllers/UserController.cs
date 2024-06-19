@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BookStoreOnline.Core;
 using BookStoreOnline.Models;
 
 namespace BookStoreOnline.Controllers
@@ -30,7 +31,7 @@ namespace BookStoreOnline.Controllers
             return RedirectToAction("Index", "Admin/Dashboard");
             if (ModelState.IsValid)
             {
-                 var taikhoanAdmin = db.AdminAccounts.FirstOrDefault(k => k.Email == taikhoan.Email && k.Password == taikhoan.Password);
+                var taikhoanAdmin = db.AdminAccounts.FirstOrDefault(k => k.Email == taikhoan.Email && Extension.GetMd5Hash(k.Password) == Extension.GetMd5Hash(taikhoan.Password));
 
                 if (taikhoanAdmin != null)
                 {
@@ -42,7 +43,7 @@ namespace BookStoreOnline.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    var account = db.Customers.FirstOrDefault(k => k.Email == taikhoan.Email && k.Password == taikhoan.Password);
+                    var account = db.Customers.FirstOrDefault(k => k.Email == taikhoan.Email && Extension.GetMd5Hash(k.Password) == Extension.GetMd5Hash(taikhoan.Password));
                     if (account != null)
                     {
                         Session["TaiKhoan"] = account;
@@ -71,7 +72,7 @@ namespace BookStoreOnline.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult SignUp(Customer cus,string rePass)
+        public ActionResult SignUp(Customer cus, string rePass)
         {
             if (ModelState.IsValid)
             {
@@ -81,11 +82,12 @@ namespace BookStoreOnline.Controllers
                     ViewBag.ThongBaoEmail = "Đã có tài khoản đăng nhập bằng Email này";
                     return View();
                 }
-                if(cus.Password == rePass)
+                if (cus.Password == rePass)
                 {
+                    cus.Password = Extension.GetMd5Hash(cus.Password);
                     db.Customers.Add(cus);
                     db.SaveChanges();
-                    return RedirectToAction("Login","User");
+                    return RedirectToAction("Login", "User");
                 }
                 else
                 {
@@ -96,6 +98,6 @@ namespace BookStoreOnline.Controllers
             return View();
         }
 
-        
+
     }
 }
