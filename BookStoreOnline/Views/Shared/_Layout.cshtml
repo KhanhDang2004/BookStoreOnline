@@ -90,8 +90,8 @@
                             <div class="navbar-nav">
                                 <a class="nav-item nav-link" href="@Url.Action("Index","Home")">Trang chủ <span class="sr-only">(current)</span></a>
                                 <a class="nav-item nav-link" href="@Url.Action("GetAllBook","Category")">Tất cả sản phẩm</a>
-                                <a class="nav-item nav-link" href="#">Giới thiệu</a>
-                                <a class="nav-item nav-link" href="#">Liên hệ</a>
+                                <a class="nav-item nav-link" href="@Url.Action("Index","Introduce")">Giới thiệu</a>
+                                <a class="nav-item nav-link" href="@Url.Action("Index", "Contact")">Liên hệ</a>
 
 
                             </div>
@@ -138,45 +138,80 @@
         </div>
     </div>
 
-    <div class="footer">
-        <div class="container">
-            <div class="row foot-list">
-                <div class="col-lg-4">
-                    <h2>Dịch vụ</h2> <br />
-                    <ul>
-                        <li>Điều khoản sử dụng</li>
-                        <li>Chính sách bảo mật thông tin cá nhân</li>
-                        <li>Chính sách bảo mật thanh toán</li>
-                        <li>Hệ thống trung tâm - nhà sách</li>
+    <footer>
 
-                    </ul>
+        <div class="footer-container">
 
-                </div>
-                <div class="col-lg-4">
-                    <h2>Hỗ trợ</h2> <br />
-                    <ul>
-                        <li>Liên hệ</li>
-                        <li>Chính sách đổi - trả - hoàn tiền</li>
-                        <li>Chính sách vận chuyển</li>
+            <div class="col footer-item col-four">
+                <h2>Về chúng tôi </h2>
+                <p class="text-footer">
+                    Giới thiệu về nhà sách
+                </p>
+                <p class="text-footer">
+                    Hệ thống nhà sách
+                </p>
+                <p class="text-footer">
+                    Điều khoản sử dụng
+                </p>
+                <p class="text-footer">
+                    Chính sách bảo mật
+                </p>
+                <p class="text-footer">
+                    Chính sách bán hàng
+                </p>
+                <p class="text-footer">
+                    Phương thức vận chuyển
+                </p>
+            </div>
 
 
-                    </ul>
-                </div>
-                <div class="col-lg-4">
-                    <h2>Liên hệ</h2> <br />
-                    <ul>
-                        <li><i class="bi bi-facebook"></i><a href="https://www.facebook.com/profile.php?id=100025506227864&locale=vi_VN">Lê Trần Đức Hải</a></li>
-                        <li><i class="bi bi-instagram" style="margin-right: 5px;"></i>Duck.Haii</li>
-                        <li><i class="bi bi-github"></i>DucHai</li>
-                        <li><i class="bi bi-envelope-fill"></i>letranduchai2004@gmail.com</li>
 
-                    </ul>
-                </div>
+            <div class="col footer-item col-four">
+
+                <h2>Tài khoản của tôi </h2>
+
+                <p class="text-footer">
+                    Đăng nhập
+                </p>
+                <p class="text-footer">
+                    Tạo tài khoản
+                </p>
 
             </div>
-        </div>
-    </div>
+            <div class="col footer-item col-four">
+                <h2>Hỗ trợ khách hàng</h2>
+                <p class="text-footer">
+                    Các câu hỏi thường gặp
+                </p>
+                <p class="text-footer">
+                    Chính sách Đổi/Trả hàng
+                </p>
+                <p class="text-footer">
+                    Quy định viết bình luận
+                </p>
+            </div>
+            <div class="col footer-item col-four">
+                <h2>Liên hệ chúng tôi </h2>
+                <p class="text-footer">
+                    Hotline:00000000000<br>
+                    Email:Nhasach@gmail.com
+                </p>
+                <ul class="social-icons">
+                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                    <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                    <li><a href="#"><i class="fab fa-tiktok"></i></a></li>
+                </ul>
 
+            </div>
+
+        </div>
+        <div class="copyright">
+            &copy; 2023 Nhà Sách . All rights reserved.
+        </div>
+
+    </footer>
 
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
