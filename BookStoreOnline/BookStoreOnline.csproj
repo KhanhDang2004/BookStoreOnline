@@ -208,6 +208,7 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Images\1__3_.jpg" />
     <Content Include="Images\20-nam-lich-su-chung-khoan.jpeg" />
     <Content Include="Images\25207783.jpg" />
     <Content Include="Images\360_F_303347228_6UhDk2B9YMcjsKr2I3FYBKztYtyoDmxA.jpg" />
@@ -215,6 +216,7 @@
     <Content Include="Images\7-thoi-quen-hieu-qua-1.jpg" />
     <Content Include="Images\ban-gi-de-nhanh-giau-1.jpg" />
     <Content Include="Images\bi-quyet-tay-trang-thanh-trieu-phu.jpg" />
+    <Content Include="Images\bottom.jpg" />
     <Content Include="Images\Cardgame_Slide_T6_840x320.jpg" />
     <Content Include="Images\com-bo-2-cuon-sach-canh-tranh.jpg" />
     <Content Include="Images\content-nghe-thuat.jpg" />

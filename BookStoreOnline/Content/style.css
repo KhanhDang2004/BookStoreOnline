@@ -21,7 +21,7 @@
 
 .logo a img {
     width: 50%;
-    height: 100px;
+    height: 75px;
 }
 
 .head-middle {
@@ -35,26 +35,27 @@
 
         .head-middle form input[type="text"] {
             outline: none;
-            width: 70%;
-            height: 38px;
-            border-radius:13px;
+            width: 85%;
+            height: 42px;
+            border-radius:14px;
             border: 1px solid rgb(206, 206, 206);
             /* border-radius: 15px; */
             padding: 5px 10px;
+            margin-left:-40px;
         }
 
         .head-middle form button {
-            width: 45px;
-            height: 38px;
+            width: 46px;
+            height: 42px;
             /* border-radius: 50%; */
-            border-radius:13px;
+            border-radius:14px;
             border: none;
             background-color: orange;
             color: #fff;
             outline: none;
             cursor: pointer;
             position: relative;
-            left: -45px;
+            left: -50px;
         }
 
 .category-link {
@@ -81,8 +82,9 @@
 .cart-link {
     color: orange;
     position: relative;
-    left: -53px;
-    font-size: 40px;
+    left: -93px;
+    font-size: 30px;
+    width:400px;
 }
 
 .quantity-prod-cart {
@@ -91,7 +93,7 @@
     height: 27px;
     border-radius: 50%;
     text-align: center;
-    font-size: 17px;
+    font-size: 30px;
     font-weight: 500;
     position: absolute;
     padding: 0px 10px;
@@ -454,6 +456,7 @@
     box-shadow: inset 2px 2px 2px 0px rgba(255,255,255,.5), 7px 7px 20px 0px rgba(0,0,0,.1), 4px 4px 5px 0px rgba(0,0,0,.1);
     outline: none;
     text-align:center;
+    margin-left:-235px;
 }
 .btn-7 {
     background: linear-gradient(0deg, rgba(255,151,0,1) 0%, rgba(251,75,2,1) 100%);
@@ -663,8 +666,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #f2f2f2;
+    background-color: #fff;
     padding: 40px;
+    width: 1075px;
+    margin-left: 50px;
 }
 
 .hero-content {
@@ -683,9 +688,9 @@
     }
 
 .slide-show {
-    width: 830px;
+    width: 900px;
     overflow: hidden;
-    margin: auto;
+    margin-left: -10px;
     position: relative;
 }
 
@@ -723,7 +728,8 @@
     bottom: 10px;
     display: flex;
     left: 50%;
-    transform: translateX(-50%);
+    /* transform: translateX(-50%); */
+    margin-left: 100px;
 }
 
 .index-item {
@@ -736,6 +742,29 @@
 .active {
     background-color: #999;
 }
+
+.img-side {
+    width: 194px;
+    /* float:right;
+  margin-left:100px ; */
+}
+
+    .img-side > img {
+        border-radius: 5%;
+    }
+
+.row::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.item-img {
+    width: 300px;
+    height: 159px;
+    margin-left: 50px;
+}
+
 
 
 
@@ -774,4 +803,10 @@ footer {
 
     .social-icons a {
         color: black;
+    }
+    .giohang{
+        font-size:23px;
+    }
+    .icon-down{
+        font-size:13px;
     }
