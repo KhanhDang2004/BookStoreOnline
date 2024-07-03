@@ -13,13 +13,13 @@ namespace BookStoreOnline.Areas.Admin.Controllers
 {
     public class ProductsController : Controller
     {
-        private BookStoreEntities db = new BookStoreEntities();
+        private NhaSachEntities db = new NhaSachEntities();
 
         // GET: Admin/Products
         public ActionResult Index()
         {
-            var products = (from p in db.Products orderby p.ProductID descending select p).ToList();
-            return View(products.ToList());
+            var sanPham = (from p in db.SANPHAMs orderby p.MaSanPham descending select p).ToList();
+            return View(sanPham.ToList());
         }
 
         // GET: Admin/Products/Details/5
@@ -29,18 +29,18 @@ namespace BookStoreOnline.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            SANPHAM sanPham = db.SANPHAMs.Find(id);
+            if (sanPham == null)
             {
                 return HttpNotFound();
             }
-            return View(product);
+            return View(sanPham);
         }
 
         // GET: Admin/Products/Create
         public ActionResult Create()
         {
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
+            ViewBag.LoaiSP = new SelectList(db.LOAIs, "MaLoai", "TenLoai");
             return View();
         }
 
@@ -49,7 +49,7 @@ namespace BookStoreOnline.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Product product, HttpPostedFileBase imageBook)
+        public ActionResult Create(SANPHAM sanPham, HttpPostedFileBase imageBook)
         {
             if (ModelState.IsValid)
             {
@@ -57,17 +57,17 @@ namespace BookStoreOnline.Areas.Admin.Controllers
                 {
                     var fileName = Path.GetFileName(imageBook.FileName);
                     var path = Path.Combine(Server.MapPath("~/Images"), fileName);
-                    product.ImageProd = fileName;
+                    sanPham.Anh = fileName;
                     imageBook.SaveAs(path);
                 }
 
-                db.Products.Add(product);
+                db.SANPHAMs.Add(sanPham);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", product.CategoryID);
-            return View(product);
+            ViewBag.CategoryID = new SelectList(db.LOAIs, "CategoryID", "CategoryName", sanPham.MaLoai);
+            return View(sanPham);
         }
 
         // GET: Admin/Products/Edit/5
@@ -77,13 +77,13 @@ namespace BookStoreOnline.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            SANPHAM sanPham = db.SANPHAMs.Find(id);
+            if (sanPham == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", product.CategoryID);
-            return View(product);
+            ViewBag.CategoryID = new SelectList(db.LOAIs, "CategoryID", "CategoryName", sanPham.MaLoai);
+            return View(sanPham);
         }
 
         // POST: Admin/Products/Edit/5
@@ -91,7 +91,7 @@ namespace BookStoreOnline.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductID,ProductName,Price,Introduce,Author,ImageProd,CategoryID")] Product product, HttpPostedFileBase imageBook)
+        public ActionResult Edit([Bind(Include = "ProductID,ProductName,Price,Introduce,Author,ImageProd,CategoryID")] SANPHAM sanPham, HttpPostedFileBase imageBook)
         {
             if (ModelState.IsValid)
             {
@@ -99,16 +99,16 @@ namespace BookStoreOnline.Areas.Admin.Controllers
                 {
                     var fileName = Path.GetFileName(imageBook.FileName);
                     var path = Path.Combine(Server.MapPath("~/Images"), fileName);
-                    product.ImageProd = fileName;
+                    sanPham.Anh = fileName;
                     imageBook.SaveAs(path);
                 }
 
-                db.Entry(product).State = EntityState.Modified;
+                db.Entry(sanPham).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", product.CategoryID);
-            return View(product);
+            ViewBag.CategoryID = new SelectList(db.LOAIs, "CategoryID", "CategoryName", sanPham.MaLoai);
+            return View(sanPham);
         }
 
         // GET: Admin/Products/Delete/5
@@ -118,12 +118,12 @@ namespace BookStoreOnline.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            SANPHAM sanPham = db.SANPHAMs.Find(id);
+            if (sanPham == null)
             {
                 return HttpNotFound();
             }
-            return View(product);
+            return View(sanPham);
         }
 
         // POST: Admin/Products/Delete/5
@@ -131,8 +131,8 @@ namespace BookStoreOnline.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Product product = db.Products.Find(id);
-            db.Products.Remove(product);
+            SANPHAM product = db.SANPHAMs.Find(id);
+            db.SANPHAMs.Remove(product);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

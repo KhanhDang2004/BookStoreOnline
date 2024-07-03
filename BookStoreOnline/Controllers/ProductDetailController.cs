@@ -9,12 +9,12 @@ namespace BookStoreOnline.Controllers
 {
     public class ProductDetailController : Controller
     {
-        BookStoreEntities db = new BookStoreEntities();
+        NhaSachEntities db = new NhaSachEntities();
         // GET: ProductDetail
         public ActionResult Index(int id)
         {
-            ViewBag.Book = db.Products.FirstOrDefault(book => book.ProductID == id);
-            ViewBag.MoreBook = db.Products.ToList().Take(4);
+            ViewBag.Book = db.SANPHAMs.FirstOrDefault(book => book.MaSanPham == id);
+            ViewBag.MoreBook = db.SANPHAMs.ToList().Take(4);
             return View();
         }
     }

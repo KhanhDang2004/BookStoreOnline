@@ -1,4 +1,4 @@
-﻿@model BookStoreOnline.Models.Product
+﻿@model BookStoreOnline.Models.SANPHAM
 
 @{
     ViewBag.Title = "Create";
@@ -17,40 +17,40 @@
 
         <div class="mb-3">
             <label for="CategoryName" class="form-label"> Tên sách</label>
-            @Html.EditorFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.TenSanPham, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TenSanPham, "", new { @class = "text-danger" })
         </div>
 
         <div class="mb-3">
             <label for="CategoryName" class="form-label">  Tác giả</label>
-            @Html.EditorFor(model => model.Author, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Author, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.TacGia, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TacGia, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="mb-3">
         <label for="CategoryName" class="form-label">  Giá </label>
-        @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+        @Html.EditorFor(model => model.Gia, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Gia, "", new { @class = "text-danger" })
     </div>
 
     <div class="mb-3">
         <label for="CategoryName" class="form-label">  Thể loại </label>
-        @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
+        @Html.DropDownList("LoaiSP", null, htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.MaLoai, "", new { @class = "text-danger" })
     </div>
 
     <div class="mb-3">
         <label for="CategoryName" class="form-label">  Giới thiệu</label>
         <textarea name="Introduce" placeholder="Giới thiệu về sách" class="form-control" rows="4"></textarea>
-        @Html.ValidationMessageFor(model => model.Introduce, "", new { @class = "text-danger" })
+        @Html.ValidationMessageFor(model => model.MoTa, "", new { @class = "text-danger" })
     </div>
 
     <div class="mb-3">
         <label for="CategoryName" class="form-label">  Hình ảnh</label>
         <div class="mb-3">
             <input type="file" name="imageBook" />
-            @Html.ValidationMessageFor(model => model.ImageProd, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.Anh, "", new { @class = "text-danger" })
         </div>
     </div>
 

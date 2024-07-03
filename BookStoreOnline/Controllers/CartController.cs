@@ -9,7 +9,7 @@ namespace BookStoreOnline.Controllers
 {
     public class CartController : Controller
     {
-        BookStoreEntities db = new BookStoreEntities();
+        NhaSachEntities db = new NhaSachEntities();
         // GET: Cart
         public ActionResult Index()
         {
@@ -35,16 +35,16 @@ namespace BookStoreOnline.Controllers
             int id = int.Parse(product["ProductID"]);
             int quantity = int.Parse(product["Quantity"]);
 
-            CartItem Product = myCart.FirstOrDefault(p => p.ProductID == id);
-            if (Product == null)
+            CartItem sanPham = myCart.FirstOrDefault(p => p.ProductID == id);
+            if (sanPham == null)
             {
-                Product = new CartItem(id);
-                Product.Number = quantity;
-                myCart.Add(Product);
+                sanPham = new CartItem(id);
+                sanPham.Number = quantity;
+                myCart.Add(sanPham);
             }
             else
             {
-                Product.Number += quantity;
+                sanPham.Number += quantity;
             }
             return RedirectToAction("GetCartInfo", "Cart");
         }
@@ -64,16 +64,16 @@ namespace BookStoreOnline.Controllers
 
             int quantity = 1;
 
-            CartItem Product = myCart.FirstOrDefault(p => p.ProductID == id);
-            if (Product == null)
+            CartItem sanPham = myCart.FirstOrDefault(p => p.ProductID == id);
+            if (sanPham == null)
             {
-                Product = new CartItem(id);
-                Product.Number = quantity;
-                myCart.Add(Product);
+                sanPham = new CartItem(id);
+                sanPham.Number = quantity;
+                myCart.Add(sanPham);
             }
             else
             {
-                Product.Number += quantity;
+                sanPham.Number += quantity;
             }
             return RedirectToAction("GetCartInfo", "Cart");
         }
@@ -116,8 +116,8 @@ namespace BookStoreOnline.Controllers
             int quantity = int.Parse(product["Quantity"]);
 
             List<CartItem> myCart = GetCart();
-            CartItem Product = myCart.FirstOrDefault(p => p.ProductID == id);
-            Product.Number = quantity;
+            CartItem sanPham = myCart.FirstOrDefault(p => p.ProductID == id);
+            sanPham.Number = quantity;
             return RedirectToAction("GetCartInfo", "Cart");
         }
 
@@ -135,29 +135,29 @@ namespace BookStoreOnline.Controllers
 
         public ActionResult InsertOrder(string address)
         {
-            Order order = new Order();
-            var user = (Customer)Session["TaiKhoan"];
-            order.IDCustomer = user.ID;
-            order.DateOrder = DateTime.Now.Date;
-            order.Address = address;
-            order.StatusOrder = 0;
-            db.Orders.Add(order);
+            DONHANG donHang = new DONHANG();
+            var khachHangDaDangNhap = (KHACHHANG)Session["TaiKhoan"];
+            donHang.ID = khachHangDaDangNhap.MaKH;
+            donHang.NgayDat = DateTime.Now.Date;
+            donHang.DiaChi = address;
+            donHang.TrangThai = 0;
+            db.DONHANGs.Add(donHang);
             db.SaveChanges();
 
             List<CartItem> cartItems = GetCart();
             foreach (var item in cartItems)
             {
-                OrderDetail prod = new OrderDetail();
-                prod.IDOrder = order.IDOrder;
-                prod.ProductID = item.ProductID;
-                prod.Quantity = item.Number;
-                prod.UnitPrice = item.FinalPrice();
+                CHITIETDONHANG chiTietDonHang = new CHITIETDONHANG();
+                chiTietDonHang.MaDonHang = donHang.MaDonHang;
+                chiTietDonHang.MaSanPham = item.ProductID;
+                chiTietDonHang.SoLuong = item.Number;
+                //prod.UnitPrice = item.FinalPrice();
 
-                db.OrderDetails.Add(prod);
+                db.CHITIETDONHANGs.Add(chiTietDonHang);
                 db.SaveChanges();
             }
             Session["GioHang"] = null;
-            return RedirectToAction("Index/" + user.ID, "Order");
+            return RedirectToAction("Index/" + khachHangDaDangNhap.MaKH, "Order");
         }
 
 

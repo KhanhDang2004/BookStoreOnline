@@ -1,4 +1,4 @@
-﻿@model BookStoreOnline.Models.Category
+﻿@model BookStoreOnline.Models.LOAI
 
 @{
     ViewBag.Title = "Delete";
@@ -11,7 +11,7 @@
     <div class="card-body">
         <h3 class="text-center mb-4">Bạn có chắc chắn muốn xóa danh mục này?</h3>
         <h4 class="text-center"> 
-             Danh mục: @Html.DisplayFor(model => model.CategoryName) 
+             Danh mục: @Html.DisplayFor(model => model.Tenloai) 
         </h4>
         @using (Html.BeginForm())
         {

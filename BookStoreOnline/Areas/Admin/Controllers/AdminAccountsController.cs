@@ -15,30 +15,30 @@ namespace BookStoreOnline.Areas.Admin.Controllers
 {
     public class AdminAccountsController : Controller
     {
-        private BookStoreEntities db = new BookStoreEntities();
+        private NhaSachEntities db = new NhaSachEntities();
 
-        // GET: Admin/AdminAccounts
+        // GET: Admin/NHANVIENs.
         public ActionResult Index()
         {
-            return View(db.AdminAccounts.ToList());
+            return View(db.NHANVIENs.ToList());
         }
 
-        // GET: Admin/AdminAccounts/Details/5
+        // GET: Admin/NHANVIENs.Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AdminAccount adminAccount = db.AdminAccounts.Find(id);
-            if (adminAccount == null)
+            NHANVIEN nhanVien = db.NHANVIENs.Find(id);
+            if (nhanVien == null)
             {
                 return HttpNotFound();
             }
-            return View(adminAccount);
+            return View(nhanVien);
         }
 
-        // GET: Admin/AdminAccounts/Create
+        // GET: Admin/NHANVIENs.Create
         public ActionResult Create()
         {
             var roles = from AdminRole e in Enum.GetValues(typeof(AdminRole))
@@ -48,34 +48,34 @@ namespace BookStoreOnline.Areas.Admin.Controllers
             return View();
         }
 
-        // POST: Admin/AdminAccounts/Create
+        // POST: Admin/NHANVIENs.Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Name,Email,Role")] AdminAccount adminAccount)
+        public ActionResult Create([Bind(Include = "Name,Email,Role")] NHANVIEN nhanVienMoi)
         {
             if (ModelState.IsValid)
             {
-                adminAccount.Password = Extension.GetMd5Hash("123456789");
-                adminAccount.CreatedOn = DateTime.Now;
-                db.AdminAccounts.Add(adminAccount);
+                nhanVienMoi.MatKhau = Extension.GetMd5Hash("123456789");
+                nhanVienMoi.NgayTao = DateTime.Now;
+                db.NHANVIENs.Add(nhanVienMoi);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(adminAccount);
+            return View(nhanVienMoi);
         }
 
-        // GET: Admin/AdminAccounts/Edit/5
+        // GET: Admin/NHANVIENs.Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AdminAccount adminAccount = db.AdminAccounts.Find(id);
-            if (adminAccount == null)
+            NHANVIEN nhanVien = db.NHANVIENs.Find(id);
+            if (nhanVien == null)
             {
                 return HttpNotFound();
             }
@@ -83,51 +83,51 @@ namespace BookStoreOnline.Areas.Admin.Controllers
                         select new { Id = (int)e, Name = e.GetDescription() };
 
             ViewBag.Role = new SelectList(roles, "Id", "Name");
-            return View(adminAccount);
+            return View(nhanVien);
         }
 
-        // POST: Admin/AdminAccounts/Edit/5
+        // POST: Admin/NHANVIENs.Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AdminID, Name,Email,Role")] AdminAccount adminAccount)
+        public ActionResult Edit([Bind(Include = "AdminID, Name,Email,Role")] NHANVIEN nhanVien)
         {
             if (ModelState.IsValid)
             {
-                AdminAccount admAccount = db.AdminAccounts.Find(adminAccount.AdminID);
-                admAccount.Name = adminAccount.Name;
-                admAccount.Role = adminAccount.Role;
-                admAccount.Email = adminAccount.Email;
+                NHANVIEN admAccount = db.NHANVIENs.Find(nhanVien.MaNV);
+                admAccount.Ten = nhanVien.Ten;
+                admAccount.Quyen = nhanVien.Quyen;
+                admAccount.Email = nhanVien.Email;
                 db.Entry(admAccount).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(adminAccount);
+            return View(nhanVien);
         }
 
-        // GET: Admin/AdminAccounts/Delete/5
+        // GET: Admin/NHANVIENs.Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AdminAccount adminAccount = db.AdminAccounts.Find(id);
-            if (adminAccount == null)
+            NHANVIEN nhanVien = db.NHANVIENs.Find(id);
+            if (nhanVien == null)
             {
                 return HttpNotFound();
             }
-            return View(adminAccount);
+            return View(nhanVien);
         }
 
-        // POST: Admin/AdminAccounts/Delete/5
+        // POST: Admin/NHANVIENs.Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            AdminAccount adminAccount = db.AdminAccounts.Find(id);
-            db.AdminAccounts.Remove(adminAccount);
+            NHANVIEN nhanVien = db.NHANVIENs.Find(id);
+            db.NHANVIENs.Remove(nhanVien);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -148,25 +148,25 @@ namespace BookStoreOnline.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AdminAccount adminAccount = db.AdminAccounts.Find(id);
-            if (adminAccount == null)
+            NHANVIEN nhanVien = db.NHANVIENs.Find(id);
+            if (nhanVien == null)
             {
                 return HttpNotFound();
             }
-            return View(adminAccount);
+            return View(nhanVien);
         }
 
         [HttpPost, ActionName("DisableAccount")]
         [ValidateAntiForgeryToken]
         public ActionResult DisableAccountConfirmed(int id)
         {
-            AdminAccount adminAccount = db.AdminAccounts.Find(id);
-            if (adminAccount == null)
+            NHANVIEN nhanVien = db.NHANVIENs.Find(id);
+            if (nhanVien == null)
             {
                 return HttpNotFound();
             }
 
-            adminAccount.IsActive = false; // Assuming there is a property 'IsActive' in the AdminAccount model to indicate if the account is active or not
+            nhanVien.TrangThai = false; // Assuming there is a property 'IsActive' in the AdminAccount model to indicate if the account is active or not
             db.SaveChanges();
 
             return RedirectToAction("Index");

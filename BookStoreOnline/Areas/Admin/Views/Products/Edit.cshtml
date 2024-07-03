@@ -1,4 +1,4 @@
-﻿@model BookStoreOnline.Models.Product
+﻿@model BookStoreOnline.Models.SANPHAM
 
 @{
     ViewBag.Title = "Edit";
@@ -15,52 +15,52 @@
 
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ProductID)
+        @Html.HiddenFor(model => model.MaSanPham)
 
 
 
         <div class="mb-3">
             <label for="CategoryName" class="form-label"> Tên sách</label>
-            @Html.EditorFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.ProductName)
+            @Html.EditorFor(model => model.TenSanPham, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TenSanPham)
         </div>
 
 
         <div class="mb-3">
             <label for="CategoryName" class="form-label"> Tác giả</label>
-            @Html.EditorFor(model => model.Author, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Author)
+            @Html.EditorFor(model => model.TacGia, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TacGia)
         </div>
 
 
         <div class="mb-3">
             <label for="CategoryName" class="form-label"> Gía </label>>
-            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Price)
+            @Html.EditorFor(model => model.Gia, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Gia)
         </div>
 
         <div class="mb-3">
             <label for="CategoryName" class="form-label"> Mô tả </label>
-            <textarea class="form-control" name="Introduce" rows="5">@Model.Introduce</textarea>
-            @Html.ValidationMessageFor(model => model.Introduce)
+            <textarea class="form-control" name="Introduce" rows="5">@Model.MoTa</textarea>
+            @Html.ValidationMessageFor(model => model.MoTa)
         </div>
     </div>
     <div class="mb-3">
-        <label for="CategoryName" class="form-label"> Thể loại</label>
-        @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
+        <label for="TenLoai" class="form-label"> Thể loại</label>
+        @Html.DropDownList("MaLoai", null, htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.MaLoai, "", new { @class = "text-danger" })
     </div>
 
 
     <div class="mb-3">
         <label for="CategoryName" class="form-label"> Hình ảnh</label>
-        <img src="~/Images/@Model.ImageProd" style="width: 30%; position: relative; left: 0;height:280px" /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        <img src="~/Images/@Model.Anh" style="width: 30%; position: relative; left: 0;height:280px" /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 
         @*@Html.EditorFor(model => model.ImagePro, new { htmlAttributes = new { @class = "form-control" } })*@
         <input type="file" name="imageBook" />
-        @Html.HiddenFor(model => model.ImageProd)
+        @Html.HiddenFor(model => model.Anh)
 
-        @Html.ValidationMessageFor(model => model.ImageProd, "", new { @class = "text-danger" })
+        @Html.ValidationMessageFor(model => model.Anh, "", new { @class = "text-danger" })
     </div>
     
 

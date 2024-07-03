@@ -9,17 +9,17 @@ namespace BookStoreOnline.Controllers
 {
     public class CategoryPartialController : Controller
     {
-        BookStoreEntities db = new BookStoreEntities();
+        NhaSachEntities db = new NhaSachEntities();
         // GET: CategoryPartial
         public ActionResult GetPartialCategoryNav()
         {
-            ViewBag.CateList = db.Categories.ToList();
+            ViewBag.CateList = db.LOAIs.ToList();
             return PartialView();
         }
 
         public ActionResult GetCategorySelection()
         {
-            ViewBag.CateList = db.Categories.ToList();
+            ViewBag.CateList = db.LOAIs.ToList();
             return PartialView();
         }
     }

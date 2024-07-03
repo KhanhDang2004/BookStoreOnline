@@ -1,6 +1,6 @@
 ﻿@{
 
-    var user = Session["TaiKhoan"] as BookStoreOnline.Models.Customer;
+    var user = Session["TaiKhoan"] as BookStoreOnline.Models.KHACHHANG;
 }
 
 <!DOCTYPE html>
@@ -51,13 +51,13 @@
                         <div class="dropdown show">
                             <a class="user-link-option" href="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="bi bi-person-circle"></i>
-                                <span style="font-size: 25px;"> @user.Name</span>
+                                <span style="font-size: 25px;"> @user.Ten</span>
 
                             </a>
 
 
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="@Url.Action("Index/"+user.ID,"Order")">Đơn hàng của bạn</a>
+                                <a class="dropdown-item" href="@Url.Action("Index/"+user.MaKH,"Order")">Đơn hàng của bạn</a>
                                 <a class="dropdown-item" href="@Url.Action("LogOut","User")">Đăng xuất</a>
 
                             </div>

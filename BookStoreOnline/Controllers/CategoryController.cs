@@ -8,22 +8,22 @@ namespace BookStoreOnline.Controllers
 {
     public class CategoryController : Controller
     {
-        BookStoreEntities db = new BookStoreEntities();
+        NhaSachEntities db = new NhaSachEntities();
         // GET: Category
         public ActionResult Index(int id)
         {
-            ViewBag.CategoryName = db.Categories.FirstOrDefault(n => n.CategoryID == id).CategoryName;
-            return View(db.Products.Where(book => book.CategoryID == id).ToList());
+            ViewBag.CategoryName = db.LOAIs.FirstOrDefault(n => n.Maloai == id).Tenloai;
+            return View(db.SANPHAMs.Where(book => book.MaLoai == id).ToList());
         }
         public ActionResult GetAllBook()
         {
-            return View(db.Products.ToList());
+            return View(db.SANPHAMs.ToList());
         }
 
         public ActionResult Search(string inputString)
         {
             ViewBag.TextSeatch = inputString;
-            var result = db.Products.Where(s => s.ProductName.Contains(inputString) || s.Author.Contains(inputString)).ToList();
+            var result = db.SANPHAMs.Where(s => s.TenSanPham.Contains(inputString) || s.TacGia.Contains(inputString)).ToList();
 
             return View(result);
         }

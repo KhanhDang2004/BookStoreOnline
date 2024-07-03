@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BookStoreOnline.Models.AdminAccount>
+﻿@model IEnumerable<BookStoreOnline.Models.NHANVIEN>
 @using BookStoreOnline.Areas.Admin.Constants;
 
 @{
@@ -41,7 +41,7 @@
                 @STT
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.Ten)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
@@ -58,9 +58,9 @@
         @Html.ActionLink("Details", "Details", new { id = item.AdminID }) |
         @Html.ActionLink("Delete", "Delete", new { id = item.AdminID })*@
 
-                <a href="@Url.Action("Edit", new { id = item.AdminID })" class="btn btn-sm btn-warning">Chỉnh sửa</a> 
-                <a href="@Url.Action("DisableAccount", new { id = item.AdminID })" class="btn btn-sm btn-info">Vô hiệu hóa </a>
-                <a href="@Url.Action("Delete", new { id = item.AdminID })" class="btn btn-sm btn-danger">Xóa</a>
+                <a href="@Url.Action("Edit", new { id = item.MaNV })" class="btn btn-sm btn-warning">Chỉnh sửa</a> 
+                <a href="@Url.Action("DisableAccount", new { id = item.MaNV })" class="btn btn-sm btn-info">Vô hiệu hóa </a>
+                <a href="@Url.Action("Delete", new { id = item.MaNV })" class="btn btn-sm btn-danger">Xóa</a>
 
             </td>
         </tr>

@@ -1,4 +1,4 @@
-﻿@model BookStoreOnline.Models.Order
+﻿@model BookStoreOnline.Models.DONHANG
 @using BookStoreOnline.Areas.Admin.Constants;
 @{
     ViewBag.Title = "Details";
@@ -58,7 +58,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-6">
-                                        Tên khách hàng: <span style="font-weight:bold">@Model.Customer.Name</span> <br /><br /> 
+                                        Tên khách hàng: <span style="font-weight:bold">@Model.KHACHHANGs.Name</span> <br /><br /> 
 
                                         Địa chỉ giao hàng: @Model.Address <br /> <br />
                                         @if (Model.StatusOrder == (int)Constants.StatusOrder.NoInform)

@@ -11,11 +11,11 @@ namespace BookStoreOnline.Areas.Admin.Controllers
 {
     public class ControlUserController : Controller
     {
-        private BookStoreEntities db = new BookStoreEntities();
+        private NhaSachEntities db = new NhaSachEntities();
         // GET: Admin/ControlUser
         public ActionResult Index()
         {
-            var users = db.Customers.ToList();
+            var users = db.KHACHHANGs.ToList();
             return View(users);
         }
         public ActionResult Delete(int? id)
@@ -24,12 +24,12 @@ namespace BookStoreOnline.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
-            if (customer == null)
+            KHACHHANG khachHang = db.KHACHHANGs.Find(id);
+            if (khachHang == null)
             {
                 return HttpNotFound();
             }
-            return View(customer);
+            return View(khachHang);
         }
 
         // POST: Admin/Nguoidungs/Delete/5
@@ -37,9 +37,9 @@ namespace BookStoreOnline.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Customer nguoidung = db.Customers.Find(id);
+            KHACHHANG nguoidung = db.KHACHHANGs.Find(id);
 
-            db.Customers.Remove(nguoidung);
+            db.KHACHHANGs.Remove(nguoidung);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -49,21 +49,21 @@ namespace BookStoreOnline.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
-            if (customer == null)
+            KHACHHANG khachHang = db.KHACHHANGs.Find(id);
+            if (khachHang == null)
             {
                 return HttpNotFound();
             }
-            return View(customer);
+            return View(khachHang);
         }
 
         [HttpPost, ActionName("ResetPassword")]
         [ValidateAntiForgeryToken]
         public ActionResult ResetPassword(int id)
         {
-            Customer nguoidung = db.Customers.Find(id);
+            KHACHHANG nguoidung = db.KHACHHANGs.Find(id);
 
-            nguoidung.Password = Extension.GetMd5Hash("123456789");
+            nguoidung.MatKhau = Extension.GetMd5Hash("123456789");
                
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -75,25 +75,25 @@ namespace BookStoreOnline.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
-            if (customer == null)
+            KHACHHANG KHACHHANGs = db.KHACHHANGs.Find(id);
+            if (KHACHHANGs == null)
             {
                 return HttpNotFound();
             }
-            return View(customer);
+            return View(KHACHHANGs);
         }
 
         [HttpPost, ActionName("DisableAccount")]
         [ValidateAntiForgeryToken]
         public ActionResult DisableAccountConfirmed(int id)
         {
-            Customer customer = db.Customers.Find(id);
-            if (customer == null)
+            KHACHHANG khachHang = db.KHACHHANGs.Find(id);
+            if (khachHang == null)
             {
                 return HttpNotFound();
             }
 
-            customer.IsActive = false; 
+            khachHang.TrangThai = false; 
             db.SaveChanges();
 
             return RedirectToAction("Index");

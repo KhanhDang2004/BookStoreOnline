@@ -12,47 +12,47 @@ namespace BookStoreOnline.Areas.Admin.Controllers
 {
     public class OrdersAdminController : Controller
     {
-        private BookStoreEntities db = new BookStoreEntities();
+        private NhaSachEntities db = new NhaSachEntities();
 
         // GET: Admin/Orders
         public ActionResult Index(int? status)
         {
-            List<Order> orders = new List<Order>();
+            List<DONHANG> donHang = new List<DONHANG>();
             switch (status)
             {
                 case 0:
-                    orders = db.Orders.Where(x=>x.StatusOrder == 0).ToList();
+                    donHang = db.DONHANGs.Where(x=>x.TrangThai == 0).ToList();
                     break;
                 case 1:
-                    orders = db.Orders.Where(x => x.StatusOrder == 1).ToList();
+                    donHang = db.DONHANGs.Where(x => x.TrangThai == 1).ToList();
                     break;
                 default:
-                    orders = db.Orders.ToList();
+                    donHang = db.DONHANGs.ToList();
                     break;
             }
-            return View(orders.ToList());
+            return View(donHang.ToList());
         }
 
         // GET: Admin/Orders/Details/5
         public ActionResult Details(int id)
         {
-            var detail = db.OrderDetails.Where(d => d.IDOrder == id).ToList();
+            var detail = db.CHITIETDONHANGs.Where(d => d.MaDonHang == id).ToList();
             ViewBag.Detail = detail;
 
             decimal total = 0;
             foreach (var item in detail)
             {
-                total += item.UnitPrice.GetValueOrDefault();
+                //total += item.UnitPrice.GetValueOrDefault();
             }
             ViewBag.Total = total;
-            var order = db.Orders.FirstOrDefault(d => d.IDOrder == id);
+            var order = db.DONHANGs.FirstOrDefault(d => d.MaDonHang == id);
             return View(order);
         }
 
         // GET: Admin/Orders/Create
         public ActionResult Create()
         {
-            ViewBag.IDCus = new SelectList(db.Customers, "ID", "NameCustomer");
+            ViewBag.IDCus = new SelectList(db.KHACHHANGs, "ID", "NameKHACHHANGs");
             return View();
         }
 
@@ -61,17 +61,17 @@ namespace BookStoreOnline.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IDOrder,Address,Status,DateOrder,IDCus")] Order order)
+        public ActionResult Create([Bind(Include = "IDOrder,Address,Status,DateOrder,IDCus")] DONHANG donHang)
         {
             if (ModelState.IsValid)
             {
-                db.Orders.Add(order);
+                db.DONHANGs.Add(donHang);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IDCus = new SelectList(db.Customers, "ID", "NameCustomer", order.IDCustomer);
-            return View(order);
+            ViewBag.IDCus = new SelectList(db.KHACHHANGs, "ID", "NameKHACHHANGs", donHang.ID);
+            return View(donHang);
         }
 
         // GET: Admin/Orders/Edit/5
@@ -81,13 +81,13 @@ namespace BookStoreOnline.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Order order = db.Orders.Find(id);
-            if (order == null)
+            DONHANG donHang = db.DONHANGs.Find(id);
+            if (donHang == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.IDCus = new SelectList(db.Customers, "ID", "NameCustomer", order.IDCustomer);
-            return View(order);
+            ViewBag.IDCus = new SelectList(db.KHACHHANGs, "ID", "NameKHACHHANGs", donHang.ID);
+            return View(donHang);
         }
 
         // POST: Admin/Orders/Edit/5
@@ -95,16 +95,16 @@ namespace BookStoreOnline.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IDOrder,Address,Status,DateOrder,IDCus")] Order order)
+        public ActionResult Edit([Bind(Include = "IDOrder,Address,Status,DateOrder,IDCus")] DONHANG donHang)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(order).State = EntityState.Modified;
+                db.Entry(donHang).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.IDCus = new SelectList(db.Customers, "ID", "NameCustomer", order.IDCustomer);
-            return View(order);
+            ViewBag.IDCus = new SelectList(db.KHACHHANGs, "ID", "NameKHACHHANGs", donHang.ID);
+            return View(donHang);
         }
 
         // GET: Admin/Orders/Delete/5
@@ -114,12 +114,12 @@ namespace BookStoreOnline.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Order order = db.Orders.Find(id);
-            if (order == null)
+            DONHANG donHang = db.DONHANGs.Find(id);
+            if (donHang == null)
             {
                 return HttpNotFound();
             }
-            return View(order);
+            return View(donHang);
         }
 
         // POST: Admin/Orders/Delete/5
@@ -127,8 +127,8 @@ namespace BookStoreOnline.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Order order = db.Orders.Find(id);
-            db.Orders.Remove(order);
+            DONHANG donHang = db.DONHANGs.Find(id);
+            db.DONHANGs.Remove(donHang);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -143,8 +143,8 @@ namespace BookStoreOnline.Areas.Admin.Controllers
         }
         public ActionResult ConfirmOrder(int id)
         {
-            var order = db.Orders.FirstOrDefault(item => item.IDOrder == id);
-            order.StatusOrder = 1;
+            var order = db.DONHANGs.FirstOrDefault(item => item.MaDonHang == id);
+            order.TrangThai = 1;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

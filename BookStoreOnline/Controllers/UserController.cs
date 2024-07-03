@@ -10,7 +10,7 @@ namespace BookStoreOnline.Controllers
 {
     public class UserController : Controller
     {
-        BookStoreEntities db = new BookStoreEntities();
+        NhaSachEntities db = new NhaSachEntities();
         // GET: User
         public ActionResult Index()
         {
@@ -24,26 +24,26 @@ namespace BookStoreOnline.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(Customer taikhoan)
+        public ActionResult Login(KHACHHANG taikhoan)
         {
             Session["TaiKhoan"] = taikhoan;
             //return RedirectToAction("Index", "Admin/OrdersAdmin");
             return RedirectToAction("Index", "Admin/Dashboard");
             if (ModelState.IsValid)
             {
-                var taikhoanAdmin = db.AdminAccounts.FirstOrDefault(k => k.Email == taikhoan.Email && Extension.GetMd5Hash(k.Password) == Extension.GetMd5Hash(taikhoan.Password));
+                var taikhoanAdmin = db.NHANVIENs.FirstOrDefault(k => k.Email == taikhoan.Email && Extension.GetMd5Hash(k.MatKhau) == Extension.GetMd5Hash(taikhoan.MatKhau));
 
                 if (taikhoanAdmin != null)
                 {
                     Session["TaiKhoan"] = taikhoanAdmin;
-                    //return RedirectToAction("Index", "Admin/OrdersAdmin");
+                    return RedirectToAction("Index", "Admin/OrdersAdmin");
                     return RedirectToAction("Index", "Admin/Dardboard");
 
                 }
 
                 if (ModelState.IsValid)
                 {
-                    var account = db.Customers.FirstOrDefault(k => k.Email == taikhoan.Email && Extension.GetMd5Hash(k.Password) == Extension.GetMd5Hash(taikhoan.Password));
+                    var account = db.KHACHHANGs.FirstOrDefault(k => k.Email == taikhoan.Email && Extension.GetMd5Hash(k.MatKhau) == Extension.GetMd5Hash(taikhoan.MatKhau));
                     if (account != null)
                     {
                         Session["TaiKhoan"] = account;
@@ -72,20 +72,20 @@ namespace BookStoreOnline.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult SignUp(Customer cus, string rePass)
+        public ActionResult SignUp(KHACHHANG cus, string rePass)
         {
             if (ModelState.IsValid)
             {
-                var checkEmail = db.Customers.FirstOrDefault(c => c.Email == cus.Email);
+                var checkEmail = db.KHACHHANGs.FirstOrDefault(c => c.Email == cus.Email);
                 if (checkEmail != null)
                 {
                     ViewBag.ThongBaoEmail = "Đã có tài khoản đăng nhập bằng Email này";
                     return View();
                 }
-                if (cus.Password == rePass)
+                if (cus.MatKhau == rePass)
                 {
-                    cus.Password = Extension.GetMd5Hash(cus.Password);
-                    db.Customers.Add(cus);
+                    cus.MatKhau = Extension.GetMd5Hash(cus.MatKhau);
+                    db.KHACHHANGs.Add(cus);
                     db.SaveChanges();
                     return RedirectToAction("Login", "User");
                 }

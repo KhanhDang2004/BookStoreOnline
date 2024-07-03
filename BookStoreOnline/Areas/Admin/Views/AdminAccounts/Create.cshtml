@@ -1,4 +1,4 @@
-﻿@model BookStoreOnline.Models.AdminAccount
+﻿@model BookStoreOnline.Models.NHANVIEN
 
 @{
     ViewBag.Title = "Create";
@@ -18,8 +18,8 @@
 
         <div class="mb-3">
             <label for="Name" class="form-label"> Tên người quản trị</label>
-            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            @Html.EditorFor(model => model.Ten, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Ten, "", new { @class = "text-danger" })
         </div>
 
         <div class="mb-3">
@@ -35,8 +35,8 @@
     </div>
     <div class="mb-3">
         <label for="Role" class="form-label">Quyền hạn</label>
-        @Html.DropDownListFor(model => model.Role, (SelectList)ViewBag.Role, "Chọn quyền hạn", new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.Role, "", new { @class = "text-danger" })
+        @Html.DropDownListFor(model => model.Quyen, (SelectList)ViewBag.Role, "Chọn quyền hạn", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Quyen, "", new { @class = "text-danger" })
     </div>
 
 

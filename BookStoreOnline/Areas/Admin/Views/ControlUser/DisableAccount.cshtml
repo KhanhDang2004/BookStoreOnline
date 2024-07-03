@@ -1,4 +1,4 @@
-﻿@model BookStoreOnline.Models.Customer
+﻿@model BookStoreOnline.Models.KHACHHANG
 @{
     ViewBag.Title = "DisableAccount";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
@@ -10,7 +10,7 @@
     <div class="card-body">
         <h3 class="text-center mb-4">Bạn có chắc chắn muốn vô hiệu khóa Người dùng này?</h3>
         <h4 class="text-center">
-            Người dùng: @Html.DisplayFor(model => model.Name)
+            Người dùng: @Html.DisplayFor(model => model.Ten)
         </h4>
         @using (Html.BeginForm())
         {

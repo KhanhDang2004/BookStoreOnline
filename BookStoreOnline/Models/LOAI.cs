@@ -12,24 +12,18 @@ namespace BookStoreOnline.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Customer
+    public partial class LOAI
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Customer()
+        public LOAI()
         {
-            this.Orders = new HashSet<Order>();
+            this.SANPHAMs = new HashSet<SANPHAM>();
         }
     
-        public int ID { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public string Phone { get; set; }
-        public string Address { get; set; }
-        public Nullable<System.DateTime> CreatedOn { get; set; }
-        public Nullable<bool> IsActive { get; set; }
+        public int Maloai { get; set; }
+        public string Tenloai { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<SANPHAM> SANPHAMs { get; set; }
     }
 }

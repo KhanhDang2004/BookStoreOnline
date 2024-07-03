@@ -4,18 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="add00ed8abd54ab682bf64347ccaea8b" Name="Diagram1">
-        <EntityTypeShape EntityType="BookStoreModel.AdminAccount" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BookStoreModel.Category" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BookStoreModel.Customer" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BookStoreModel.Order" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BookStoreModel.OrderDetail" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="BookStoreModel.Product" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="BookStoreModel.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <AssociationConnector Association="BookStoreModel.FK_Product_Category" ManuallyRouted="false" />
-        <AssociationConnector Association="BookStoreModel.FK_Order_Customer" ManuallyRouted="false" />
-        <AssociationConnector Association="BookStoreModel.FK_OrderDetail_Order" ManuallyRouted="false" />
-        <AssociationConnector Association="BookStoreModel.FK_OrderDetail_Product" ManuallyRouted="false" />
+      <Diagram DiagramId="1446aa50d2d244d0b2110c01a23beff7" Name="Diagram1">
+        <EntityTypeShape EntityType="NhaSachModel.Chitietdonhang" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="NhaSachModel.Donhang" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NhaSachModel.Khachhang" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NhaSachModel.Phanquyen" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NhaSachModel.Sanpham" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="NhaSachModel.Theloai" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <AssociationConnector Association="NhaSachModel.FK_Chitietdonhang_Donhang" ManuallyRouted="false" />
+        <AssociationConnector Association="NhaSachModel.FK_Chitietdonhang_Sanpham" ManuallyRouted="false" />
+        <AssociationConnector Association="NhaSachModel.FK_Donhang_Khachhang" ManuallyRouted="false" />
+        <AssociationConnector Association="NhaSachModel.FK_Sanpham_Theloai" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

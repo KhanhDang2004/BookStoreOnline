@@ -12,105 +12,105 @@ namespace BookStoreOnline.Areas.Admin.Controllers
 {
     public class CategoriesController : Controller
     {
-        private BookStoreEntities db = new BookStoreEntities();
+        private NhaSachEntities db = new NhaSachEntities();
 
-        // GET: Admin/Categories
+        // GET: Admin/LOAIs.
         public ActionResult Index()
         {
-            return View(db.Categories.ToList());
+            return View(db.LOAIs.ToList());
         }
 
-        // GET: Admin/Categories/Details/5
+        // GET: Admin/LOAIs.Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
-            if (category == null)
+            LOAI loai = db.LOAIs.Find(id);
+            if (loai == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            return View(loai);
         }
 
-        // GET: Admin/Categories/Create
+        // GET: Admin/LOAIs.Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Admin/Categories/Create
+        // POST: Admin/LOAIs.Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CategoryID,CategoryName")] Category category)
+        public ActionResult Create([Bind(Include = "CategoryID,CategoryName")] LOAI loai)
         {
             if (ModelState.IsValid)
             {
-                db.Categories.Add(category);
+                db.LOAIs.Add(loai);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(category);
+            return View(loai);
         }
 
-        // GET: Admin/Categories/Edit/5
+        // GET: Admin/LOAIs.Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
-            if (category == null)
+            LOAI loai = db.LOAIs.Find(id);
+            if (loai == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            return View(loai);
         }
 
-        // POST: Admin/Categories/Edit/5
+        // POST: Admin/LOAIs.Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CategoryID,CategoryName")] Category category)
+        public ActionResult Edit([Bind(Include = "CategoryID,CategoryName")] LOAI loai)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(category).State = EntityState.Modified;
+                db.Entry(loai).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(category);
+            return View(loai);
         }
 
-        // GET: Admin/Categories/Delete/5
+        // GET: Admin/LOAIs.Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
-            if (category == null)
+            LOAI loai = db.LOAIs.Find(id);
+            if (loai == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            return View(loai);
         }
 
-        // POST: Admin/Categories/Delete/5
+        // POST: Admin/LOAIs.Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Category category = db.Categories.Find(id);
-            db.Categories.Remove(category);
+            LOAI loai = db.LOAIs.Find(id);
+            db.LOAIs.Remove(loai);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

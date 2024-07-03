@@ -1,4 +1,4 @@
-﻿@model BookStoreOnline.Models.Product
+﻿@model BookStoreOnline.Models.SANPHAM
 
 @{
     ViewBag.Title = "Details";
@@ -12,57 +12,57 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.ProductName)
+            @Html.DisplayNameFor(model => model.TenSanPham)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ProductName)
+            @Html.DisplayFor(model => model.TenSanPham)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Price)
+            @Html.DisplayNameFor(model => model.Gia)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Price)
+            @Html.DisplayFor(model => model.Gia)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Introduce)
+            @Html.DisplayNameFor(model => model.MoTa)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Introduce)
+            @Html.DisplayFor(model => model.MoTa)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Author)
+            @Html.DisplayNameFor(model => model.TacGia)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Author)
+            @Html.DisplayFor(model => model.TacGia)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ImageProd)
+            @Html.DisplayNameFor(model => model.Anh)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ImageProd)
+            @Html.DisplayFor(model => model.Anh)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Category.CategoryName)
+            @Html.DisplayNameFor(model => model.LOAI.Tenloai)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Category.CategoryName)
+            @Html.DisplayFor(model => model.LOAI.Tenloai)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ProductID }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MaSanPham }) |
     @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn btn-secondary", style = "color: white !important;" })
 
 </p>

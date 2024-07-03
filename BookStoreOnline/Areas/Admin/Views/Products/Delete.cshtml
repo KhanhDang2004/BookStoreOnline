@@ -1,4 +1,4 @@
-﻿@model BookStoreOnline.Models.Product
+﻿@model BookStoreOnline.Models.SANPHAM
 
 @{
     ViewBag.Title = "Delete";
@@ -12,7 +12,7 @@
     <div class="card-body">
         <h3 class="text-center mb-4">Bạn có chắc chắn muốn xóa danh mục này?</h3>
         <h4 class="text-center">
-            Danh mục: @Html.DisplayFor(model => model.ProductName)
+            Danh mục: @Html.DisplayFor(model => model.TenSanPham)
         </h4>
         @using (Html.BeginForm())
         {

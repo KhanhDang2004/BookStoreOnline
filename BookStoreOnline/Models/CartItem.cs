@@ -8,7 +8,7 @@ namespace BookStoreOnline.Models
 {
     public class CartItem
     {
-        BookStoreEntities db = new BookStoreEntities();
+        NhaSachEntities db = new NhaSachEntities();
         public int ProductID { get; set; }
         public string NamePro { get; set; }
         public string ImagePro { get; set; }
@@ -23,10 +23,10 @@ namespace BookStoreOnline.Models
         public CartItem(int ProductID)
         {
             this.ProductID = ProductID;
-            var productDB = db.Products.Single(s => s.ProductID == this.ProductID);
-            this.NamePro = productDB.ProductName;
-            this.ImagePro = productDB.ImageProd;
-            this.Price = (decimal)productDB.Price;
+            var productDB = db.SANPHAMs.Single(s => s.MaSanPham == this.ProductID);
+            this.NamePro = productDB.TenSanPham;
+            this.ImagePro = productDB.Anh;
+            this.Price = (decimal)productDB.Gia;
             this.Number = 1;
         }
     }

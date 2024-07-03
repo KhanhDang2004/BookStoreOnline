@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BookStoreOnline.Models.Category>
+﻿@model IEnumerable<BookStoreOnline.Models.LOAI>
 
 @{
     ViewBag.Title = "Index";
@@ -24,11 +24,11 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.CategoryName)
+                        @Html.DisplayFor(modelItem => item.Tenloai)
                     </td>
                     <td >
-                        <a href="@Url.Action("Edit", new { id = item.CategoryID})" class="btn btn-sm btn-warning">Chỉnh sửa</a> |
-                        <a href="@Url.Action("Delete", new { id = item.CategoryID })" class="btn btn-sm btn-danger">Xóa</a>
+                        <a href="@Url.Action("Edit", new { id = item.Maloai})" class="btn btn-sm btn-warning">Chỉnh sửa</a> |
+                        <a href="@Url.Action("Delete", new { id = item.Maloai })" class="btn btn-sm btn-danger">Xóa</a>
                     </td>
                 </tr>
             }

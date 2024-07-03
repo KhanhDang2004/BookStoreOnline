@@ -9,11 +9,11 @@ namespace BookStoreOnline.Controllers
 {
     public class OrderController : Controller
     {
-        BookStoreEntities db = new BookStoreEntities();
+        NhaSachEntities db = new NhaSachEntities();
         // GET: Order
         public ActionResult Index(int id)
         {
-            return View(db.Orders.Where(o => o.IDCustomer == id).ToList());
+            return View(db.DONHANGs.Where(o => o.ID == id).ToList());
         }
 
         

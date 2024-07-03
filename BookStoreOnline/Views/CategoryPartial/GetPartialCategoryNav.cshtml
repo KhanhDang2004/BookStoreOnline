@@ -6,7 +6,7 @@
         <a class="dropdown-item" href="@Url.Action("GetAllBook","Category")">Tất cả sách</a>
         @foreach (var item in ViewBag.CateList)
         {
-            <a class="dropdown-item" href="@Url.Action("Index/"+item.CategoryID,"Category")">@item.CategoryName</a>
+            <a class="dropdown-item" href="@Url.Action("Index/"+item.Maloai,"Category")">@item.Tenloai</a>
 
         }
     </div>

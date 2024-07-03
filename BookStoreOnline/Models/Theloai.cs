@@ -12,18 +12,18 @@ namespace BookStoreOnline.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Category
+    public partial class Theloai
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Category()
+        public Theloai()
         {
-            this.Products = new HashSet<Product>();
+            this.Sanphams = new HashSet<Sanpham>();
         }
     
-        public int CategoryID { get; set; }
-        public string CategoryName { get; set; }
+        public int MaTheloai { get; set; }
+        public string TenTheloai { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<Sanpham> Sanphams { get; set; }
     }
 }

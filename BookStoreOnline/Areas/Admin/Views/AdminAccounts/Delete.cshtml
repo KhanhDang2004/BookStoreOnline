@@ -1,4 +1,4 @@
-﻿@model BookStoreOnline.Models.AdminAccount
+﻿@model BookStoreOnline.Models.NHANVIEN
 @using BookStoreOnline.Areas.Admin.Constants;
 @{
     ViewBag.Title = "Delete";
@@ -14,7 +14,7 @@
         <h4 class="text-center">
             @*@EnumExtensions.GetDescription(Model.AdminRole)*@
 
-            Người dùng: @Html.DisplayFor(model => model.Name)
+            Người dùng: @Html.DisplayFor(model => model.Ten)
         </h4>
         @using (Html.BeginForm())
         {

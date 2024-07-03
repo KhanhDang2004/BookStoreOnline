@@ -12,15 +12,15 @@ namespace BookStoreOnline.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class OrderDetail
+    public partial class DANHGIA
     {
         public int ID { get; set; }
-        public Nullable<int> IDOrder { get; set; }
-        public Nullable<int> ProductID { get; set; }
-        public Nullable<int> Quantity { get; set; }
-        public Nullable<decimal> UnitPrice { get; set; }
+        public int MaKH { get; set; }
+        public int MaSanPham { get; set; }
+        public string NoiDung { get; set; }
+        public System.DateTime NgayTao { get; set; }
     
-        public virtual Order Order { get; set; }
-        public virtual Product Product { get; set; }
+        public virtual KHACHHANG KHACHHANG { get; set; }
+        public virtual SANPHAM SANPHAM { get; set; }
     }
 }

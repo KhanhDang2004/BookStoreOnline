@@ -1,4 +1,4 @@
-﻿@model BookStoreOnline.Models.AdminAccount
+﻿@model BookStoreOnline.Models.NHANVIEN
 
 @{
     ViewBag.Title = "Edit";
@@ -21,8 +21,8 @@
 
             <div class="mb-3">
                 <label for="CategoryName" class="form-label"> Tên người quản trị</label>
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name)
+                @Html.EditorFor(model => model.Ten, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Ten)
             </div>
 
 
@@ -40,7 +40,7 @@
                         <option value="@role.Value" @(Model.Role.ToString() == role.Value ? "selected" : "")>@role.Text</option>
                     }
                 </select>
-                @Html.ValidationMessageFor(model => model.Role, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Quyen, "", new { @class = "text-danger" })
             </div>
         </div>
 

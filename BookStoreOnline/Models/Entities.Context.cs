@@ -25,11 +25,14 @@ namespace BookStoreOnline.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Chitietdonhang> Chitietdonhangs { get; set; }
-        public virtual DbSet<Donhang> Donhangs { get; set; }
-        public virtual DbSet<Khachhang> Khachhangs { get; set; }
-        public virtual DbSet<Phanquyen> Phanquyens { get; set; }
-        public virtual DbSet<Sanpham> Sanphams { get; set; }
-        public virtual DbSet<Theloai> Theloais { get; set; }
+        public virtual DbSet<CHITIETDONHANG> CHITIETDONHANGs { get; set; }
+        public virtual DbSet<DANHGIA> DANHGIAs { get; set; }
+        public virtual DbSet<DONHANG> DONHANGs { get; set; }
+        public virtual DbSet<KHACHHANG> KHACHHANGs { get; set; }
+        public virtual DbSet<KHUYENMAI> KHUYENMAIs { get; set; }
+        public virtual DbSet<LOAI> LOAIs { get; set; }
+        public virtual DbSet<NHANVIEN> NHANVIENs { get; set; }
+        public virtual DbSet<SANPHAM> SANPHAMs { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

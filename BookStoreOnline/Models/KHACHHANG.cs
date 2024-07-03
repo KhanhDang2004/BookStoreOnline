@@ -12,24 +12,27 @@ namespace BookStoreOnline.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Product
+    public partial class KHACHHANG
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Product()
+        public KHACHHANG()
         {
-            this.OrderDetails = new HashSet<OrderDetail>();
+            this.DANHGIAs = new HashSet<DANHGIA>();
+            this.DONHANGs = new HashSet<DONHANG>();
         }
     
-        public int ProductID { get; set; }
-        public string ProductName { get; set; }
-        public Nullable<decimal> Price { get; set; }
-        public string Introduce { get; set; }
-        public string Author { get; set; }
-        public string ImageProd { get; set; }
-        public Nullable<int> CategoryID { get; set; }
+        public int MaKH { get; set; }
+        public string Ten { get; set; }
+        public string Email { get; set; }
+        public string MatKhau { get; set; }
+        public string SoDienThoai { get; set; }
+        public string DiaChi { get; set; }
+        public Nullable<System.DateTime> NgayTao { get; set; }
+        public Nullable<bool> TrangThai { get; set; }
     
-        public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual ICollection<DANHGIA> DANHGIAs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DONHANG> DONHANGs { get; set; }
     }
 }
