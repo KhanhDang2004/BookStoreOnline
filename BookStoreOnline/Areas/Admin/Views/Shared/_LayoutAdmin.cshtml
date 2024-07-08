@@ -124,8 +124,6 @@
             <div id="content">
 
                 <!-- Topbar -->
-                @if (User.Identity.IsAuthenticated)
-                {
                     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                         <!-- Sidebar Toggle (Topbar) -->
@@ -169,9 +167,9 @@
                                     </div>*@
                             </li>
                             <!-- Nav Item - User Information -->
-                            @*@{
-                                    var fullname = ((USER)Session["login"]).Fullname;
-                                }*@
+                            @{
+//var fullname = ((NHANVIEN)Session["login"]).Fullname;
+                                }
 
                             <li class="nav-item dropdown no-arrow">
                                 <div class="dropdown">
@@ -192,7 +190,6 @@
                         </ul>
                     </nav>
                     <!-- End of Topbar -->
-                }
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     @RenderBody()

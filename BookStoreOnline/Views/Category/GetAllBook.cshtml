@@ -38,16 +38,19 @@
                                     <i class="bi bi-star-fill"></i>
                                     <span style="color: black;">(0 đánh giá)</span>
                                 </p>
-                                @if (user != null)
-                                {
-                                   
-                                        <a href="@Url.Action("AddSingleProduct/"+ item.MaSanPham,"Cart")" class="custom-btn btn-14">Mua</a>
-                                }
-                                else
-                                {
-                                    <a href="@Url.Action("Login", "User")" class="custom-btn btn-14">Mua</a>
+                                <div style="text-align: center; position: center">
+                                    @if (user != null)
+                                    {
 
-                                }
+                                        <a style="margin-left: 0px" href="@Url.Action("AddSingleProduct/"+ item.MaSanPham,"Cart")" class="custom-btn btn-14">Mua</a>
+                                    }
+                                    else
+                                    {
+                                        <a style="margin-left: 0px" href="@Url.Action("Login", "User")" class="custom-btn btn-14">Mua</a>
+
+                                    }
+                                </div>
+                              
                                 <a href="@Url.Action("Index/"+ item.MaSanPham,"ProductDetail")"></a>
 
                             </div>
