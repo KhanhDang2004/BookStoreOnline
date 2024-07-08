@@ -28,7 +28,8 @@ namespace BookStoreOnline.Controllers
         {
             Session["TaiKhoan"] = taikhoan;
             //return RedirectToAction("Index", "Admin/OrdersAdmin");
-            return RedirectToAction("Index", "Admin/Dashboard");
+            return RedirectToAction("Index", "Home");
+           /* return RedirectToAction("Index", "Admin/Dashboard");*/
             if (ModelState.IsValid)
             {
                 var taikhoanAdmin = db.NHANVIENs.FirstOrDefault(k => k.Email == taikhoan.Email && Extension.GetMd5Hash(k.MatKhau) == Extension.GetMd5Hash(taikhoan.MatKhau));

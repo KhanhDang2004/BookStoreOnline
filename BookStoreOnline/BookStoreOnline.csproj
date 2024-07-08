@@ -142,7 +142,9 @@
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CategoryPartialController.cs" />
+    <Compile Include="Controllers\Contact2Controller.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Introduce2Controller.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductDetailController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -309,6 +311,8 @@
     <Content Include="Views\Cart\NullCart.cshtml" />
     <Content Include="Views\Cart\CartPartial.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Introduce2\Index.cshtml" />
+    <Content Include="Views\Contact2\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
