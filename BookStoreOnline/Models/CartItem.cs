@@ -9,25 +9,25 @@ namespace BookStoreOnline.Models
     public class CartItem
     {
         NhaSachEntities db = new NhaSachEntities();
-        public int ProductID { get; set; }
-        public string NamePro { get; set; }
-        public string ImagePro { get; set; }
-        public decimal Price { get; set; }
-        public int Number { get; set; }
+        public int MaSanPham { get; set; }
+        public string TenSanPham { get; set; }
+        public string Anh { get; set; }
+        public decimal Gia { get; set; }
+        public int SoLuong { get; set; }
 
 
         public decimal FinalPrice()
         {
-            return Number * Price;
+            return SoLuong * Gia;
         }
-        public CartItem(int ProductID)
+        public CartItem(int MaSanPham)
         {
-            this.ProductID = ProductID;
-            var productDB = db.SANPHAMs.Single(s => s.MaSanPham == this.ProductID);
-            this.NamePro = productDB.TenSanPham;
-            this.ImagePro = productDB.Anh;
-            this.Price = (decimal)productDB.Gia;
-            this.Number = 1;
+            this.MaSanPham = MaSanPham;
+            var productDB = db.SANPHAMs.Single(s => s.MaSanPham == this.MaSanPham);
+            this.TenSanPham = productDB.TenSanPham;
+            this.Anh = productDB.Anh;
+            this.Gia = (decimal)productDB.Gia;
+            this.SoLuong = 1;
         }
     }
 }

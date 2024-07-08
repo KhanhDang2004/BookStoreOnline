@@ -25,15 +25,15 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>@item.KHACHHANGs.Name</td>
-                    <td>@String.Format("{0:dd/MM/yyyy}", item.DateOrder)</td>
-                    <td>@item.Address</td>
+                    <td>@item.KHACHHANG.Ten</td>
+                    <td>@String.Format("{0:dd/MM/yyyy}", item.NgayDat)</td>
+                    <td>@item.DiaChi</td>
                     @* Chuyển đổi từ int sang enum *@
-                    <td>@EHelper.GetEnumDescription((Constants.StatusOrder)item.StatusOrder)</td>
-                    <td>@EHelper.GetEnumDescription((Constants.StatusPayment)item.StatusPayment)</td>
-                    <td>@EHelper.GetEnumDescription((Constants.TypePayment)item.TypePayment)</td>
+                    <td>@EHelper.GetEnumDescription((Constants.StatusOrder)item.TrangThai)</td>
+                    <td>@EHelper.GetEnumDescription((Constants.StatusPayment)item.TrangThaiThanhToan)</td>
+                    <td>@EHelper.GetEnumDescription((Constants.TypePayment)item.PhuongThucThanhToan)</td>
                     <td>
-                        <a href="@Url.Action("Details/"+item.IDOrder,"OrdersAdmin")" class="btn btn-info">Xem chi tiết</a>
+                        <a href="@Url.Action("Details/"+item.MaDonHang,"OrdersAdmin")" class="btn btn-info">Xem chi tiết</a>
                     </td>
                 </tr>
             }

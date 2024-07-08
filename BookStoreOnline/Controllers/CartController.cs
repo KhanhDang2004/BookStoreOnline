@@ -35,16 +35,16 @@ namespace BookStoreOnline.Controllers
             int id = int.Parse(product["ProductID"]);
             int quantity = int.Parse(product["Quantity"]);
 
-            CartItem sanPham = myCart.FirstOrDefault(p => p.ProductID == id);
+            CartItem sanPham = myCart.FirstOrDefault(p => p.MaSanPham == id);
             if (sanPham == null)
             {
                 sanPham = new CartItem(id);
-                sanPham.Number = quantity;
+                sanPham.SoLuong = quantity;
                 myCart.Add(sanPham);
             }
             else
             {
-                sanPham.Number += quantity;
+                sanPham.SoLuong += quantity;
             }
             return RedirectToAction("GetCartInfo", "Cart");
         }
@@ -53,7 +53,7 @@ namespace BookStoreOnline.Controllers
             int totalNumber = 0;
             List<CartItem> myCart = GetCart();
             if (myCart != null)
-                totalNumber = myCart.Sum(sp => sp.Number);
+                totalNumber = myCart.Sum(sp => sp.SoLuong);
             return totalNumber;
         }
 
@@ -64,16 +64,16 @@ namespace BookStoreOnline.Controllers
 
             int quantity = 1;
 
-            CartItem sanPham = myCart.FirstOrDefault(p => p.ProductID == id);
+            CartItem sanPham = myCart.FirstOrDefault(p => p.MaSanPham == id);
             if (sanPham == null)
             {
                 sanPham = new CartItem(id);
-                sanPham.Number = quantity;
+                sanPham.SoLuong = quantity;
                 myCart.Add(sanPham);
             }
             else
             {
-                sanPham.Number += quantity;
+                sanPham.SoLuong += quantity;
             }
             return RedirectToAction("GetCartInfo", "Cart");
         }
@@ -81,7 +81,7 @@ namespace BookStoreOnline.Controllers
         public ActionResult Remove(int id)
         {
             List<CartItem> myCart = GetCart();
-            CartItem Product = myCart.FirstOrDefault(p => p.ProductID == id);
+            CartItem Product = myCart.FirstOrDefault(p => p.MaSanPham == id);
             myCart.Remove(Product);
             return RedirectToAction("GetCartInfo", "Cart");
         }
@@ -116,8 +116,8 @@ namespace BookStoreOnline.Controllers
             int quantity = int.Parse(product["Quantity"]);
 
             List<CartItem> myCart = GetCart();
-            CartItem sanPham = myCart.FirstOrDefault(p => p.ProductID == id);
-            sanPham.Number = quantity;
+            CartItem sanPham = myCart.FirstOrDefault(p => p.MaSanPham == id);
+            sanPham.SoLuong = quantity;
             return RedirectToAction("GetCartInfo", "Cart");
         }
 
@@ -149,8 +149,8 @@ namespace BookStoreOnline.Controllers
             {
                 CHITIETDONHANG chiTietDonHang = new CHITIETDONHANG();
                 chiTietDonHang.MaDonHang = donHang.MaDonHang;
-                chiTietDonHang.MaSanPham = item.ProductID;
-                chiTietDonHang.SoLuong = item.Number;
+                chiTietDonHang.MaSanPham = item.MaSanPham;
+                chiTietDonHang.SoLuong = item.SoLuong;
                 //prod.UnitPrice = item.FinalPrice();
 
                 db.CHITIETDONHANGs.Add(chiTietDonHang);

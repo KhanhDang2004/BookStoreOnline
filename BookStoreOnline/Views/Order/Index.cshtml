@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BookStoreOnline.Models.Order>
+﻿@model IEnumerable<BookStoreOnline.Models.DONHANG>
 
 
 <div class="container body-page">
@@ -23,17 +23,17 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.KHACHHANGs.NameKHACHHANGs)
+                    @Html.DisplayFor(modelItem => item.KHACHHANG.Ten)
                 </td>
 
                 <td>
-                    @String.Format("{0:dd/MM/yyyy}", item.DateOrder)
+                    @String.Format("{0:dd/MM/yyyy}", item.NgayDat)
                 </td>
 
                 <td>
-                    @Html.DisplayFor(modelItem => item.Address)
+                    @Html.DisplayFor(modelItem => item.DiaChi)
                 </td>
-               @if(item.Status == 0)
+               @if(item.TrangThai == 0)
                 {
                     <td style="color:red">Chưa gửi</td>
                 }

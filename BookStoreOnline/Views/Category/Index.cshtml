@@ -4,10 +4,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@model IEnumerable<BookStoreOnline.Models.Product>
+@model IEnumerable<BookStoreOnline.Models.SANPHAM>
 @{
     var price = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
-    var user = Session["TaiKhoan"] as BookStoreOnline.Models.KHACHHANGs;
+    var user = Session["TaiKhoan"] as BookStoreOnline.Models.KHACHHANG;
 }
 
 
@@ -20,7 +20,7 @@
             @{ Html.RenderAction("GetCategorySelection", "CategoryPartial");}
         </div>
         <div class="col-lg-9 list-book">
-            <h3 style="color:gray">@ViewBag.CategoryName</h3>
+            <h3 style="color:gray">@ViewBag.Tenloai</h3>
             <div class="row">
                 <!-- product -->
 
@@ -29,10 +29,10 @@
                 {
                     <div class="prod-item">
                         <div class="card" style="width: 18rem;">
-                            <a href="@Url.Action("Index/"+ item.ProductID,"ProductDetail")"><img class="card-img-top" src="~/Images/@item.ImageProd" alt="Card image cap"></a>
+                            <a href="@Url.Action("Index/"+ item.MaSanPham,"ProductDetail")"><img class="card-img-top" src="~/Images/@item.Anh" alt="Card image cap"></a>
                             <div class="card-body">
-                                <a href="@Url.Action("Index/"+ item.ProductID,"ProductDetail") " class="title-prod"> <h5 class="card-title">@item.ProductName </h5> </a>
-                                <h5 style="color: darkred;">@String.Format(price, "{0:c0}", item.Price)</h5>
+                                <a href="@Url.Action("Index/"+ item.MaSanPham,"ProductDetail") " class="title-prod"> <h5 class="card-title">@item.TenSanPham </h5> </a>
+                                <h5 style="color: darkred;">@String.Format(price, "{0:c0}", item.Gia)</h5>
                                 <p class="card-text rating-card">
                                     <i class="bi bi-star-fill"></i>
                                     <i class="bi bi-star-fill"></i>
@@ -43,7 +43,7 @@
                                 </p>
                                 @if (user != null)
                                 {
-                                    <a href="@Url.Action("AddSingleProduct/"+ item.ProductID,"Cart")" class="custom-btn btn-14">Mua</a>
+                                    <a href="@Url.Action("AddSingleProduct/"+ item.MaSanPham,"Cart")" class="custom-btn btn-14">Mua</a>
 
                                 }
                                 else
@@ -51,7 +51,7 @@
                                     <a href="@Url.Action("Login", "User")" class="custom-btn btn-14">Mua</a>
 
                                 }
-                                <a href="@Url.Action("Index/"+ item.ProductID,"ProductDetail")" class="see-detail-prod"><i class="bi bi-eye"></i></a>
+                                <a href="@Url.Action("Index/"+ item.MaSanPham,"ProductDetail")" class="see-detail-prod"><i class="bi bi-eye"></i></a>
 
                             </div>
                         </div>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
 using BookStoreOnline.Core;
@@ -26,24 +27,27 @@ namespace BookStoreOnline.Controllers
         [HttpPost]
         public ActionResult Login(KHACHHANG taikhoan)
         {
+            //Session["TaiKhoan"] = taikhoan;
+            //return RedirectToAction("Index", "Home");
             Session["TaiKhoan"] = taikhoan;
-            //return RedirectToAction("Index", "Admin/OrdersAdmin");
+            ////return RedirectToAction("Index", "Admin/OrdersAdmin");
             return RedirectToAction("Index", "Admin/Dashboard");
             if (ModelState.IsValid)
             {
-                var taikhoanAdmin = db.NHANVIENs.FirstOrDefault(k => k.Email == taikhoan.Email && Extension.GetMd5Hash(k.MatKhau) == Extension.GetMd5Hash(taikhoan.MatKhau));
+                string matKhau = Extension.GetMd5Hash(taikhoan.MatKhau);
+                var tkNhanVien = db.NHANVIENs.FirstOrDefault(k => k.Email == taikhoan.Email && k.MatKhau == matKhau);
 
-                if (taikhoanAdmin != null)
+                if (tkNhanVien != null)
                 {
-                    Session["TaiKhoan"] = taikhoanAdmin;
-                    return RedirectToAction("Index", "Admin/OrdersAdmin");
+                    Session["TaiKhoan"] = tkNhanVien;
+                    //return RedirectToAction("Index", "Admin/OrdersAdmin");
                     return RedirectToAction("Index", "Admin/Dardboard");
 
                 }
 
                 if (ModelState.IsValid)
                 {
-                    var account = db.KHACHHANGs.FirstOrDefault(k => k.Email == taikhoan.Email && Extension.GetMd5Hash(k.MatKhau) == Extension.GetMd5Hash(taikhoan.MatKhau));
+                    var account = db.KHACHHANGs.FirstOrDefault(k => k.Email == taikhoan.Email && k.MatKhau == matKhau);
                     if (account != null)
                     {
                         Session["TaiKhoan"] = account;

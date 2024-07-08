@@ -23,7 +23,7 @@
             {
                 <tr>
                     <td style="width: 15%;">
-                        <img src="~/Images/@item.Product.ImageProd" style="width: 60%; position: relative; left: 0;height:100px" />
+                        <img src="~/Images/@item." style="width: 60%; position: relative; left: 0;height:100px" />
                     </td>
                     <td style="width:35%">
                         @item.Product.ProductName
@@ -58,12 +58,12 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-6">
-                                        Tên khách hàng: <span style="font-weight:bold">@Model.KHACHHANGs.Name</span> <br /><br /> 
+                                        Tên khách hàng: <span style="font-weight:bold">@Model.KHACHHANG.Ten</span> <br /><br /> 
 
-                                        Địa chỉ giao hàng: @Model.Address <br /> <br />
-                                        @if (Model.StatusOrder == (int)Constants.StatusOrder.NoInform)
+                                        Địa chỉ giao hàng: @Model.DiaChi <br /> <br />
+                                        @if (Model.TrangThai == (int)Constants.StatusOrder.NoInform)
                                         {
-                                            <a href="@Url.Action("ConfirmOrder/"+ Model.IDOrder,"OrdersAdmin")" class="btn btn-success">Xác nhận đơn hàng</a>
+                                            <a href="@Url.Action("ConfirmOrder/"+ Model.MaDonHang,"OrdersAdmin")" class="btn btn-success">Xác nhận đơn hàng</a>
                                         }
                                     </div>
                                     <div class="col-6">

@@ -7,7 +7,7 @@
 
 @{
     var price = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
-    var user = Session["TaiKhoan"] as BookStoreOnline.Models.KHACHHANGs;
+    var user = Session["TaiKhoan"] as BookStoreOnline.Models.KHACHHANG;
 }
 
 <div class="container body-page">
@@ -28,22 +28,22 @@
                 <tr class="prod-list-table">
 
                     <td class="prod-list-details" style="padding-top: 10px;">
-                        <img src="~/Images/@item.ImagePro" alt="">
-                        <h5>@item.NamePro</h5>
+                        <img src="~/Images/@item.Anh" alt="">
+                        <h5>@item.TenSanPham</h5>
                     </td>
                     <td>
 
                         @using (Html.BeginForm("Update", "Cart", FormMethod.Post, new { @class = "edit-quantity" }))
                         {
-                            <input type="number" name="Quantity" value="@item.Number" min="1">
-                            <input type="hidden" name="ProductID" value="@item.ProductID" />
+                            <input type="number" name="Quantity" value="@item.SoLuong" min="1">
+                            <input type="hidden" name="ProductID" value="@item.MaSanPham" />
                             <button type="submit"><i class="bi bi-arrow-clockwise"></i></button>
                         }
                     </td>
                     <td>
                         <h5>@String.Format(price, "{0:c0}", item.FinalPrice())</h5>
                     </td>
-                    <td><a href="@Url.Action("Remove/"+item.ProductID,"Cart")" class="delete-prod-btn"><i class="bi bi-x-square-fill"></i></a></td>
+                    <td><a href="@Url.Action("Remove/"+item.MaSanPham,"Cart")" class="delete-prod-btn"><i class="bi bi-x-square-fill"></i></a></td>
                 </tr>
             }
 

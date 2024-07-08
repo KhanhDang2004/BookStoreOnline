@@ -5,10 +5,10 @@
 }
 
 
-@model IEnumerable<BookStoreOnline.Models.Product>
+@model IEnumerable<BookStoreOnline.Models.SANPHAM>
 @{
     var price = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
-    var user = Session["TaiKhoan"] as BookStoreOnline.Models.KHACHHANGs;
+    var user = Session["TaiKhoan"] as BookStoreOnline.Models.KHACHHANG;
 }
 
 
@@ -30,10 +30,10 @@
                 {
                     <div class="prod-item">
                         <div class="card" style="width: 18rem;">
-                            <a href="@Url.Action("Index/"+ item.ProductID,"ProductDetail")"><img class="card-img-top" src="~/Images/@item.ImageProd" alt="Card image cap"></a>
+                            <a href="@Url.Action("Index/"+ item.MaSanPham,"ProductDetail")"><img class="card-img-top" src="~/Images/@item.Anh" alt="Card image cap"></a>
                             <div class="card-body">
-                                <a href="@Url.Action("Index/"+ item.ProductID,"ProductDetail") " class="title-prod"> <h5 class="card-title">@item.ProductName </h5> </a>
-                                <h5 style="color: darkred;">@String.Format(price, "{0:c0}", item.Price)</h5>
+                                <a href="@Url.Action("Index/"+ item.MaSanPham,"ProductDetail") " class="title-prod"> <h5 class="card-title">@item.TenSanPham </h5> </a>
+                                <h5 style="color: darkred;">@String.Format(price, "{0:c0}", item.Gia)</h5>
                                 <p class="card-text rating-card">
                                     <i class="bi bi-star-fill"></i>
                                     <i class="bi bi-star-fill"></i>
@@ -44,7 +44,7 @@
                                 </p>
                                 @if (user != null)
                                 {
-                                    <a href="@Url.Action("AddSingleProduct/"+ item.ProductID,"Cart")" class="add-to-cart-btn"><i class="bi bi-cart-plus-fill"></i></a>
+                                    <a href="@Url.Action("AddSingleProduct/"+ item.MaSanPham,"Cart")" class="add-to-cart-btn"><i class="bi bi-cart-plus-fill"></i></a>
 
                                 }
                                 else
@@ -52,7 +52,7 @@
                                     <a href="@Url.Action("Login", "User")" class="add-to-cart-btn"><i class="bi bi-cart-plus-fill"></i></a>
 
                                 }
-                                <a href="@Url.Action("Index/"+ item.ProductID,"ProductDetail")" class="see-detail-prod"><i class="bi bi-eye"></i></a>
+                                <a href="@Url.Action("Index/"+ item.MaSanPham,"ProductDetail")" class="see-detail-prod"><i class="bi bi-eye"></i></a>
 
                             </div>
                         </div>

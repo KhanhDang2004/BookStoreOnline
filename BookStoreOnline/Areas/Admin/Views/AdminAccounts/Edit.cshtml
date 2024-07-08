@@ -15,7 +15,7 @@
 
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.AdminID)
+            @Html.HiddenFor(model => model.MaNV)
 
 
 
@@ -35,9 +35,9 @@
             <div class="mb-3">
                 <label for="Role" class="form-label">Quyền hạn</label>
                 <select id="Role" name="Role" class="form-control">
-                    @foreach (var role in ViewBag.Role)
+                    @foreach (var role in ViewBag.Quyen)
                     {
-                        <option value="@role.Value" @(Model.Role.ToString() == role.Value ? "selected" : "")>@role.Text</option>
+                        <option value="@role.Value" @(Model.Quyen.ToString() == role.Value ? "selected" : "")>@role.Text</option>
                     }
                 </select>
                 @Html.ValidationMessageFor(model => model.Quyen, "", new { @class = "text-danger" })
