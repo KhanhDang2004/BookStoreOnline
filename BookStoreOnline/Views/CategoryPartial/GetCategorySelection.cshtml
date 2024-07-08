@@ -1,8 +1,35 @@
-﻿<div class="list-group">
-    <a href="@Url.Action("GetAllBook","Category")" class="list-group-item list-group-item-action" style="border:none"><i class="bi bi-list"></i>Tất cả sản phẩm</a>
+﻿<style>
+    .list-group-item {
+        border: none;
+        padding: 15px;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+        .list-group-item:hover {
+            background-color: #f8f9fa;
+            color: #0056b3;
+        }
+
+        .list-group-item i {
+            margin-right: 10px;
+        }
+
+    .category-title {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        color: #343a40;
+    }
+</style>
+
+<div class="list-group">
+    @*<h4 class="category-title">Danh mục sản phẩm</h4>*@
+    <a href="@Url.Action("GetAllBook","Category")" class="list-group-item list-group-item-action">
+        <i class="bi bi-list"></i>Danh mục sản phẩm
+    </a>
     @foreach (var item in ViewBag.CateList)
     {
-        <a href="@Url.Action("Index/" + item.Maloai,"Category")" class="list-group-item list-group-item-action">@item.Tenloai</a>
-
+        <a href="@Url.Action("Index", "Category", new { id = item.Maloai })" class="list-group-item list-group-item-action">
+            @item.Tenloai
+        </a>
     }
 </div>

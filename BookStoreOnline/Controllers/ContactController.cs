@@ -8,7 +8,7 @@ namespace BookStoreOnline.Controllers
 {
     public class ContactController : Controller
     {
-        // GET: Contact
+        // GET: Contact2
         public ActionResult Index()
         {
             return View();

@@ -10,47 +10,55 @@
     var user = Session["TaiKhoan"] as BookStoreOnline.Models.KHACHHANG;
 }
 
-<div class="container body-page">
-    <table class="table">
-        <thead>
-            <tr>
-
-                <th scope="col">Sản phẩm</th>
-                <th scope="col">Số lượng</th>
-                <th scope="col">Đơn giá</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-
-            @foreach (var item in Model)
-            {
-                <tr class="prod-list-table">
-
-                    <td class="prod-list-details" style="padding-top: 10px;">
-                        <img src="~/Images/@item.Anh" alt="">
-                        <h5>@item.TenSanPham</h5>
-                    </td>
-                    <td>
-
-                        @using (Html.BeginForm("Update", "Cart", FormMethod.Post, new { @class = "edit-quantity" }))
-                        {
-                            <input type="number" name="Quantity" value="@item.SoLuong" min="1">
-                            <input type="hidden" name="ProductID" value="@item.MaSanPham" />
-                            <button type="submit"><i class="bi bi-arrow-clockwise"></i></button>
-                        }
-                    </td>
-                    <td>
-                        <h5>@String.Format(price, "{0:c0}", item.FinalPrice())</h5>
-                    </td>
-                    <td><a href="@Url.Action("Remove/"+item.MaSanPham,"Cart")" class="delete-prod-btn"><i class="bi bi-x-square-fill"></i></a></td>
-                </tr>
-            }
-
-
-
-        </tbody>
-    </table>
+<div class="container body-page mt-4">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Giỏ hàng của bạn</h4>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Sản phẩm</th>
+                        <th scope="col">Số lượng</th>
+                        <th scope="col">Đơn giá</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="prod-list-table">
+                            <td class="prod-list-details" style="padding-top: 10px;">
+                                <div class="d-flex align-items-center">
+                                    <img src="~/Images/@item.Anh" alt="" class="img-thumbnail mr-3" style="width: 100px;">
+                                    <h5 class="mb-0">@item.TenSanPham</h5>
+                                </div>
+                            </td>
+                            <td>
+                                @using (Html.BeginForm("Update", "Cart", FormMethod.Post, new { @class = "edit-quantity" }))
+                                {
+                                    <div class="input-group">
+                                        <input type="number" name="Quantity" value="@item.SoLuong" min="1" class="form-control">
+                                        <input type="hidden" name="ProductID" value="@item.MaSanPham" />
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-outline-secondary"><i class="bi bi-arrow-clockwise"></i></button>
+                                        </div>
+                                    </div>
+                                }
+                            </td>
+                            <td>
+                                <h5 class="mb-0">@String.Format(price, "{0:c0}", item.FinalPrice())</h5>
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Remove/"+item.MaSanPham,"Cart")" class="btn btn-danger"><i class="bi bi-x-square-fill"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 
     <hr />
 
@@ -78,5 +86,5 @@
     }
 
 
-    </div>
+</div>
 

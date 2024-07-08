@@ -27,38 +27,18 @@ namespace BookStoreOnline.Controllers
         [HttpPost]
         public ActionResult Login(KHACHHANG taikhoan)
         {
-            //Session["TaiKhoan"] = taikhoan;
             //return RedirectToAction("Index", "Home");
-            Session["TaiKhoan"] = taikhoan;
-            ////return RedirectToAction("Index", "Admin/OrdersAdmin");
-            return RedirectToAction("Index", "Admin/Dashboard");
-            if (ModelState.IsValid)
+            string matKhau = Extension.GetMd5Hash(taikhoan.MatKhau);
+            var account = db.KHACHHANGs.FirstOrDefault(k => k.Email == taikhoan.Email && k.MatKhau == matKhau);
+            if (account != null)
             {
-                string matKhau = Extension.GetMd5Hash(taikhoan.MatKhau);
-                var tkNhanVien = db.NHANVIENs.FirstOrDefault(k => k.Email == taikhoan.Email && k.MatKhau == matKhau);
+                Session["TaiKhoan"] = account;
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
 
-                if (tkNhanVien != null)
-                {
-                    Session["TaiKhoan"] = tkNhanVien;
-                    //return RedirectToAction("Index", "Admin/OrdersAdmin");
-                    return RedirectToAction("Index", "Admin/Dardboard");
-
-                }
-
-                if (ModelState.IsValid)
-                {
-                    var account = db.KHACHHANGs.FirstOrDefault(k => k.Email == taikhoan.Email && k.MatKhau == matKhau);
-                    if (account != null)
-                    {
-                        Session["TaiKhoan"] = account;
-                        return RedirectToAction("Index", "Home");
-                    }
-                    else
-                    {
-
-                        ViewBag.ThongBao = "Email hoặc mật khẩu không chính xác";
-                    }
-                }
+                ViewBag.ThongBao = "Email hoặc mật khẩu không chính xác";
             }
             return View();
         }
@@ -88,6 +68,8 @@ namespace BookStoreOnline.Controllers
                 }
                 if (cus.MatKhau == rePass)
                 {
+                    cus.NgayTao = DateTime.Now;
+                    cus.TrangThai = true;
                     cus.MatKhau = Extension.GetMd5Hash(cus.MatKhau);
                     db.KHACHHANGs.Add(cus);
                     db.SaveChanges();

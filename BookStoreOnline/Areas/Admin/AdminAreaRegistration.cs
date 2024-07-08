@@ -17,7 +17,7 @@ namespace BookStoreOnline.Areas.Admin
             context.MapRoute(
                 "Admin_default",
                 "Admin/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Auth", action = "Login", id = UrlParameter.Optional }
             );
         }
     }

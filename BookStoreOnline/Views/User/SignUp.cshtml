@@ -3,40 +3,51 @@
     ViewBag.Title = "SignUp";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<div class="container body-page">
-
-    <div class="row">
-        <div class="col-lg-6" style="height:400px ;">
-            <img src="https://photo2.tinhte.vn/data/attachment-files/2023/04/6403882_image.jpg" alt="" style="width:100%; height: 100%;">
-        </div>
-
-        <div class="col-lg-6 login-box">
-            <h3 style="color: gray ;">Đăng ký</h3>
-            @using (Html.BeginForm("SignUp", "User"))
-            {
-                <span style="color:red">@ViewBag.ThongBaoEmail</span>
-                <div class="form-group">
-                    <input type="text" name="NameKHACHHANGs" class="form-control" placeholder="Tên của bạn">
+<div class="container body-page my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="row no-gutters">
+                    <div class="col-lg-6">
+                        <img src="https://photo2.tinhte.vn/data/attachment-files/2023/04/6403882_image.jpg" alt="Login Image" class="img-fluid" style="height: 100%; object-fit: cover;">
+                    </div>
+                    <div class="col-lg-6 d-flex flex-column justify-content-center p-4">
+                        <h3 class="text-muted mb-4">Đăng ký tài khoản</h3>
+                        @using (Html.BeginForm("SignUp", "User"))
+                        {
+                            <span style="color:red">@ViewBag.ThongBaoEmail</span>
+                            <div class="form-group">
+                                <label for="nameGuest">Tên của bạn</label>
+                                <input type="text" name="Ten" class="form-control" placeholder="Tên của bạn">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Email</label>
+                                <input type="email" name="Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập địa chỉ email của bạn">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Địa chỉ</label>
+                                <input type="text" name="DiaChi" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập địa chỉ email của bạn">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Số điện thoại</label>
+                                <input type="number" name="SoDienThoai" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập địa chỉ email của bạn">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Mật khẩu</label>
+                                <input type="password" name="MatKhau" class="form-control" id="exampleInputPassword1" placeholder="Mật khẩu đăng nhập">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Xác nhận lại mật khẩu</label>
+                                <input type="password" name="rePass" class="form-control" id="exampleInputPassword1" placeholder="Mật khẩu đăng nhập">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Đăng ký</button>
+                        }
+                        <div class="mt-3">
+                            <span>Đã có tài khoản? @Html.ActionLink("Quay lại đăng nhập", "Login", "User")</span>
+                        </div>
+                    </div>
                 </div>
-
-
-                <div class="form-group">
-                    <input type="email" name="Email" class="form-control" placeholder="Email">
-                </div>
-                <div class="form-group">
-                    <input type="password" name="Password" class="form-control" placeholder="Mật khẩu đăng nhập">
-                </div>
-                <div class="form-group">
-                    <input type="password" name="rePass" class="form-control" id="exampleInputPassword1"
-                           placeholder="Nhập lại mật khẩu">
-                </div>
-                <span style="color:red">@ViewBag.ThongBao</span>
-                <button type="submit" class="btn-login">Đăng ký ngay</button>
-            }
-
             </div>
+        </div>
     </div>
-
 </div>
-

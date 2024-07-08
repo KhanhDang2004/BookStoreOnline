@@ -1,13 +1,44 @@
-﻿<div class="dropdown show">
-    <a class="category-nav" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <i class="bi bi-list"></i>
+﻿<style> 
+    .navbar-nav .nav-link, .dropdown-item {
+        /*color: #ffffff;*/ /* White text color */
+        font-weight: 500; /* Medium font weight */
+    }
+
+        .navbar-nav .nav-link:hover, .dropdown-item:hover {
+            color: #f8f9fa; /* Lighter text color on hover */
+            background-color: #495057; /* Darker background on hover */
+            border-radius: 5px; /* Rounded corners */
+        }
+         
+    .nav-list {
+        padding: 10px 0;
+    }
+
+    .dropdown-menu {
+        background-color: #343a40; /* Dark background color for dropdown */
+        border: none; /* Remove border */
+    }
+
+    .dropdown-item {
+        color: #ffffff; /* White text color for dropdown items */
+        font-weight: 500; /* Medium font weight */
+    }
+
+        .dropdown-item:hover {
+            color: #f8f9fa; /* Lighter text color on hover */
+            background-color: #495057; /* Darker background on hover */
+            border-radius: 5px; /* Rounded corners */
+        }
+</style>
+<div class="dropdown show">
+    <a class="nav-item nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" style="color: #D1D3D5" >
+        Danh mục sản phẩm
     </a>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
         <a class="dropdown-item" href="@Url.Action("GetAllBook","Category")">Tất cả sách</a>
         @foreach (var item in ViewBag.CateList)
         {
             <a class="dropdown-item" href="@Url.Action("Index/"+item.Maloai,"Category")">@item.Tenloai</a>
-
         }
     </div>
 </div>

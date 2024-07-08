@@ -9,60 +9,52 @@
     var price = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
     var user = Session["TaiKhoan"] as BookStoreOnline.Models.KHACHHANG;
 }
+<link rel="stylesheet" href="~/Content/css/view-product.css">
 
 
-<div class="container body-page">
-
+<div class="container body-page mt-5">
     <div class="row">
         <div class="col-lg-3">
-
-
             @{ Html.RenderAction("GetCategorySelection", "CategoryPartial");}
         </div>
         <div class="col-lg-9 list-book">
-            <h3 style="color:gray">@ViewBag.Tenloai</h3>
+            <h3 class="text-muted">@ViewBag.Tenloai</h3>
             <div class="row">
                 <!-- product -->
-
-
                 @foreach (var item in Model)
                 {
-                    <div class="prod-item">
-                        <div class="card" style="width: 18rem;">
-                            <a href="@Url.Action("Index/"+ item.MaSanPham,"ProductDetail")"><img class="card-img-top" src="~/Images/@item.Anh" alt="Card image cap"></a>
-                            <div class="card-body">
-                                <a href="@Url.Action("Index/"+ item.MaSanPham,"ProductDetail") " class="title-prod"> <h5 class="card-title">@item.TenSanPham </h5> </a>
-                                <h5 style="color: darkred;">@String.Format(price, "{0:c0}", item.Gia)</h5>
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <a href="@Url.Action("Index", "ProductDetail", new { id = item.MaSanPham })">
+                                <img class="card-img-top" src="~/Images/@item.Anh" alt="@item.TenSanPham">
+                            </a>
+                            <div class="card-body text-center">
+                                <a href="@Url.Action("Index", "ProductDetail", new { id = item.MaSanPham })" class="text-dark">
+                                    <h5 class="card-title">@item.TenSanPham</h5>
+                                </a>
+                                <h5 class="text-danger">@String.Format(price, "{0:c0}", item.Gia)</h5>
                                 <p class="card-text rating-card">
                                     <i class="bi bi-star-fill"></i>
                                     <i class="bi bi-star-fill"></i>
                                     <i class="bi bi-star-fill"></i>
                                     <i class="bi bi-star-fill"></i>
                                     <i class="bi bi-star-fill"></i>
-                                    <span style="color: black;">(0 đánh giá)</span>
+                                    <span class="text-dark">(0 đánh giá)</span>
                                 </p>
                                 @if (user != null)
                                 {
-                                    <a href="@Url.Action("AddSingleProduct/"+ item.MaSanPham,"Cart")" class="custom-btn btn-14">Mua</a>
-
+                                    <a href="@Url.Action("AddSingleProduct", "Cart", new { id = item.MaSanPham })" class="btn btn-primary">Mua</a>
                                 }
                                 else
                                 {
-                                    <a href="@Url.Action("Login", "User")" class="custom-btn btn-14">Mua</a>
-
+                                    <a href="@Url.Action("Login", "User")" class="btn btn-primary">Mua</a>
                                 }
-                                <a href="@Url.Action("Index/"+ item.MaSanPham,"ProductDetail")" class="see-detail-prod"><i class="bi bi-eye"></i></a>
-
                             </div>
                         </div>
                     </div>
                 }
-
-
             </div>
-
         </div>
     </div>
 </div>
-
 

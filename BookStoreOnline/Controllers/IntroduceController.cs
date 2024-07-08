@@ -8,7 +8,6 @@ namespace BookStoreOnline.Controllers
 {
     public class IntroduceController : Controller
     {
-        // GET: Introduce
         public ActionResult Index()
         {
             return View();
