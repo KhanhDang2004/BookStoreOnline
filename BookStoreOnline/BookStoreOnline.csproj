@@ -158,6 +158,8 @@
     <Compile Include="Models\CHITIETDONHANG.cs">
       <DependentUpon>NhaSachEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Custom\DanhGiaContent.cs" />
+    <Compile Include="Models\Custom\DanhGiaItem.cs" />
     <Compile Include="Models\DANHGIA.cs">
       <DependentUpon>NhaSachEntities.tt</DependentUpon>
     </Compile>
@@ -235,6 +237,7 @@
     <Content Include="Content\AdminAssets\login-assets\js\owl.carousel.min.js" />
     <Content Include="Content\css\header.css" />
     <Content Include="Content\css\view-product.css" />
+    <Content Include="Content\Img\Picture1.txt" />
     <Content Include="Content\style.css" />
     <Content Include="Content\styles.css" />
     <Content Include="favicon.ico" />

@@ -13,7 +13,6 @@ namespace BookStoreOnline.Controllers
         public ActionResult Index()
         {
             var book = db.SANPHAMs.ToList().Take(8);
-            var a = 2;
             return View(book);
         }
     }
