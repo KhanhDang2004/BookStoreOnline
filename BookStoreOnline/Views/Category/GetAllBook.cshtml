@@ -12,40 +12,43 @@
 <div class="container body-page mt-5">
     <div class="row">
         <div class="col-lg-3">
-            @{ Html.RenderAction("GetCategorySelection", "CategoryPartial");}
+            @{ Html.RenderAction("GetCategorySelection", "CategoryPartial"); }
         </div>
         <div class="col-lg-9 list-book">
-            @*<h3 class="text-muted">Tất cả sách</h3>*@
             <div class="row">
-                <!-- product -->
                 @foreach (var item in Model)
                 {
                     <div class="col-md-4 mb-4">
-                        <div class="card">
+                        <div class="card h-100">
                             <a href="@Url.Action("Index", "ProductDetail", new { id = item.MaSanPham })">
                                 <img class="card-img-top" src="~/Images/@item.Anh" alt="@item.TenSanPham">
                             </a>
-                            <div class="card-body text-center">
+                            <div class="card-body text-center d-flex flex-column">
                                 <a href="@Url.Action("Index", "ProductDetail", new { id = item.MaSanPham })" class="text-dark">
                                     <h5 class="card-title">@item.TenSanPham</h5>
                                 </a>
                                 <h5 class="text-danger">@String.Format(price, "{0:c0}", item.Gia)</h5>
                                 <p class="card-text rating-card">
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
                                     <span class="text-dark">(0 đánh giá)</span>
                                 </p>
-                                @if (user != null)
-                                {
-                                    <a href="@Url.Action("AddSingleProduct", "Cart", new { id = item.MaSanPham })" class="btn btn-primary">Mua</a>
-                                }
-                                else
-                                {
-                                    <a href="@Url.Action("Login", "User")" class="btn btn-primary">Mua</a>
-                                }
+                                <div class="mt-auto d-flex justify-content-between w-100">
+                                    @if (user != null)
+                                    {
+                                        <a href="@Url.Action("AddSingleProduct", "Cart", new { id = item.MaSanPham })" class="btn btn-primary me-1">Mua</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("Login", "User")" class="btn btn-primary me-1">Mua</a>
+                                    }
+                                    <a href="@Url.Action("Index", "ProductDetail", new { id = item.MaSanPham })" class="btn btn-outline-secondary">
+                                        <i class="bi bi-eye"></i> Xem chi tiết
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -54,3 +57,51 @@
         </div>
     </div>
 </div>
+
+
+<style>
+    .card-body {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 10px;
+        min-height: 40px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+        color: white;
+        flex: 1 1 40%;
+        max-width: 40%;
+        border-radius: 0; /* Remove border radius */
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+    .btn-outline-secondary {
+        background-color: #fff;
+        border: 1px solid #6c757d;
+        color: #6c757d;
+        flex: 1 1 58%;
+        max-width: 58%;
+        border-radius: 0; /* Ensure same border radius as primary button */
+    }
+
+        .btn-outline-secondary:hover {
+            background-color: #6c757d;
+            color: #fff;
+        }
+
+    .rating-card i {
+        margin-right: 2px;
+    }
+</style>

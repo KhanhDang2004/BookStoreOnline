@@ -10,8 +10,56 @@
     var user = Session["TaiKhoan"] as BookStoreOnline.Models.KHACHHANG;
 }
 
+<style>
+    .prod-list-details img {
+        border-radius: 8px;
+    }
+
+    .prod-list-table {
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    .address-title {
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+
+    .checkout-form {
+        margin-top: 20px;
+    }
+
+        .checkout-form textarea {
+            resize: none;
+        }
+
+    .custom-btn {
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 18px;
+    }
+
+        .custom-btn:hover {
+            background-color: #218838;
+            color: #fff;
+        }
+
+    .btn-outline-secondary {
+        color: #6c757d;
+        border-color: #6c757d;
+    }
+
+        .btn-outline-secondary:hover {
+            color: #495057;
+            background-color: #e9ecef;
+            border-color: #6c757d;
+        }
+</style>
+
 <div class="container body-page mt-4">
-    <div class="card">
+    <div class="card shadow-sm">
         <div class="card-header bg-primary text-white">
             <h4 class="mb-0">Giỏ hàng của bạn</h4>
         </div>
@@ -22,17 +70,18 @@
                         <th scope="col">Sản phẩm</th>
                         <th scope="col">Số lượng</th>
                         <th scope="col">Đơn giá</th>
-                        <th scope="col"></th>
+                        <th scope="col" class="text-center">Xóa</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
                     {
                         <tr class="prod-list-table">
-                            <td class="prod-list-details" style="padding-top: 10px;">
-                                <div class="d-flex align-items-center">
-                                    <img src="~/Images/@item.Anh" alt="" class="img-thumbnail mr-3" style="width: 100px;">
+                            <td class="prod-list-details d-flex align-items-center">
+                                <img src="~/Images/@item.Anh" alt="" class="img-thumbnail mr-3" style="width: 100px;">
+                                <div>
                                     <h5 class="mb-0">@item.TenSanPham</h5>
+                                    <p class="text-muted">Mã SP: @item.MaSanPham</p>
                                 </div>
                             </td>
                             <td>
@@ -50,7 +99,7 @@
                             <td>
                                 <h5 class="mb-0">@String.Format(price, "{0:c0}", item.FinalPrice())</h5>
                             </td>
-                            <td>
+                            <td class="text-center">
                                 <a href="@Url.Action("Remove/"+item.MaSanPham,"Cart")" class="btn btn-danger"><i class="bi bi-x-square-fill"></i></a>
                             </td>
                         </tr>
@@ -62,15 +111,16 @@
 
     <hr />
 
+
     @using (Html.BeginForm("InsertOrder", "Cart", FormMethod.Post, new { @class = "checkout-form" }))
     {
-        <div class="row infor-order">
+        <div class="row infor-order mt-3">
             <div class="col-lg-6">
-                <h5 class="address-title">Địa chỉ</h5>
-                <textarea name="address" placeholder="Nhập địa chỉ giao hàng" rows="4" required></textarea>
+                <h5 class="address-title">Địa chỉ giao hàng</h5>
+                <textarea name="address" placeholder="Nhập địa chỉ giao hàng" rows="4" class="form-control" required></textarea>
             </div>
             <div class="col-lg-6">
-                <table class="table ">
+                <table class="table">
                     <tr>
                         <td>Số lượng sản phẩm</td>
                         <td>@ViewBag.TotalNumber</td>
@@ -80,11 +130,11 @@
                         <td><h4>@String.Format(price, "{0:c0}", ViewBag.TotalPrice)</h4></td>
                     </tr>
                 </table>
-                <button type="submit" class="custom-btn btn-14">Đặt hàng</button>
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Đặt hàng</button>
             </div>
         </div>
     }
-
+</div>
 
 </div>
 

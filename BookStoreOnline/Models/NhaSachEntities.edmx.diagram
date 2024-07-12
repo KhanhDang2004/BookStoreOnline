@@ -4,12 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8a183fa138c34b178114d6619ee32c65" Name="Diagram1" ZoomLevel="74">
+      <Diagram DiagramId="8a183fa138c34b178114d6619ee32c65" Name="Diagram1" ZoomLevel="84">
         <EntityTypeShape EntityType="NhaSachModel.CHITIETDONHANG" Width="1.5" PointX="8.25" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="NhaSachModel.DANHGIA" Width="1.5" PointX="8.25" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="NhaSachModel.DONHANG" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
         <EntityTypeShape EntityType="NhaSachModel.KHACHHANG" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="NhaSachModel.KHUYENMAI" Width="1.5" PointX="11.125" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="NhaSachModel.KHUYENMAI" Width="1.5" PointX="10.25" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="NhaSachModel.LOAI" Width="1.5" PointX="3.75" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="NhaSachModel.NHANVIEN" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="NhaSachModel.SANPHAM" Width="1.5" PointX="6" PointY="4.375" IsExpanded="true" />

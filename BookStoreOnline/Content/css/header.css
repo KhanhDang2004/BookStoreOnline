@@ -27,7 +27,7 @@
 	}
 
 	.top-header button {
-		background-color: #4CAF50;
+		background-color: #80bdff;
 		border: none;
 		border-radius: 20px;
 		color: #fff;
@@ -88,7 +88,7 @@
 
 /* Button Styles */
 .custom-btn.btn-7 {
-	background-color: #4CAF50;
+	background-color: #80bdff;
 	color: #fff;
 	padding: 10px 15px;
 	border-radius: 20px;
@@ -97,7 +97,7 @@
 }
 
 	.custom-btn.btn-7:hover {
-		background-color: #45a049;
+		background-color: #acb2b9;
 	}
 
 /* Cart Badge */

@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -8,95 +7,223 @@
     var user = Session["TaiKhoan"] as BookStoreOnline.Models.KHACHHANG;
 }
 
-<div class="container body-page">
+<div class="container body-page mt-4">
     <div class="row">
         <div class="col-lg-5">
-            <img src="~/Images/@ViewBag.Book.Anh" style="width:100%" alt="">
+            <img src="~/Images/@ViewBag.Book.Anh" class="img-fluid rounded shadow-sm" alt="Book Image">
         </div>
         <div class="col-lg-4">
-            <h3>  @ViewBag.Book.TenSanPham</h3>
-
-            <h3 style="color:darkred;"> @String.Format(price, "{0:c0}", ViewBag.Book.Gia)</h3>
-            <p>Tác giả : @ViewBag.Book.TacGia</p>
-            <span>Đánh giá : </span>
-            <span style="color: rgb(155, 155, 0);">
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-fill"></i>
-                <i class="bi bi-star-half"></i>
-            </span> <br /> <br /> <br />
+            <h3 class="font-weight-bold mb-3">@ViewBag.Book.TenSanPham</h3>
+            <h3 class="text-danger mb-3">@String.Format(price, "{0:c0}", ViewBag.Book.Gia)</h3>
+            <p>Tác giả: @ViewBag.Book.TacGia</p>
+            <div class="d-flex align-items-center mb-3">
+                <span>Đánh giá:</span>
+                <span class="text-warning ml-2">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-half"></i>
+                </span>
+            </div>
             @if (user == null)
             {
-                <div class="form-add-to-cart">
-                    <input type="number" style="width:60px" value="1" min="1">
-                    <button onclick="location.href='@Url.Action("Login", "User")'"><i class="bi bi-bag-plus"></i>Thêm vào giỏ hàng</button>
+                <div class="form-add-to-cart d-flex align-items-center">
+                    <input type="number" class="form-control mr-2" style="width: 80px;" value="1" min="1">
+                    <button class="btn btn-primary" onclick="location.href='@Url.Action("Login", "User")'">
+                        <i class="bi bi-bag-plus"></i> Thêm vào giỏ hàng
+                    </button>
                 </div>
             }
             else
             {
-                using (Html.BeginForm("AddToCart", "Cart", FormMethod.Post, new { @class = "form-add-to-cart" }))
+                using (Html.BeginForm("AddToCart", "Cart", FormMethod.Post, new { @class = "form-add-to-cart d-flex align-items-center" }))
                 {
-                    <input type="number" name="Quantity" style="width:60px" value="1" min="1">
+                    <input type="number" name="Quantity" class="form-control mr-2" style="width: 80px;" value="1" min="1">
                     <input type="hidden" name="ProductID" value="@ViewBag.Book.MaSanPham" />
-                    <button type="submit"><i class="bi bi-bag-plus"></i>Thêm vào giỏ hàng</button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-bag-plus"></i> Thêm vào giỏ hàng
+                    </button>
                 }
             }
         </div>
-
         <div class="col-lg-3">
-            <h4 style="color:gray">Mô tả</h4>
-            <p> @ViewBag.Book.MoTa</p>
+            <h4 class="text-muted">Mô tả</h4>
+            <p>@ViewBag.Book.MoTa</p>
         </div>
     </div>
 
-    <hr/>
+    <hr />
 
-    <div class="more-some-book">
-        <h3>Khám phá thêm</h3>
+
+
+
+
+
+    <div class="more-some-book mt-5">
+        <h3 class="font-weight-bold">Khám phá thêm</h3>
         <hr />
         <div class="row">
             @foreach (var item in ViewBag.MoreBook)
             {
-                <div class="col-lg-3 prod-item">
-                    <div class="card" style="width: 18rem;">
-                        <a href="@Url.Action("Index/"+ item.MaSanPham,"ProductDetail")"><img class="card-img-top" src="~/Images/@item.Anh" alt="Card image cap"></a>
-                        <div class="card-body">
-                            <a href="@Url.Action("Index/"+ item.MaSanPham,"ProductDetail") " class="title-prod"> <h5 class="card-title">@item.TenSanPham </h5> </a>
-                            <h5 style="color: darkred;">@String.Format(price, "{0:c0}", item.Gia)</h5>
-                            <p class="card-text rating-card">
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="card shadow-sm h-100 border-0">
+                        <a href="@Url.Action("Index/"+ item.MaSanPham,"ProductDetail")">
+                            <img class="card-img-top img-fluid rounded-top" src="~/Images/@item.Anh" alt="Card image cap">
+                        </a>
+                        <div class="card-body d-flex flex-column">
+                            <a href="@Url.Action("Index/"+ item.MaSanPham,"ProductDetail")" class="title-prod text-dark text-decoration-none">
+                                <h5 class="card-title">@item.TenSanPham</h5>
+                            </a>
+                            <h5 class="text-danger mb-3">@String.Format(price, "{0:c0}", item.Gia)</h5>
+                            <p class="card-text rating-card mb-4">
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
                                 <span style="color: black;">(0 đánh giá)</span>
                             </p>
                             @if (user != null)
                             {
-                                <a href="@Url.Action("AddSingleProduct/"+ item.MaSanPham,"Cart")" class="custom-btn btn-14">Mua Ngay</a>
-
+                                <a href="@Url.Action("AddSingleProduct/"+ item.MaSanPham,"Cart")" class="btn btn-success mt-auto">Mua Ngay</a>
                             }
                             else
                             {
-                                <a href="@Url.Action("Login", "User")" class="custom-btn btn-14">Mua Ngay</a>
-
+                                <a href="@Url.Action("Login", "User")" class="btn btn-primary">Mua Ngay</a>
                             }
-                            <a href="@Url.Action("Index/"+ item.MaSanPham,"ProductDetail")" class="see-detail-prod"><i class="bi bi-eye"></i></a>
-
+                            <a href="@Url.Action("Index/"+ item.MaSanPham,"ProductDetail")" class="btn btn-outline-secondary mt-2">
+                                <i class="bi bi-eye"></i> Xem chi tiết
+                            </a>
                         </div>
                     </div>
                 </div>
             }
-
-
         </div>
     </div>
-    <div class="row" style="justify-content: center; margin:30px auto">
-        <a href="@Url.Action("GetAllBook","Category")" class="see-more"><h4>Xem thêm</h4></a>
+
+
+    <div class="row justify-content-center mt-4">
+        <a href="@Url.Action("GetAllBook", "Category")" class="see-more">
+            <h4>Xem thêm</h4>
+        </a>
     </div>
-
-
-
 </div>
 
+    
+
+  
+
+<!-- Thêm một số CSS tùy chỉnh để làm đẹp giao diện -->
+<style>
+    .container.body-page {
+        margin-top: 20px;
+    }
+    .card {
+        transition: transform 0.2s;
+    }
+    .card-header {
+        background-color: #007bff;
+        color: white;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .table {
+        margin-bottom: 0;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #f5f5f5;
+    }
+
+    .thead-dark th {
+        background-color: #343a40;
+        color: white;
+    }
+
+    .text-danger {
+        color: red !important;
+    }
+
+    .text-success {
+        color: green !important;
+    }
+
+    .img-fluid {
+        border-radius: 8px;
+    }
+
+    .form-add-to-cart {
+        margin-top: 20px;
+    }
+
+    .more-some-book h3 {
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .card {
+        border: none;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .card-img-top {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    .title-prod {
+        text-decoration: none;
+        color: black;
+    }
+
+        .title-prod:hover {
+            text-decoration: underline;
+        }
+
+    .custom-btn {
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 18px;
+        display: inline-block;
+    }
+
+        .custom-btn:hover {
+            background-color: #218838;
+            color: #fff;
+        }
+
+    .see-detail-prod {
+        display: inline-block;
+        margin-top: 10px;
+        color: #007bff;
+    }
+
+        .see-detail-prod:hover {
+            color: #0056b3;
+        }
+
+    .btn-outline-secondary {
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 18px;
+        text-decoration: none;
+        color: #6c757d;
+        border: 1px solid #6c757d;
+    }
+
+        .btn-outline-secondary:hover {
+            background-color: #e2e6ea;
+            color: #495057;
+            border: 1px solid #6c757d;
+        }
+</style>
