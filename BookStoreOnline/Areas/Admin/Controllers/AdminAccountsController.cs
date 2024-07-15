@@ -42,9 +42,9 @@ namespace BookStoreOnline.Areas.Admin.Controllers
         public ActionResult Create()
         {
             var roles = from AdminRole e in Enum.GetValues(typeof(AdminRole))
-                        select new { Id = (int)e, Name = e.GetDescription() };
+                        select new { Value = e.ToString(), Text = e.GetDescription() };
 
-            ViewBag.Role = new SelectList(roles, "Id", "Name");
+            ViewBag.Quyen = new SelectList(roles, "Value", "Text");
             return View();
         }
 
@@ -53,12 +53,13 @@ namespace BookStoreOnline.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Name,Email,Role")] NHANVIEN nhanVienMoi)
+        public ActionResult Create([Bind(Include = "Ten,Email,Quyen")] NHANVIEN nhanVienMoi)
         {
             if (ModelState.IsValid)
             {
                 nhanVienMoi.MatKhau = Extension.GetMd5Hash("123456789");
                 nhanVienMoi.NgayTao = DateTime.Now;
+                nhanVienMoi.TrangThai = true;
                 db.NHANVIENs.Add(nhanVienMoi);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -80,9 +81,9 @@ namespace BookStoreOnline.Areas.Admin.Controllers
                 return HttpNotFound();
             }
             var roles = from AdminRole e in Enum.GetValues(typeof(AdminRole))
-                        select new { Id = (int)e, Name = e.GetDescription() };
+                        select new { Value = e.ToString(), Text = e.GetDescription() };
 
-            ViewBag.Role = new SelectList(roles, "Id", "Name");
+            ViewBag.Quyen = new SelectList(roles, "Value", "Text");
             return View(nhanVien);
         }
 
@@ -91,7 +92,7 @@ namespace BookStoreOnline.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AdminID, Name,Email,Role")] NHANVIEN nhanVien)
+        public ActionResult Edit([Bind(Include = "MaNV,Ten,Email,Quyen")] NHANVIEN nhanVien)
         {
             if (ModelState.IsValid)
             {
@@ -167,6 +168,37 @@ namespace BookStoreOnline.Areas.Admin.Controllers
             }
 
             nhanVien.TrangThai = false; // Assuming there is a property 'IsActive' in the AdminAccount model to indicate if the account is active or not
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+
+        public ActionResult EnableAccount(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            NHANVIEN nhanVien = db.NHANVIENs.Find(id);
+            if (nhanVien == null)
+            {
+                return HttpNotFound();
+            }
+            return View(nhanVien);
+        }
+
+        [HttpPost, ActionName("EnableAccount")]
+        [ValidateAntiForgeryToken]
+        public ActionResult EnableAccountAccountConfirmed(int id)
+        {
+            NHANVIEN nhanVien = db.NHANVIENs.Find(id);
+            if (nhanVien == null)
+            {
+                return HttpNotFound();
+            }
+
+            nhanVien.TrangThai = true; // Assuming there is a property 'IsActive' in the AdminAccount model to indicate if the account is active or not
             db.SaveChanges();
 
             return RedirectToAction("Index");

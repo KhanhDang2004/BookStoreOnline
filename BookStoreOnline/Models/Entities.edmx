@@ -30,11 +30,11 @@
           </Key>
           <Property Name="MaDonHang" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DiaChi" Type="nvarchar(max)" />
-          <Property Name="TrangThai" Type="int" />
+          <Property Name="TrangThai" Type="varchar" MaxLength="20" />
           <Property Name="NgayDat" Type="datetime" />
           <Property Name="ID" Type="int" />
-          <Property Name="TrangThaiThanhToan" Type="int" Nullable="false" />
-          <Property Name="PhuongThucThanhToan" Type="int" Nullable="false" />
+          <Property Name="TrangThaiThanhToan" Type="varchar" MaxLength="20" />
+          <Property Name="PhuongThucThanhToan" Type="varchar" MaxLength="20" />
           <Property Name="TongTien" Type="int" Nullable="false" />
           <Property Name="MaKM" Type="varchar" MaxLength="15" />
           <Property Name="MaNVXuLy" Type="int" />
@@ -82,7 +82,7 @@
           <Property Name="MaNV" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Email" Type="nvarchar(max)" />
           <Property Name="MatKhau" Type="nvarchar(max)" />
-          <Property Name="Quyen" Type="int" Nullable="false" />
+          <Property Name="Quyen" Type="varchar" MaxLength="20" />
           <Property Name="Ten" Type="nvarchar" MaxLength="100" />
           <Property Name="NgayTao" Type="datetime" />
           <Property Name="TrangThai" Type="bit" />
@@ -288,11 +288,11 @@ warning 6035: The relationship 'FK_DONHANG_KHUYENMAI' has columns that are not p
           </Key>
           <Property Name="MaDonHang" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DiaChi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="TrangThai" Type="Int32" />
+          <Property Name="TrangThai" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="NgayDat" Type="DateTime" Precision="3" />
           <Property Name="ID" Type="Int32" />
-          <Property Name="TrangThaiThanhToan" Type="Int32" Nullable="false" />
-          <Property Name="PhuongThucThanhToan" Type="Int32" Nullable="false" />
+          <Property Name="TrangThaiThanhToan" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PhuongThucThanhToan" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="TongTien" Type="Int32" Nullable="false" />
           <Property Name="MaKM" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="MaNVXuLy" Type="Int32" />
@@ -346,7 +346,7 @@ warning 6035: The relationship 'FK_DONHANG_KHUYENMAI' has columns that are not p
           <Property Name="MaNV" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="MatKhau" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Quyen" Type="Int32" Nullable="false" />
+          <Property Name="Quyen" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Ten" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="NgayTao" Type="DateTime" Precision="3" />
           <Property Name="TrangThai" Type="Boolean" />

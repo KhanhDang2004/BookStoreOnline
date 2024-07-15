@@ -47,20 +47,30 @@
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                @EHelper.GetEnumDescription((Constants.AdminRole)item.Quyen)
+                @{
+                    var role = (Constants.AdminRole)Enum.Parse(typeof(Constants.AdminRole), item.Quyen);
+                    var description = @EHelper.GetEnumDescription((Constants.AdminRole)role);
+                }
+                @description
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.NgayTao)
             </td>
 
             <td>
-                @*@Html.ActionLink("Edit", "Edit", new { id = item.AdminID }) |
-        @Html.ActionLink("Details", "Details", new { id = item.AdminID }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.AdminID })*@
+                <div class="col">
 
-                <a href="@Url.Action("Edit", new { id = item.MaNV })" class="btn btn-sm btn-warning">Chỉnh sửa</a> 
-                <a href="@Url.Action("DisableAccount", new { id = item.MaNV })" class="btn btn-sm btn-info">Vô hiệu hóa </a>
-                <a href="@Url.Action("Delete", new { id = item.MaNV })" class="btn btn-sm btn-danger">Xóa</a>
+                    <a href="@Url.Action("Edit", new { id = item.MaNV })" class="btn btn-sm btn-warning">Chỉnh sửa</a>
+
+                    @if (item.TrangThai == true)
+                    {
+                        <a href="@Url.Action("DisableAccount", new { id = item.MaNV })" class="btn btn-sm btn-success">Vô hiệu hóa</a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("EnableAccount", new { id = item.MaNV })" class="btn btn-sm btn-danger">Kích hoạt</a>
+                    }
+                </div>
 
             </td>
         </tr>
@@ -73,42 +83,3 @@
 
 
 
-@*<h2>Index</h2>
-
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Password)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Role)
-            </th>
-            <th></th>
-        </tr>
-
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Password)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Role)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.AdminID }) |
-                @Html.ActionLink("Details", "Details", new { id=item.AdminID }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.AdminID })
-            </td>
-        </tr>
-    }
-
-    </table>*@

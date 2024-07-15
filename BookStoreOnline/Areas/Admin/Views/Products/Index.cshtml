@@ -50,10 +50,11 @@
                 <td>
                     @*@Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.ProductID }) |
 
-                    @Html.ActionLink("Xóa", "Delete", new { id = item.ProductID })*@
-
-                    <a href="@Url.Action("Edit", new { id = item.MaSanPham })" class="btn btn-sm btn-warning">Chỉnh sửa</a> |
+        @Html.ActionLink("Xóa", "Delete", new { id = item.ProductID })*@
+                    <div style="display: flex; justify-content: flex-end;">
+                    <a href="@Url.Action("Edit", new { id = item.MaSanPham })" class="btn btn-sm btn-warning">Chỉnh sửa</a> 
                     <a href="@Url.Action("Delete", new { id = item.MaSanPham })" class="btn btn-sm btn-danger">Xóa</a>
+                    </div>
                 </td>
             </tr>
         }

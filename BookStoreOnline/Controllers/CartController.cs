@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BookStoreOnline.Models;
+using static BookStoreOnline.Areas.Admin.Constants.Constants;
 
 namespace BookStoreOnline.Controllers
 {
@@ -140,7 +141,7 @@ namespace BookStoreOnline.Controllers
             donHang.ID = khachHangDaDangNhap.MaKH;
             donHang.NgayDat = DateTime.Now.Date;
             donHang.DiaChi = address;
-            donHang.TrangThai = 0;
+            donHang.TrangThai = StatusOrder.NoInform.ToString();
             db.DONHANGs.Add(donHang);
             db.SaveChanges();
 
