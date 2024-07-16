@@ -1,0 +1,95 @@
+﻿@model IEnumerable<BookStoreOnline.Models.KHUYENMAI>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="card-body">
+    <h2>Các mã khuyến mãi</h2>
+</div>
+<div class="text-right">
+    <button type="button" class="btn btn-primary" onclick="location.href='/Admin/Promotion/Create';">Thêm khuyến mãi mới</button>
+</div>
+<div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TenChuongTrinh)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MaKM)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MoTa)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NgayTao)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NgayBatDau)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NgayKetThuc)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SoTienKM)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SoTienMuaHangToiThieu)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SoLanDung)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.KichHoat)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TenChuongTrinh)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MaKM)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MoTa)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NgayTao)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NgayBatDau)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NgayKetThuc)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SoTienKM)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SoTienMuaHangToiThieu)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SoLanDung)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.KichHoat)
+                    </td>
+                    <td>
+                        <div style="display: flex; justify-content: flex-end;">
+                            <a href="@Url.Action("Edit", new { id = item.ID})" class="btn btn-sm btn-warning">Chỉnh sửa</a>
+                            <a href="@Url.Action("Delete", new { id = item.ID })" class="btn btn-sm btn-danger">Xóa</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+
+

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BookStoreOnline.Models;
+using static BookStoreOnline.Areas.Admin.Constants.Constants;
 
 namespace BookStoreOnline.Areas.Admin.Controllers
 {
@@ -15,20 +16,45 @@ namespace BookStoreOnline.Areas.Admin.Controllers
         private NhaSachEntities db = new NhaSachEntities();
 
         // GET: Admin/Orders
-        public ActionResult Index(int? status)
+        public ActionResult Index(string status)
         {
-            List<DONHANG> donHang = new List<DONHANG>();
-            switch (status)
+            List<DONHANG> donHang;
+
+            if (!string.IsNullOrEmpty(status))
             {
-                case 0:
-                    donHang = db.DONHANGs.Where(x=>x.TrangThai == 0).ToList();
-                    break;
-                case 1:
-                    donHang = db.DONHANGs.Where(x => x.TrangThai == 1).ToList();
-                    break;
-                default:
+                if (Enum.TryParse(status, out StatusOrder parsedStatusOrder))
+                {
+                    switch (parsedStatusOrder)
+                    {
+                        case StatusOrder.NoInform:
+                            donHang = db.DONHANGs.Where(x => x.TrangThai == StatusOrder.NoInform.ToString()).ToList();
+                            break;
+                        case StatusOrder.Informed:
+                            donHang = db.DONHANGs.Where(x => x.TrangThai == StatusOrder.Informed.ToString()).ToList();
+                            break;
+                        case StatusOrder.Shipping:
+                            donHang = db.DONHANGs.Where(x => x.TrangThai == StatusOrder.Shipping.ToString()).ToList();
+                            break;
+                        case StatusOrder.Received:
+                            donHang = db.DONHANGs.Where(x => x.TrangThai == StatusOrder.Received.ToString()).ToList();
+                            break;
+                        case StatusOrder.Canceled:
+                            donHang = db.DONHANGs.Where(x => x.TrangThai == StatusOrder.Canceled.ToString()).ToList();
+                            break;
+                        default:
+                            donHang = db.DONHANGs.ToList();
+                            break;
+                    }
+                }
+                else
+                {
                     donHang = db.DONHANGs.ToList();
-                    break;
+                }
+            }
+            else
+            {
+                // If no status is provided, return all orders
+                donHang = db.DONHANGs.ToList();
             }
             return View(donHang.ToList());
         }
@@ -52,7 +78,7 @@ namespace BookStoreOnline.Areas.Admin.Controllers
         // GET: Admin/Orders/Create
         public ActionResult Create()
         {
-            ViewBag.IDCus = new SelectList(db.KHACHHANGs, "ID", "NameKHACHHANGs");
+            ViewBag.IDCus = new SelectList(db.KHACHHANGs, "ID", "Ten");
             return View();
         }
 
@@ -61,7 +87,7 @@ namespace BookStoreOnline.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IDOrder,Address,Status,DateOrder,IDCus")] DONHANG donHang)
+        public ActionResult Create([Bind(Include = "MaDonHang,DiaChi,TrangThai,NgayDat,ID")] DONHANG donHang)
         {
             if (ModelState.IsValid)
             {
@@ -70,7 +96,7 @@ namespace BookStoreOnline.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IDCus = new SelectList(db.KHACHHANGs, "ID", "NameKHACHHANGs", donHang.ID);
+            ViewBag.IDCus = new SelectList(db.KHACHHANGs, "ID", "Ten", donHang.ID);
             return View(donHang);
         }
 
@@ -86,7 +112,7 @@ namespace BookStoreOnline.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.IDCus = new SelectList(db.KHACHHANGs, "ID", "NameKHACHHANGs", donHang.ID);
+            ViewBag.IDCus = new SelectList(db.KHACHHANGs, "ID", "Ten", donHang.ID);
             return View(donHang);
         }
 
@@ -95,7 +121,7 @@ namespace BookStoreOnline.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IDOrder,Address,Status,DateOrder,IDCus")] DONHANG donHang)
+        public ActionResult Edit([Bind(Include = "MaDonHang,DiaChi,TrangThai,NgayDat,ID")] DONHANG donHang)
         {
             if (ModelState.IsValid)
             {
@@ -103,7 +129,7 @@ namespace BookStoreOnline.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.IDCus = new SelectList(db.KHACHHANGs, "ID", "NameKHACHHANGs", donHang.ID);
+            ViewBag.IDCus = new SelectList(db.KHACHHANGs, "ID", "Ten ", donHang.ID);
             return View(donHang);
         }
 
@@ -144,7 +170,7 @@ namespace BookStoreOnline.Areas.Admin.Controllers
         public ActionResult ConfirmOrder(int id)
         {
             var order = db.DONHANGs.FirstOrDefault(item => item.MaDonHang == id);
-            order.TrangThai = 1;
+            order.TrangThai = StatusOrder.Informed.ToString();
             db.SaveChanges();
             return RedirectToAction("Index");
         }

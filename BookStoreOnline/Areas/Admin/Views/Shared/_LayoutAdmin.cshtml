@@ -73,10 +73,10 @@
                     <span>Tài khoản người dùng</span>
                 </a>
             </li>
-                <hr class="sidebar-divider my-0">
-                <div class="sidebar-heading">
-                    Đơn hàng
-                </div>
+            <hr class="sidebar-divider my-0">
+            <div class="sidebar-heading">
+                Đơn hàng
+            </div>
 
             <li class="nav-item">
                 <a class="nav-link" href="/Admin/OrdersAdmin/Index">
@@ -86,23 +86,53 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="/Admin/OrdersAdmin?status=1">
+                <a class="nav-link" href="/Admin/OrdersAdmin/Index?status=0">
                     <i class="fas fa-list"></i>
-                    <span>Đơn hàng đã giao</span>
+                    <span>Đơn hàng chưa xác nhận</span>
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="/Admin/OrdersAdmin?status=0">
+                <a class="nav-link" href="/Admin/OrdersAdmin/Index?status=1">
                     <i class="fas fa-list"></i>
-                    <span>Đơn hàng chưa giao</span>
+                    <span>Đơn hàng đã xác nhận</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/Admin/OrdersAdmin/Index?status=2">
+                    <i class="fas fa-list"></i>
+                    <span>Đơn hàng đang giao</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/Admin/OrdersAdmin/Index?status=3">
+                    <i class="fas fa-list"></i>
+                    <span>Đơn hàng giao thành công</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/Admin/OrdersAdmin/Index?status=4">
+                    <i class="fas fa-list"></i>
+                    <span>Đơn hàng đã hủy</span>
+                </a>
+            </li> 
             <hr class="sidebar-divider my-0">
             <hr class="sidebar-divider">
+
+
+            <div class="sidebar-heading">
+                Khuyến Mãi
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/Admin/Promotion/Index">
+                    <i class="fas fa-list"></i>
+                    <span>Mã Khuyến Mãi</span>
+                </a>
+            </li>
             <!-- Heading -->
             <div class="sidebar-heading">
-               Thông kê
+                Thông kê
             </div>
 
             <li class="nav-item">

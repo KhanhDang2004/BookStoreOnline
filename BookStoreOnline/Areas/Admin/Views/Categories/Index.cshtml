@@ -26,9 +26,11 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Tenloai)
                     </td>
-                    <td >
-                        <a href="@Url.Action("Edit", new { id = item.Maloai})" class="btn btn-sm btn-warning">Chỉnh sửa</a> |
+                    <td>
+                        <div style="display: flex; justify-content: flex-end;">
+                        <a href="@Url.Action("Edit", new { id = item.Maloai})" class="btn btn-sm btn-warning">Chỉnh sửa</a> 
                         <a href="@Url.Action("Delete", new { id = item.Maloai })" class="btn btn-sm btn-danger">Xóa</a>
+                            </div>
                     </td>
                 </tr>
             }

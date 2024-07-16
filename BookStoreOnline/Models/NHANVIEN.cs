@@ -24,7 +24,7 @@ namespace BookStoreOnline.Models
         public int MaNV { get; set; }
         public string Email { get; set; }
         public string MatKhau { get; set; }
-        public int Quyen { get; set; }
+        public string Quyen { get; set; }
         public string Ten { get; set; }
         public Nullable<System.DateTime> NgayTao { get; set; }
         public Nullable<bool> TrangThai { get; set; }

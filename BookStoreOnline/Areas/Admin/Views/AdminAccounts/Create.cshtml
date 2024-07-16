@@ -34,8 +34,8 @@
         <input type="text" class="form-control" value="123456789" readonly="readonly" />
     </div>
     <div class="mb-3">
-        <label for="Role" class="form-label">Quyền hạn</label>
-        @Html.DropDownListFor(model => model.Quyen, (SelectList)ViewBag.Role, "Chọn quyền hạn", new { @class = "form-control" })
+        <label for="Role" class="form-label">Quyền hạn</label> 
+        @Html.DropDownListFor(model => model.Quyen, (SelectList)ViewBag.Quyen, "Chọn quyền hạn", new { @class = "form-control" })
         @Html.ValidationMessageFor(model => model.Quyen, "", new { @class = "text-danger" })
     </div>
 

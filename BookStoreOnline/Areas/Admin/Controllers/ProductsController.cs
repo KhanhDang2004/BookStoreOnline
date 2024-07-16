@@ -66,7 +66,7 @@ namespace BookStoreOnline.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CategoryID = new SelectList(db.LOAIs, "CategoryID", "CategoryName", sanPham.MaLoai);
+            ViewBag.CategoryID = new SelectList(db.LOAIs, "MaLoai", "TenLoai", sanPham.MaLoai);
             return View(sanPham);
         }
 
@@ -82,7 +82,7 @@ namespace BookStoreOnline.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryID = new SelectList(db.LOAIs, "CategoryID", "CategoryName", sanPham.MaLoai);
+            ViewBag.MaLoai = new SelectList(db.LOAIs, "MaLoai", "TenLoai", sanPham.MaLoai);
             return View(sanPham);
         }
 
@@ -91,7 +91,7 @@ namespace BookStoreOnline.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductID,ProductName,Price,Introduce,Author,ImageProd,CategoryID")] SANPHAM sanPham, HttpPostedFileBase imageBook)
+        public ActionResult Edit([Bind(Include = "MaSanPham,TenSanPham,Gia,MoTa,TacGia,Anh,MaLoai")] SANPHAM sanPham, HttpPostedFileBase imageBook)
         {
             if (ModelState.IsValid)
             {
@@ -107,7 +107,7 @@ namespace BookStoreOnline.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CategoryID = new SelectList(db.LOAIs, "CategoryID", "CategoryName", sanPham.MaLoai);
+            ViewBag.MaLoai = new SelectList(db.LOAIs, "MaLoai", "TenLoai", sanPham.MaLoai);
             return View(sanPham);
         }
 

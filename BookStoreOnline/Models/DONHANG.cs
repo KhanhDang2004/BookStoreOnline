@@ -22,11 +22,11 @@ namespace BookStoreOnline.Models
     
         public int MaDonHang { get; set; }
         public string DiaChi { get; set; }
-        public Nullable<int> TrangThai { get; set; }
+        public string TrangThai { get; set; }
         public Nullable<System.DateTime> NgayDat { get; set; }
         public Nullable<int> ID { get; set; }
-        public int TrangThaiThanhToan { get; set; }
-        public int PhuongThucThanhToan { get; set; }
+        public string TrangThaiThanhToan { get; set; }
+        public string PhuongThucThanhToan { get; set; }
         public int TongTien { get; set; }
         public string MaKM { get; set; }
         public Nullable<int> MaNVXuLy { get; set; }

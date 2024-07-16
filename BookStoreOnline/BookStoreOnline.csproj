@@ -143,6 +143,7 @@
     <Compile Include="Areas\Admin\Controllers\AuthController.cs" />
     <Compile Include="Areas\Admin\Controllers\OrdersAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PromotionController.cs" />
     <Compile Include="Areas\Admin\Models\LoginViewModel.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
@@ -159,47 +160,49 @@
     </Compile>
     <Compile Include="Models\CartItem.cs" />
     <Compile Include="Models\CHITIETDONHANG.cs">
-      <DependentUpon>NhaSachEntities.tt</DependentUpon>
+      <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Custom\DanhGiaContent.cs" />
+    <Compile Include="Models\Custom\DanhGiaItem.cs" />
     <Compile Include="Models\DANHGIA.cs">
-      <DependentUpon>NhaSachEntities.tt</DependentUpon>
+      <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DONHANG.cs">
-      <DependentUpon>NhaSachEntities.tt</DependentUpon>
+      <DependentUpon>Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Entities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Entities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Entities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\KHACHHANG.cs">
-      <DependentUpon>NhaSachEntities.tt</DependentUpon>
+      <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\KHUYENMAI.cs">
-      <DependentUpon>NhaSachEntities.tt</DependentUpon>
+      <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LOAI.cs">
-      <DependentUpon>NhaSachEntities.tt</DependentUpon>
+      <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\NHANVIEN.cs">
-      <DependentUpon>NhaSachEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\NhaSachEntities.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NhaSachEntities.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\NhaSachEntities.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NhaSachEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\NhaSachEntities.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NhaSachEntities.edmx</DependentUpon>
+      <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PaypalConfiguration.cs" />
     <Compile Include="Models\SANPHAM.cs">
-      <DependentUpon>NhaSachEntities.tt</DependentUpon>
+      <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>NhaSachEntities.tt</DependentUpon>
+      <DependentUpon>Entities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -239,6 +242,7 @@
     <Content Include="Content\AdminAssets\login-assets\js\owl.carousel.min.js" />
     <Content Include="Content\css\header.css" />
     <Content Include="Content\css\view-product.css" />
+    <Content Include="Content\Img\Picture1.txt" />
     <Content Include="Content\style.css" />
     <Content Include="Content\styles.css" />
     <Content Include="favicon.ico" />
@@ -259,15 +263,15 @@
     <Content Include="Images\prod2.jpg" />
     <Content Include="Images\slide2.jpg" />
     <Content Include="Images\tai-chinh-hanh-vi.jpg" />
-    <Content Include="Models\NhaSachEntities.Context.tt">
+    <Content Include="Models\Entities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>NhaSachEntities.edmx</DependentUpon>
-      <LastGenOutput>NhaSachEntities.Context.cs</LastGenOutput>
+      <DependentUpon>Entities.edmx</DependentUpon>
+      <LastGenOutput>Entities.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\NhaSachEntities.tt">
+    <Content Include="Models\Entities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>NhaSachEntities.edmx</DependentUpon>
-      <LastGenOutput>NhaSachEntities.cs</LastGenOutput>
+      <DependentUpon>Entities.edmx</DependentUpon>
+      <LastGenOutput>Entities.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -298,13 +302,6 @@
     <Content Include="Areas\Admin\Views\AdminAccounts\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ControlUser\DisableAccount.cshtml" />
     <Content Include="Areas\Admin\Views\AdminAccounts\DisableAccount.cshtml" />
-    <EntityDeploy Include="Models\NhaSachEntities.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>NhaSachEntities.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\NhaSachEntities.edmx.diagram">
-      <DependentUpon>NhaSachEntities.edmx</DependentUpon>
-    </Content>
     <Content Include="Areas\Admin\Views\Auth\Login.cshtml" />
     <Content Include="Content\AdminAssets\login-assets\fonts\et-line.eot" />
     <Content Include="Content\AdminAssets\login-assets\fonts\et-line.ttf" />
@@ -335,6 +332,16 @@
     <Content Include="Content\AdminAssets\login-assets\js\bootstrap.esm.min.js.map" />
     <Content Include="Content\AdminAssets\login-assets\js\bootstrap.js.map" />
     <Content Include="Content\AdminAssets\login-assets\js\bootstrap.min.js.map" />
+    <Content Include="Areas\Admin\Views\Promotion\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Promotion\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminAccounts\EnableAccount.cshtml" />
+    <EntityDeploy Include="Models\Entities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Entities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Entities.edmx.diagram">
+      <DependentUpon>Entities.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -377,8 +384,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Views\PaypalConfiguration\" />
+    <Folder Include="Areas\Admin\Data\" /> 
+    <Folder Include="Views\PaypalConfiguration\" /> 
+    <Folder Include="Areas\Admin\Views\Default\" /> 
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
