@@ -34,5 +34,6 @@ namespace BookStoreOnline.Models
         public virtual DbSet<NHANVIEN> NHANVIENs { get; set; }
         public virtual DbSet<SANPHAM> SANPHAMs { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public object SANPHAM { get; internal set; }
     }
 }

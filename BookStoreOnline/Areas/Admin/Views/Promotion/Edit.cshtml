@@ -1,14 +1,14 @@
 ﻿@model BookStoreOnline.Models.KHUYENMAI
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Edit";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <div class="card-body">
-    <h2>Thêm mã giảm giá mới</h2>
+    <h2>Chỉnh sửa mã giảm giá</h2>
 </div>
-@using (Html.BeginForm("Create", "Promotion", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Edit", "Promotion", FormMethod.Post, new { @enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -80,7 +80,7 @@
 
         <div class="d-flex justify-content-between align-items-center">
             @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn btn-secondary", style = "color: white !important;" })
-            <button type="submit" class="btn btn-primary" style="color: white !important;">Thêm</button>
+            <button type="submit" class="btn btn-primary" style="color: white !important;">Lưu thay đổi</button>
         </div>
     </div>
 }

@@ -9,6 +9,7 @@
 
 namespace BookStoreOnline.Models
 {
+    using BookStoreOnline.Models.Home;
     using System;
     using System.Collections.Generic;
     
@@ -31,6 +32,7 @@ namespace BookStoreOnline.Models
         public int SoLuongBan { get; set; }
         public int SoLuong { get; set; }
         public Nullable<int> MaNVTao { get; set; }
+        public Nullable<System.DateTime> NgayTao { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CHITIETDONHANG> CHITIETDONHANGs { get; set; }
@@ -38,5 +40,10 @@ namespace BookStoreOnline.Models
         public virtual ICollection<DANHGIA> DANHGIAs { get; set; }
         public virtual LOAI LOAI { get; set; }
         public virtual NHANVIEN NHANVIEN { get; set; }
+
+        public static implicit operator SANPHAM(SanPhamHome v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

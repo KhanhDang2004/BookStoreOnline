@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BookStoreOnline.Areas.Admin.Models;
-using BookStoreOnline.Models; 
-using PayPal.Api; 
-using static BookStoreOnline.Areas.Admin.Constants.Constants; 
+using BookStoreOnline.Models;
+using PayPal.Api;
+using static BookStoreOnline.Areas.Admin.Constants.Constants;
 
 namespace BookStoreOnline.Controllers
 {
@@ -98,7 +98,7 @@ namespace BookStoreOnline.Controllers
             return totalPrice;
         }
 
-        
+
 
         public ActionResult GetCartInfo()
         {
@@ -163,7 +163,7 @@ namespace BookStoreOnline.Controllers
             return RedirectToAction("Index/" + khachHangDaDangNhap.MaKH, "Order");
         }
 
-        public ActionResult FailureView() 
+        public ActionResult FailureView()
         {
             return View();
         }
@@ -302,7 +302,54 @@ namespace BookStoreOnline.Controllers
             // Create a payment using a APIContext  
             return this.payment.Create(apiContext);
         }
+        [HttpPost]
+        public JsonResult ApplyDiscount(string discountCode)
+        {
+            // Dummy logic to calculate new total price
+            KHUYENMAI kMai = db.KHUYENMAIs.FirstOrDefault(x => x.MaKM == discountCode);
+            bool status = false;
+            string errorMessage = string.Empty;
+            decimal newTotalPrice = default;
+            decimal discountAmount = default;
+            if (kMai == null)
+            {
+                status = false;
+                errorMessage = "Mã KM này không tồn tại";
+            }
+            else
+            {
+                var khachHangDaDangNhap = (KHACHHANG)Session["TaiKhoan"];
+                List<DONHANG> donHang = db.DONHANGs.Where(x => x.ID == khachHangDaDangNhap.MaKH && x.MaKM == discountCode).ToList();
+                if (donHang.Count >= kMai.SoLanDung)
+                {
+                    status = false;
+                    errorMessage = "Khách hàng đã đạt quá số lần dùng mã";
+                }
+                else
+                {
+                    decimal totalOrder = GetTotalPrice();
+                    if (kMai.SoTienMuaHangToiThieu > totalOrder)
+                    {
+                        status = false;
+                        errorMessage = $"Gía trị đơn hàng chưa đủ yêu cầu dùng mã. Tối thiểu phải là: {kMai.SoTienMuaHangToiThieu}";
+                    }
+                    else
+                    {
+                        status = true;
+                        newTotalPrice = totalOrder - kMai.SoTienKM;
+                        discountAmount = kMai.SoTienKM;
+                    }
+                };
+            }
+            return Json(new
+            {
+                success = status,
+                newTotalPrice,
+                discountAmount,
+                errorMessage
+            });
 
+        }
 
     }
 }

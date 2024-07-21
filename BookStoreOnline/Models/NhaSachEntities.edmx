@@ -101,6 +101,7 @@
           <Property Name="SoLuongBan" Type="int" Nullable="false" />
           <Property Name="SoLuong" Type="int" Nullable="false" />
           <Property Name="MaNVTao" Type="int" />
+          <Property Name="NgayTao" Type="datetime" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -367,6 +368,7 @@ warning 6035: The relationship 'FK_DONHANG_KHUYENMAI' has columns that are not p
           <Property Name="SoLuongBan" Type="Int32" Nullable="false" />
           <Property Name="SoLuong" Type="Int32" Nullable="false" />
           <Property Name="MaNVTao" Type="Int32" />
+          <Property Name="NgayTao" Type="DateTime" Precision="3" />
           <NavigationProperty Name="CHITIETDONHANGs" Relationship="Self.FK_Chitietdonhang_Sanpham" FromRole="SANPHAM" ToRole="CHITIETDONHANG" />
           <NavigationProperty Name="DANHGIAs" Relationship="Self.FK_DANHGIA_SANPHAM" FromRole="SANPHAM" ToRole="DANHGIA" />
           <NavigationProperty Name="LOAI" Relationship="Self.FK_Sanpham_Theloai" FromRole="SANPHAM" ToRole="LOAI" />
@@ -629,6 +631,7 @@ warning 6035: The relationship 'FK_DONHANG_KHUYENMAI' has columns that are not p
                 <ScalarProperty Name="SoLuongBan" ColumnName="SoLuongBan" />
                 <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
                 <ScalarProperty Name="MaNVTao" ColumnName="MaNVTao" />
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
