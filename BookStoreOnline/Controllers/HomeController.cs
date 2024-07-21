@@ -16,5 +16,21 @@ namespace BookStoreOnline.Controllers
             var book = db.SANPHAMs.ToList().Take(8);
             return View(book);
         }
+        public ActionResult TopSeller()
+        {
+            var topseller = db.SANPHAMs
+             .OrderByDescending(p => p.SoLuongBan)
+             .Take(4)
+             .ToList();
+            return View(topseller);
+        }
+        public ActionResult NewBook()
+        {
+            var newBook = db.SANPHAMs
+             .OrderByDescending(p => p.NgayTao)
+             .Take(3)
+             .ToList();
+            return View(newBook);
+        }
     }
 }

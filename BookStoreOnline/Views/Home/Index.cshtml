@@ -92,21 +92,21 @@
 </div>
 
 <div class="container body-page mt-5">
-    <h3>Sách hay tuyển chọn</h3>
+    <h3>Sách được bán chạy </h3>
     <hr />
     <div class="row">
-        @foreach (var item in Model)
+        @foreach (var product in Model.OrderByDescending(p => p.SoLuongBan).Take(4).ToList())
         {
             <div class="col-lg-3 col-md-4 col-sm-6 prod-item">
                 <div class="card">
-                    <a href="@Url.Action("Index", "ProductDetail", new { id = item.MaSanPham })">
-                        <img class="card-img-top" src="~/Images/@item.Anh" alt="@item.TenSanPham">
+                    <a href="@Url.Action("Index", "ProductDetail", new {id=product.MaSanPham})">
+                        <img class="card-img-top" src="~/Images/@product.Anh" alt="@product.TenSanPham">
                     </a>
                     <div class="card-body">
-                        <a href="@Url.Action("Index", "ProductDetail", new { id = item.MaSanPham })" class="title-prod">
-                            <h5 class="card-title">@item.TenSanPham</h5>
+                        <a href="@Url.Action("Index", "ProductDetail", new { id = product.MaSanPham})" class="title-prod">
+                            <h5 class="card-title">@product.TenSanPham</h5>
                         </a>
-                        <h5 style="color: darkred;">@String.Format(price, "{0:c0}", item.Gia)</h5>
+                        <!--<h5 style="color: darkred;">@String.Format(price, "{0:c0}", product.Gia)</h5>-->
                         @*<p class="card-text rating-card">
                             <i class="bi bi-star-fill"></i>
                             <i class="bi bi-star-fill"></i>
@@ -118,13 +118,13 @@
                         <div class="mt-auto d-flex justify-content-between w-100">
                             @if (user != null)
                             {
-                                <a href="@Url.Action("AddSingleProduct", "Cart", new { id = item.MaSanPham })" class="btn btn-primary me-1">Mua</a>
+                                <a href="@Url.Action("AddSingleProduct", "Cart", new { id = product.MaSanPham })" class="btn btn-primary me-1">Mua</a>
                             }
                             else
                             {
                                 <a href="@Url.Action("Login", "User")" class="btn btn-primary">Mua</a>
                             }
-                            <a href="@Url.Action("Index", "ProductDetail", new { id = item.MaSanPham })" class="btn btn-outline-secondary">
+                            <a href="@Url.Action("Index", "ProductDetail", new { id = product.MaSanPham })" class="btn btn-outline-secondary">
                                 <i class="bi bi-eye"></i> Xem chi tiết
                             </a>
 
@@ -133,7 +133,82 @@
                 </div>
             </div>
         }
+
     </div>
+</div>
+
+<div class="container body-page mt-5">
+    <h3>Sách mới nhập về </h3>
+    <hr />
+    <div class="row">
+        @foreach (var product in Model.OrderByDescending(p => p.NgayTao).Take(4).ToList())
+        {
+            <div class="col-lg-3 col-md-4 col-sm-6 prod-item">
+                <div class="card">
+                    <a href="@Url.Action("Index", "ProductDetail", new {id=product.MaSanPham})">
+                        <img class="card-img-top" src="~/Images/@product.Anh" alt="@product.TenSanPham">
+                    </a>
+                    <div class="card-body">
+                        <a href="@Url.Action("Index", "ProductDetail", new { id = product.MaSanPham})" class="title-prod">
+                            <h5 class="card-title">@product.TenSanPham</h5>
+                        </a>
+      
+                        <div class="mt-auto d-flex justify-content-between w-100">
+                            @if (user != null)
+                            {
+                                <a href="@Url.Action("AddSingleProduct", "Cart", new { id = product.MaSanPham })" class="btn btn-primary me-1">Mua</a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("Login", "User")" class="btn btn-primary">Mua</a>
+                            }
+                            <a href="@Url.Action("Index", "ProductDetail", new { id = product.MaSanPham })" class="btn btn-outline-secondary">
+                                <i class="bi bi-eye"></i> Xem chi tiết
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+<div class="container body-page mt-5">
+    <h3>Tất cả loại sách</h3>
+    <hr />
+    <div class="row">
+        @foreach (var product in Model.OrderByDescending(p => p.NgayTao).Take(4))
+        {
+            <div class="col-lg-3 col-md-4 col-sm-6 prod-item">
+                <div class="card">
+                    <a href="@Url.Action("Index", "ProductDetail", new { id = product.MaSanPham })">
+                        <img class="card-img-top" src="~/Images/@product.Anh" alt="@product.TenSanPham">
+                    </a>
+                    <div class="card-body">
+                        <a href="@Url.Action("Index", "ProductDetail", new { id = product.MaSanPham })" class="title-prod">
+                            <h5 class="card-title">@product.TenSanPham</h5>
+                        </a>
+                        <div class="mt-auto d-flex justify-content-between w-100">
+                            @if (user != null)
+                            {
+                                <a href="@Url.Action("AddSingleProduct", "Cart", new { id = product.MaSanPham })" class="btn btn-primary me-1">Mua</a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("Login", "User")" class="btn btn-primary">Mua</a>
+                            }
+                            <a href="@Url.Action("Index", "ProductDetail", new { id = product.MaSanPham })" class="btn btn-outline-secondary">
+                                <i class="bi bi-eye"></i> Xem chi tiết
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
 
     <div class="row justify-content-center mt-4">
         <a href="@Url.Action("GetAllBook", "Category")" class="see-more">

@@ -108,39 +108,123 @@
             </table>
         </div>
     </div>
-
     <hr />
-
-
     @using (Html.BeginForm("InsertOrder", "Cart", FormMethod.Post, new { @class = "checkout-form" }))
     {
         <div class="row infor-order mt-3">
             <div class="col-lg-6">
                 <h5 class="address-title">Địa chỉ giao hàng</h5>
                 <textarea name="address" placeholder="Nhập địa chỉ giao hàng" rows="4" class="form-control" required></textarea>
+
+                <h5 class="mt-3">Phương thức thanh toán</h5>
+                <select id="paymentMethod" name="paymentMethod" class="form-control" required onchange="togglePaymentButton()">
+                    <option value="">Chọn phương thức thanh toán</option>
+                    <option value="cod">Thanh toán khi nhận hàng (COD)</option>
+                    <option value="paypal">Chuyển khoản ngân hàng</option>
+                </select>
+
+                <h5 class="mt-3">Mã giảm giá</h5>
+                <div class="input-group">
+                    <input type="text" name="discountCode" id="discountCode" placeholder="Nhập mã giảm giá" class="form-control">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-secondary" onclick="applyDiscountCode()">Áp dụng</button>
+                    </div>
+                </div>
+                <div id="discountError" class="text-danger mt-2" style="display: none;"></div>
             </div>
             <div class="col-lg-6">
-                <table class="table">
-                    <tr>
-                        <td>Số lượng sản phẩm</td>
-                        <td>@ViewBag.TotalNumber</td>
-                    </tr>
-                    <tr>
-                        <td>Tổng giá</td>
-                        <td><h4>@String.Format(price, "{0:c0}", ViewBag.TotalPrice)</h4></td>
-                    </tr>
-                </table>
-                <button type="submit" class="btn btn-primary btn-lg btn-block">Đặt hàng</button>
+                <div class="card shadow">
+                    <div class="card-body">
+                        <table class="table table-borderless">
+                            <tr>
+                                <td>Số lượng sản phẩm</td>
+                                <td class="text-right">@ViewBag.TotalNumber</td>
+                            </tr>
+                            <tr id="discountRow" style="display: none;">
+                                <td>Giảm giá</td>
+                                <td class="text-right"><h4 id="discountAmount"></h4></td>
+                            </tr>
+                            <tr>
+                                <td>Tổng giá</td>
+                                <td class="text-right"><h4 id="totalPrice">@String.Format("{0:N0} ₫", ViewBag.TotalPrice)</h4></td>
+                            </tr>
+
+                        </table>
+                        <div id="codButton" class="my-3">
+                            <button id="submitButton" type="submit" class="btn btn-primary btn-lg btn-block" disabled>Đặt hàng</button>
+                        </div>
+                        <div id="paypalButton" style="display: none;">
+                            <a href="/cart/PaymentWithPayPal" class="btn btn-success btn-lg btn-block" id="paypalLink">Thanh toán bằng PayPal</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
     }
-    <tr>
-        <td style="border-top:none; text-align:right; font-size:30px;" colspan="10"><a href="/cart/PaymentWithPayPal" class="btn-success">Thanh toán bằng paypal</a></td>
-    </tr>
-</div>
+
 </div>
 
 <script>
-    $("#new-title").setVal
+    if (typeof jQuery !== 'undefined') {
+        console.log('jQuery is loaded!');
+    } else {
+        console.log('jQuery is not loaded!');
+    }
+    function togglePaymentButton() {
+        var paymentMethod = document.getElementById("paymentMethod").value;
+        var codButton = document.getElementById("codButton");
+        var paypalButton = document.getElementById("paypalButton");
+        var submitButton = document.getElementById("submitButton");
 
+        if (paymentMethod === "cod") {
+            codButton.style.display = "block";
+            paypalButton.style.display = "none";
+            submitButton.disabled = false;
+        } else if (paymentMethod === "paypal") {
+            codButton.style.display = "none";
+            paypalButton.style.display = "block";
+            submitButton.disabled = true;
+        } else {
+            codButton.style.display = "block";
+            paypalButton.style.display = "none";
+            submitButton.disabled = true;
+        }
+    }
+
+    // Ensure the button is disabled initially if no payment method is selected
+    document.addEventListener("DOMContentLoaded", function () {
+        togglePaymentButton();
+    })
+
+    function applyDiscountCode() {
+        var discountCode = $('#discountCode').val();
+
+        $.ajax({
+            url: '/cart/ApplyDiscount',  // Your server endpoint to apply the discount code
+            type: 'POST',
+            data: {
+                discountCode: discountCode
+            },
+            success: function (response) {
+                console.log("OK");
+                console.log(response);
+                if (response.success) {
+                    $('#totalPrice').html(response.newTotalPrice + ' ₫');
+                    if (response.discountAmount) {
+                        $('#discountRow').show();
+                        $('#discountAmount').html(response.discountAmount + ' ₫');
+                    } else {
+                        $('#discountRow').hide();
+                    }
+                    $('#discountError').hide();
+                } else {
+                    $('#discountError').text(response.errorMessage).show();
+                }
+            },
+            error: function () {
+                $('#discountError').text('Failed to apply discount. Please try again.').show();
+            }
+        });
+    }
 </script>
