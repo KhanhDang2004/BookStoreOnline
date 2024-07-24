@@ -99,5 +99,36 @@ namespace BookStoreOnline.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+
+        public ActionResult EnableAccount(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            KHACHHANG khachHanh = db.KHACHHANGs.Find(id);
+            if (khachHanh == null)
+            {
+                return HttpNotFound();
+            }
+            return View(khachHanh);
+        }
+
+        [HttpPost, ActionName("EnableAccount")]
+        [ValidateAntiForgeryToken]
+        public ActionResult EnableAccountAccountConfirmed(int id)
+        {
+            KHACHHANG khachHanh = db.KHACHHANGs.Find(id);
+            if (khachHanh == null)
+            {
+                return HttpNotFound();
+            }
+
+            khachHanh.TrangThai = true; // Assuming there is a property 'IsActive' in the AdminAccount model to indicate if the account is active or not
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
     }
 }

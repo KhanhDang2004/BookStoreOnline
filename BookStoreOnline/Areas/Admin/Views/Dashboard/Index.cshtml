@@ -1,33 +1,140 @@
-﻿
+﻿﻿
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-<script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
-@*<script type="text/javascript">
 
-    window.onload = function () {
-     var activities = @Html.Raw(Json.Encode(Model));
-        var lstData = [];
-        for (var i = 0; i < activities.length; i++) {
-            var item = activities[i];
-            lstData.push(
-                { label: item.label, y: item.value }
-            )
-        }
-        var chart = new CanvasJS.Chart("chartContainer", {
-            title: {
-                text: "BIEU DO LUOT XEM CAC BAI VIET"
-            },
-            data: [
-                {
-                    type: "column",
-                    dataPoints: lstData
+<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+      rel="stylesheet">
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Thống kê thu nhập 7 ngày gần nhất</h6>
+    </div>
+    <div class="card-body">
+        <div class="chart-bar">
+            <canvas id="myBarChart"></canvas>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Bootstrap core JavaScript-->
+<script src="~/Content/AdminAssets/vendor/jquery/jquery.min.js"></script>
+<script src="~/Content/AdminAssets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="~/Content/AdminAssets/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+
+<!-- Page level plugins -->
+<script src="~/Content/AdminAssets/vendor/chart.js/Chart.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="~/Content/AdminAssets/js/demo/chart-bar-demo.js"></script>
+
+
+<script>
+    var chartData = @Html.Raw(Json.Encode(ViewBag.ChartData));
+
+    //chartData = [
+    //    { label: "24/7/2024", value = 100000 },
+    //    { label: "23/7/2024", value = 500000 }
+    //]
+
+    // Tạo các mảng cho labels và data từ dữ liệu chartData
+    var labels = chartData.map(function (data) { return data.Label; });
+
+    //labels = ["24/7/2024", "23/7/2024", "22/7/2024"]
+
+
+    var dataValues = chartData.map(function (data) { return data.Value; });
+
+    //dataValues = [100000, 100000, 100000]
+
+    var maxValue = Math.max(...dataValues);
+
+    var ctx = document.getElementById("myBarChart").getContext('2d');
+    var myBarChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels, // Sử dụng mảng labels từ dữ liệu
+            datasets: [{
+                label: "Revenue",
+                backgroundColor: "#4e73df",
+                hoverBackgroundColor: "#2e59d9",
+                borderColor: "#4e73df",
+                data: dataValues, // Sử dụng mảng dataValues từ dữ liệu
+            }],
+        },
+        options: {
+            maintainAspectRatio: false,
+            layout: {
+                padding: {
+                    left: 10,
+                    right: 25,
+                    top: 25,
+                    bottom: 0
                 }
-            ]
-        });
-        console.log(lstData);
-        chart.render();
-    }
-</script>*@
-<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+            },
+            scales: {
+                xAxes: [{
+                    time: {
+                        unit: 'day' // Thay đổi unit phù hợp với dữ liệu của bạn
+                    },
+                    gridLines: {
+                        display: false,
+                        drawBorder: false
+                    },
+                    ticks: {
+                        maxTicksLimit: 7 // Tùy chỉnh số lượng nhãn trên trục x
+                    },
+                    maxBarThickness: 25,
+                }],
+                yAxes: [{
+                    ticks: {
+                        min: 0,
+                        max: maxValue,
+                        maxTicksLimit: 5,
+                        padding: 10,
+                        // Include a dollar sign in the ticks
+                        callback: function (value, index, values) {
+                            return value.toLocaleString() + " VNĐ";
+                        }
+                    },
+                    gridLines: {
+                        color: "rgb(234, 236, 244)",
+                        zeroLineColor: "rgb(234, 236, 244)",
+                        drawBorder: false,
+                        borderDash: [2],
+                        zeroLineBorderDash: [2]
+                    }
+                }],
+            },
+            legend: {
+                display: false
+            },
+            tooltips: {
+                titleMarginBottom: 10,
+                titleFontColor: '#6e707e',
+                titleFontSize: 14,
+                backgroundColor: "rgb(255,255,255)",
+                bodyFontColor: "#858796",
+                borderColor: '#dddfeb',
+                borderWidth: 1,
+                xPadding: 15,
+                yPadding: 15,
+                displayColors: false,
+                caretPadding: 10,
+                callbacks: {
+                    label: function (tooltipItem, chart) {
+                        var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                        return datasetLabel + " " + tooltipItem.yLabel.toLocaleString() + ' VNĐ';
+                    }
+                }
+            },
+        }
+    });
+
+</script>
