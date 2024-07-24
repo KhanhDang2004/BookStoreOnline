@@ -45,15 +45,23 @@
                 @*<button class="btn btn-success">
             @Html.ActionLink("Sửa", "Edit", new { id = item.MaNguoiDung }, new { @style = "color:white;" })
         </button>*@
-                <button class="btn btn-primary">
-                    @Html.ActionLink("Reset mật khẩu ", "ResetPassword", new { id = item.MaKH }, new { @style = "color:white;" })
-                </button>
-                <button class="btn btn-warning">
-                    @Html.ActionLink("Vô hiệu hóa", "DisableAccount", new { id = item.MaKH }, new { @style = "color:white;" })
-                </button>
+
+                <div class="col">
+
+                    <a href="@Url.Action("ResetPassword", new { id = item.MaKH })" class="btn btn-sm btn-warning">Reset mật khẩu</a>
+
+                    @if (item.TrangThai == true)
+                    {
+                        <a href="@Url.Action("DisableAccount", new { id = item.MaKH })" class="btn btn-sm btn-success">Vô hiệu hóa</a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("EnableAccount", new { id = item.MaKH })" class="btn btn-sm btn-danger">Kích hoạt</a>
+                    }
+                </div>
                 @*<button class="btn btn-danger">
-                    @Html.ActionLink("Xóa", "Delete", new { id = item.MaKH }, new { @style = "color:white;" })
-                </button>*@
+            @Html.ActionLink("Xóa", "Delete", new { id = item.MaKH }, new { @style = "color:white;" })
+        </button>*@
             </td>
         </tr>
     }
