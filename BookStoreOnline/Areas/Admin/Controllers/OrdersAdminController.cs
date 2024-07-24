@@ -64,14 +64,8 @@ namespace BookStoreOnline.Areas.Admin.Controllers
         {
             var detail = db.CHITIETDONHANGs.Where(d => d.MaDonHang == id).ToList();
             ViewBag.Detail = detail;
-
-            decimal total = 0;
-            foreach (var item in detail)
-            {
-                //total += item.UnitPrice.GetValueOrDefault();
-            }
-            ViewBag.Total = total;
             var order = db.DONHANGs.FirstOrDefault(d => d.MaDonHang == id);
+            ViewBag.Total = order.TongTien;
             return View(order);
         }
 
@@ -171,6 +165,27 @@ namespace BookStoreOnline.Areas.Admin.Controllers
         {
             var order = db.DONHANGs.FirstOrDefault(item => item.MaDonHang == id);
             order.TrangThai = StatusOrder.Informed.ToString();
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public ActionResult CancelOrder(int id)
+        {
+            var order = db.DONHANGs.FirstOrDefault(item => item.MaDonHang == id);
+            order.TrangThai = StatusOrder.Canceled.ToString();
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public ActionResult Shipping(int id)
+        {
+            var order = db.DONHANGs.FirstOrDefault(item => item.MaDonHang == id);
+            order.TrangThai = StatusOrder.Shipping.ToString();
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public ActionResult ShippingSuccess(int id)
+        {
+            var order = db.DONHANGs.FirstOrDefault(item => item.MaDonHang == id);
+            order.TrangThai = StatusOrder.Received.ToString();
             db.SaveChanges();
             return RedirectToAction("Index");
         }

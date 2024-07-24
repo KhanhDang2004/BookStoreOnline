@@ -1,5 +1,4 @@
-﻿@model IEnumerable<BookStoreOnline.Models.DONHANG>
-
+﻿@model IEnumerable<BookStoreOnline.Models.DONHANG> 
 <div class="container body-page mt-4">
     <div class="card shadow-sm">
         <div class="card-header bg-primary text-white">
@@ -12,6 +11,7 @@
                         <th>Tên khách hàng</th>
                         <th>Ngày đặt</th>
                         <th>Địa chỉ giao hàng</th>
+                        <th>Giá trị đơn hàng</th>
                         <th>Trạng thái</th>
                     </tr>
                 </thead>
@@ -28,13 +28,20 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.DiaChi)
                             </td>
-                            @if (item.TrangThai == 0)
+                            <td>
+                                @{
+                                    var culture = new System.Globalization.CultureInfo("vi-VN");
+                                    var formattedValue = item.TongTien.ToString("C0", culture);
+                                }
+                                @formattedValue
+                            </td>
+                            @if (item.TrangThai == "Received")
                             {
-                                <td class="text-danger">Chưa gửi</td>
+                                <td class="text-success">Đã nhận</td>
                             }
                             else
                             {
-                                <td class="text-success">Đã gửi</td>
+                                <td class="text-danger">Đang xử lý</td>
                             }
                         </tr>
                     }

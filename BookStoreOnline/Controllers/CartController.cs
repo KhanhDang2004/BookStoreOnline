@@ -136,14 +136,38 @@ namespace BookStoreOnline.Controllers
             return View();
         }
 
-        public ActionResult InsertOrder(string address)
+        public ActionResult InsertOrder(string address, string discountCode)
         {
             DONHANG donHang = new DONHANG();
             var khachHangDaDangNhap = (KHACHHANG)Session["TaiKhoan"];
             donHang.ID = khachHangDaDangNhap.MaKH;
             donHang.NgayDat = DateTime.Now.Date;
-            donHang.DiaChi = address;
+            donHang.DiaChi = string.IsNullOrEmpty(address) ? khachHangDaDangNhap.DiaChi : address;
             donHang.TrangThai = StatusOrder.NoInform.ToString();
+            decimal totalOrder = GetTotalPrice();
+            donHang.TrangThaiThanhToan = StatusPayment.Unpaid.ToString();
+            donHang.PhuongThucThanhToan = TypePayment.COD.ToString();
+            donHang.TongTien = (int)totalOrder;
+            if (!string.IsNullOrEmpty(discountCode))
+            {
+                KHUYENMAI kMai = db.KHUYENMAIs.FirstOrDefault(x => x.MaKM == discountCode);
+                decimal newTotalPrice = default;
+                if (kMai != null)
+                { 
+                    List<DONHANG> donHangDaMua = db.DONHANGs.Where(x => x.ID == khachHangDaDangNhap.MaKH && x.MaKM == discountCode).ToList();
+                    if (donHangDaMua.Count < kMai.SoLanDung)
+                    {
+                        if (kMai.SoTienMuaHangToiThieu <= totalOrder)
+                        {
+                            newTotalPrice = totalOrder - kMai.SoTienKM;
+                            donHang.TongTien = (int)newTotalPrice;
+                            donHang.MaKM = discountCode;
+                        } 
+                    }
+                    
+                }
+            }    
+
             db.DONHANGs.Add(donHang);
             db.SaveChanges();
 
@@ -244,7 +268,29 @@ namespace BookStoreOnline.Controllers
         }
         private Payment CreatePayment(APIContext apiContext, string redirectUrl)
         {
+           /* List<CartItem> listSanPham = Session["GioHang"] as List<CartItem>;
             //create itemlist and add item objects to it  
+            var itemList = new ItemList()
+            {
+                items = new List<Item>()
+            };
+            //Adding Item Details like name, currency, price etc  
+
+            foreach (var item in listSanPham)
+            {
+                itemList.items.Add(new Item()
+                {
+                    name = item.TenSanPham,
+                    currency = "USD",
+                    price = item.Gia.ToString(),
+                    quantity = item.SoLuong.ToString(),
+                    sku = item.MaSanPham.ToString(),
+                });
+            }*/
+
+            //Testtttttttttttttttttttttttttttttttttttttttttttttttttt
+
+           //create itemlist and add item objects to it  
             var itemList = new ItemList()
             {
                 items = new List<Item>()
@@ -258,6 +304,7 @@ namespace BookStoreOnline.Controllers
                 quantity = "1",
                 sku = "sku"
             });
+       
             var payer = new Payer()
             {
                 payment_method = "paypal"
@@ -272,8 +319,8 @@ namespace BookStoreOnline.Controllers
             var details = new Details()
             {
                 tax = "0",
-                shipping = "0.4",
-                subtotal = "22"
+                shipping = "0",
+                subtotal = "22.4"
             };
             //Final amount with details  
             var amount = new Amount()

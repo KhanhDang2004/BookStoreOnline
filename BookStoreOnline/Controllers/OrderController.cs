@@ -15,7 +15,5 @@ namespace BookStoreOnline.Controllers
         {
             return View(db.DONHANGs.Where(o => o.ID == id).ToList());
         }
-
-        
     }
 }

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
+using BookStoreOnline.Areas.Admin.Models;
 using BookStoreOnline.Core;
 using BookStoreOnline.Models;
 
@@ -84,6 +86,66 @@ namespace BookStoreOnline.Controllers
             return View();
         }
 
+        [HttpGet]
 
+        // Chỉ cho phép người dùng đã đăng nhập mới truy cập
+        public ActionResult Edit()
+        {
+            var currentUserId = GetCurrentUserID(); // Lấy ID của người dùng hiện tại
+            var customer = db.KHACHHANGs.FirstOrDefault(c => c.MaKH == currentUserId);
+
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+
+            var model = new EditCustomerViewModel
+            {
+                Id = customer.MaKH,
+                FullName = customer.Ten,
+                Address = customer.DiaChi,
+                PhoneNumber = customer.SoDienThoai,
+                Email = customer.Email
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(EditCustomerViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var currentUserId = GetCurrentUserID(); // Lấy ID của người dùng hiện tại
+                var customer = db.KHACHHANGs.FirstOrDefault(c => c.MaKH == currentUserId);
+
+                if (customer == null)
+                {
+                    return HttpNotFound();
+                }
+
+                // Cập nhật thông tin khách hàng
+                customer.Ten = model.FullName;
+                customer.DiaChi = model.Address;
+                customer.SoDienThoai = model.PhoneNumber;
+                customer.Email = model.Email;
+                db.Entry(customer).State = EntityState.Modified;
+                db.SaveChanges();
+
+                ViewBag.ThongBao = "Lưu thành công";
+                return View();
+            }
+
+            /* db.SaveChanges();*/
+            return View(model);
+        }
+
+        private int GetCurrentUserID()
+        {
+            // Lấy ID của người dùng hiện tại (ví dụ từ thông tin đăng nhập)
+            KHACHHANG khachHangDaDangNhap = Session["TaiKhoan"] as KHACHHANG;
+            return khachHangDaDangNhap.MaKH;
+        }
     }
 }

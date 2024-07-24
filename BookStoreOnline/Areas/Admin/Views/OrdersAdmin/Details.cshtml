@@ -23,16 +23,16 @@
             {
                 <tr>
                     <td style="width: 15%;">
-                        <img src="~/Images/@item." style="width: 60%; position: relative; left: 0;height:100px" />
+                        <img src="~/Images/@item.SANPHAM.Anh" style="width: 60%; position: relative; left: 0;height:100px" />
                     </td>
                     <td style="width:35%">
-                        @item.Product.TenSanPham
+                        @item.SANPHAM.TenSanPham
                     </td>
                     <td>
-                        @item.Gia
+                        @item.SoLuong
                     </td>
                     <td>
-                        <h6>@String.Format(price, "{0:c0}", item.UnitPrice)</h6>
+                        <h6>@String.Format(price, "{0:c0}", item.SANPHAM.Gia)</h6>
                     </td>
                 </tr>
             }
@@ -58,12 +58,24 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-6">
-                                        Tên khách hàng: <span style="font-weight:bold">@Model.KHACHHANG.Ten</span> <br /><br /> 
+                                        Tên khách hàng: <span style="font-weight:bold">@Model.KHACHHANG.Ten</span> <br /><br />
 
                                         Địa chỉ giao hàng: @Model.DiaChi <br /> <br />
-                                        @if (Model.TrangThai == (int)Constants.StatusOrder.NoInform)
+                                        @if (Model.TrangThai == Constants.StatusOrder.NoInform.ToString())
                                         {
                                             <a href="@Url.Action("ConfirmOrder/"+ Model.MaDonHang,"OrdersAdmin")" class="btn btn-success">Xác nhận đơn hàng</a>
+                                        }
+                                        @if (Model.TrangThai == Constants.StatusOrder.Informed.ToString())
+                                        {
+                                            <a href="@Url.Action("Shipping/"+ Model.MaDonHang,"OrdersAdmin")" class="btn btn-success">Chuyển cho shipper</a>
+                                        }
+                                        @if (Model.TrangThai == Constants.StatusOrder.Shipping.ToString())
+                                        {
+                                            <a href="@Url.Action("ShippingSuccess/"+ Model.MaDonHang,"OrdersAdmin")" class="btn btn-success">Xác nhận giao thành công</a>
+                                        }
+                                        @if (Model.TrangThai != Constants.StatusOrder.Canceled.ToString() && Model.TrangThai != Constants.StatusOrder.Received.ToString())
+                                        {
+                                            <a href="@Url.Action("CancelOrder/"+ Model.MaDonHang,"OrdersAdmin")" class="btn btn-danger">Hủy đơn hàng</a>
                                         }
                                     </div>
                                     <div class="col-6">
@@ -75,8 +87,9 @@
                                                     </div>
                                                     <div class="h5 mb-0 font-weight-bold text-gray-800"> @String.Format(price, "{0:c0}", ViewBag.Total)</div>
                                                 </div>
-                                                <div class="col-auto">
-                                                    <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                                <div class="col-auto d-flex align-items-center">
+                                                    <i class="fas fa-calendar fa-2x text-gray-300 me-2"></i>
+                                                    <span class="text-muted">@Model.TrangThai</span>
                                                 </div>
                                             </div>
                                         </div>
