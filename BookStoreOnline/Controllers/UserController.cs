@@ -112,7 +112,6 @@ namespace BookStoreOnline.Controllers
         }
 
         [HttpPost]
-
         [ValidateAntiForgeryToken]
         public ActionResult Edit(EditCustomerViewModel model)
         {
@@ -145,8 +144,8 @@ namespace BookStoreOnline.Controllers
         private int GetCurrentUserID()
         {
             // Lấy ID của người dùng hiện tại (ví dụ từ thông tin đăng nhập)
-
-            return 1;
+            KHACHHANG khachHangDaDangNhap = Session["TaiKhoan"] as KHACHHANG;
+            return khachHangDaDangNhap.MaKH;
         }
     }
 }

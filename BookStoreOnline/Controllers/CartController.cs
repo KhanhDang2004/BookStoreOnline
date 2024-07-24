@@ -136,14 +136,38 @@ namespace BookStoreOnline.Controllers
             return View();
         }
 
-        public ActionResult InsertOrder(string address)
+        public ActionResult InsertOrder(string address, string discountCode)
         {
             DONHANG donHang = new DONHANG();
             var khachHangDaDangNhap = (KHACHHANG)Session["TaiKhoan"];
             donHang.ID = khachHangDaDangNhap.MaKH;
             donHang.NgayDat = DateTime.Now.Date;
-            donHang.DiaChi = address;
+            donHang.DiaChi = string.IsNullOrEmpty(address) ? khachHangDaDangNhap.DiaChi : address;
             donHang.TrangThai = StatusOrder.NoInform.ToString();
+            decimal totalOrder = GetTotalPrice();
+            donHang.TrangThaiThanhToan = StatusPayment.Unpaid.ToString();
+            donHang.PhuongThucThanhToan = TypePayment.COD.ToString();
+            donHang.TongTien = (int)totalOrder;
+            if (!string.IsNullOrEmpty(discountCode))
+            {
+                KHUYENMAI kMai = db.KHUYENMAIs.FirstOrDefault(x => x.MaKM == discountCode);
+                decimal newTotalPrice = default;
+                if (kMai != null)
+                { 
+                    List<DONHANG> donHangDaMua = db.DONHANGs.Where(x => x.ID == khachHangDaDangNhap.MaKH && x.MaKM == discountCode).ToList();
+                    if (donHangDaMua.Count < kMai.SoLanDung)
+                    {
+                        if (kMai.SoTienMuaHangToiThieu <= totalOrder)
+                        {
+                            newTotalPrice = totalOrder - kMai.SoTienKM;
+                            donHang.TongTien = (int)newTotalPrice;
+                            donHang.MaKM = discountCode;
+                        } 
+                    }
+                    
+                }
+            }    
+
             db.DONHANGs.Add(donHang);
             db.SaveChanges();
 
