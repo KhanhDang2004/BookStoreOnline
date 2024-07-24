@@ -153,6 +153,7 @@
     <Compile Include="Controllers\IntroduceController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductDetailController.cs" />
+    <Compile Include="Controllers\SupportController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Core\Extension.cs" />
     <Compile Include="Global.asax.cs">
@@ -170,6 +171,7 @@
     <Compile Include="Models\DONHANG.cs">
       <DependentUpon>NhaSachEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EditCustomerViewModel.cs" />
     <Compile Include="Models\Home\SanPhamHome.cs" />
     <Compile Include="Models\KHACHHANG.cs">
       <DependentUpon>NhaSachEntities.tt</DependentUpon>
@@ -384,6 +386,8 @@
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\Cart\FailureView.cshtml" />
     <Content Include="Views\Cart\SuccessView.cshtml" />
+    <Content Include="Views\Support\Index.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
